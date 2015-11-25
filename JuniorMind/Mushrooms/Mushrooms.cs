@@ -22,6 +22,14 @@ namespace Mushrooms
 
         }
 
+
+        [TestMethod]
+        public void redMushroomsNumberTest3()
+        {
+            decimal redMushrooms = CalculateRedMushroomsNr(540, 90, 5);
+            Assert.AreEqual(450, redMushrooms);
+
+        }
         decimal CalculateRedMushroomsNr(decimal total, decimal whiteMushrooms, decimal redMultiplier)
         {
             return whiteMushrooms * redMultiplier;
