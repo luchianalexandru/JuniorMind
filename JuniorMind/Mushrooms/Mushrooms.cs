@@ -17,7 +17,7 @@ namespace Mushrooms
         [TestMethod]
         public void redMushroomsNumberTest2()
         {
-            decimal redMushrooms = CalculateRedMushroomsNr(120, 30, 3);
+            decimal redMushrooms = CalculateRedMushroomsNr(120, 3);
             Assert.AreEqual(90, redMushrooms);
 
         }
@@ -26,13 +26,15 @@ namespace Mushrooms
         [TestMethod]
         public void redMushroomsNumberTest3()
         {
-            decimal redMushrooms = CalculateRedMushroomsNr(540, 90, 5);
+            decimal redMushrooms = CalculateRedMushroomsNr(540, 5);
             Assert.AreEqual(450, redMushrooms);
 
         }
-        decimal CalculateRedMushroomsNr(decimal total, decimal whiteMushrooms, decimal redMultiplier)
+
+        decimal CalculateRedMushroomsNr(decimal total, decimal redMultiplier)
         {
-            return whiteMushrooms * redMultiplier;
+            decimal a = total / (1 + redMultiplier); 
+            return a * redMultiplier; 
         }
     }
 }
