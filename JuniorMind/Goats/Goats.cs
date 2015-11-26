@@ -14,6 +14,14 @@ namespace Goats
 
         }
 
+        [TestMethod]
+        public void SecondRandomTest()
+        {
+            Decimal Kilo = kilosEatenByGoatsInGivenDayNumber(7, 15, 21, 5, 3);
+            Assert.AreEqual(75, Kilo);
+
+        }
+
         decimal kilosEatenByGoatsInGivenDayNumber(decimal initialGoatsNr, decimal initialDaysNr, decimal initialKgEaten, decimal givenGoatsNr, decimal givenDaysNr)
         {
             return (initialDaysNr * givenGoatsNr * initialKgEaten) / (givenDaysNr * initialGoatsNr);
