@@ -9,7 +9,7 @@ namespace Mushrooms
         [TestMethod]
         public void redMushroomsNumberTest1()
         {
-            decimal redMushrooms = CalculateRedMushroomsNr(9, 3, 2);
+            decimal redMushrooms = CalculateRedMushroomsNr(9, 2);
             Assert.AreEqual(6, redMushrooms);
 
         }
