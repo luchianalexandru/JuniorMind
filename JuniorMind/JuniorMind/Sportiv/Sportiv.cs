@@ -4,11 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Sportiv
 {
     [TestClass]
-    public class UnitTest1
+    public class Sportiv
     {
         [TestMethod]
-        public void TestMethod1()
+        public void repetitionsTest1()
         {
+            decimal RepetitionsNr = CalculateTotalRepetitions(7);
+            Assert.AreEqual(49, RepetitionsNr);
+        }
+
+        decimal CalculateTotalRepetitions ( decimal MaxRepNr)
+        {
+          
+            return MaxRepNr * MaxRepNr;
         }
     }
 }
