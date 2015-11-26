@@ -13,6 +13,12 @@ namespace Sportiv
             Assert.AreEqual(49, RepetitionsNr);
         }
 
+        [TestMethod]
+        public void repetitionsTest2()
+        {
+            decimal RepetitionsNr = CalculateTotalRepetitions(235);
+            Assert.AreEqual(55225, RepetitionsNr);
+        }
         decimal CalculateTotalRepetitions ( decimal MaxRepNr)
         {
           
