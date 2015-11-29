@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parchet", "Parchet\Parchet.csproj", "{E65442F6-E5A6-49FE-B3C0-D8AB2896E264}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pavement", "Pavement\Pavement.csproj", "{B5DAC749-D805-4888-9FAE-150C7B30EE56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E65442F6-E5A6-49FE-B3C0-D8AB2896E264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E65442F6-E5A6-49FE-B3C0-D8AB2896E264}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E65442F6-E5A6-49FE-B3C0-D8AB2896E264}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E65442F6-E5A6-49FE-B3C0-D8AB2896E264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DAC749-D805-4888-9FAE-150C7B30EE56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DAC749-D805-4888-9FAE-150C7B30EE56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DAC749-D805-4888-9FAE-150C7B30EE56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DAC749-D805-4888-9FAE-150C7B30EE56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
