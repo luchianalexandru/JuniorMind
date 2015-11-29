@@ -13,6 +13,15 @@ namespace ArchaeologyArea
 
         }
 
+        [TestMethod]
+        public void SecondTest()
+        {
+            Assert.AreEqual(94.8195m, HouseArea(62.31m, 10.5m, 32.4m, 9.75m, 101, 8.3m));
+
+        }
+        
+
+
         decimal HouseArea(decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)
         {
 
