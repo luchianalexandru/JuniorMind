@@ -18,6 +18,12 @@ namespace Pavement
             Assert.AreEqual(2, requiredPavementTiles(6, 3, 3, 3));
         }
 
+        [TestMethod]
+        public void TestForThirdCase()
+        {
+            Assert.AreEqual(16, requiredPavementTiles(10, 7, 3, 2));
+        }
+
         int requiredPavementTiles(int marketLength, int marketWidth, int tileLength, int tileWidth)
         {
 
