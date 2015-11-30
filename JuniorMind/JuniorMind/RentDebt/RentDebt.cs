@@ -18,6 +18,13 @@ namespace RentDebt
             Assert.AreEqual(110, calculateDebt(100, 5));
         }
 
+
+        [TestMethod]
+        public void ThirdTest()
+        {
+            Assert.AreEqual(555, calculateDebt(300, 17));
+        }
+
         decimal calculateDebt (int rent, int nrOfDaysLate)
         {
             int percentIfLate = 0;
