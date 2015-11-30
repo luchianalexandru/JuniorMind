@@ -25,6 +25,12 @@ namespace RentDebt
             Assert.AreEqual(555, calculateDebt(300, 17));
         }
 
+        [TestMethod]
+        public void ForthTest()
+        {
+            Assert.AreEqual(2300, calculateDebt(500, 36));
+        }
+
         decimal calculateDebt (int rent, int nrOfDaysLate)
         {
             int percentIfLate = 0;
