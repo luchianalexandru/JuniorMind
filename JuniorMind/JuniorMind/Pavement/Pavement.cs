@@ -28,22 +28,23 @@ namespace Pavement
         {
 
             int requiredTilesForMarketLength = marketLength / tileLength;
-            int requiredTilesForMarketWidth = marketWidth / tileWidth; 
+            int requiredTilesForMarketWidth = marketWidth / tileWidth;
 
-            if (marketLength - (requiredTilesForMarketLength*tileLength) > 0)
-            {
-                requiredTilesForMarketLength++;
-            }
-
-            if (marketWidth - ( requiredTilesForMarketWidth * tileWidth) > 0)
-            {
-                requiredTilesForMarketWidth++;
-            }
-
+            requiredTilesForMarketLength = CalculateReqTilesForGivenDistance(marketLength, tileLength, requiredTilesForMarketLength);
+            requiredTilesForMarketWidth = CalculateReqTilesForGivenDistance(marketWidth, tileWidth, requiredTilesForMarketWidth);
+           
             return requiredTilesForMarketLength * requiredTilesForMarketWidth;
 
         }
 
+        public static int CalculateReqTilesForGivenDistance(int x, int y, int z)
+        {
+            if (x - (z * y) > 0)
+            {
+                z++;
+            }
 
+            return z;
+        }
     }
 }
