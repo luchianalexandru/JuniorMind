@@ -24,6 +24,12 @@ namespace Melons
             Assert.AreEqual("NU!", melon(221));
         }
 
+        [TestMethod]
+        public void testfor798Kg()
+        {
+            Assert.AreEqual("DA!", melon(798));
+        }
+
         string melon(int weight)
         {
             if (weight < 4)
