@@ -12,6 +12,12 @@ namespace Melons
             Assert.AreEqual("The melon can't be divided by even numbers!", melon(3));
         }
 
+        [TestMethod]
+        public void testfor4Kg()
+        {
+            Assert.AreEqual("DA!", melon(4));
+        }
+
         string melon(int weight)
         {
             if (weight < 4)
