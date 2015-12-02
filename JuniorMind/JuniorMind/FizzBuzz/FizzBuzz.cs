@@ -12,6 +12,12 @@ namespace FizzBuzz
             Assert.AreEqual("Numarul nu este divizibil cu 3 sau 5", FizzSauBuzz(17));
         }
 
+        [TestMethod]
+        public void Fizzbuzz2()
+        {
+            Assert.AreEqual("Fizz!", FizzSauBuzz(6));
+        }
+
         string FizzSauBuzz(int number)
         {
             if (number % 3 == 0 && number % 5 == 0)
