@@ -24,6 +24,12 @@ namespace FizzBuzz
             Assert.AreEqual("Buzz!", FizzSauBuzz(10));
         }
 
+        [TestMethod]
+        public void Fizzbuzz4()
+        {
+            Assert.AreEqual("FizzBuzz!", FizzSauBuzz(45));
+        }
+
         string FizzSauBuzz(int number)
         {
             if (number % 3 == 0 && number % 5 == 0)
