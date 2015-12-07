@@ -32,15 +32,7 @@ namespace Melons
 
         string melon(int weight)
         {
-            if (weight < 4)
-            {
-                return "The melon can't be divided by even numbers!";
-            }
-            if (weight % 2 == 0)
-            {
-                return "DA!";
-            }
-            else return "NU!";
+            return weight < 4 ? "The melon can't be divided by even numbers!" : weight % 2 == 0 ? "DA!" : "NU!";
         }
     }
 }
