@@ -33,19 +33,8 @@ namespace RentDebt
 
         decimal calculateDebt (int rent, int nrOfDaysLate)
         {
-            int percentIfLate = 0;
-            if (nrOfDaysLate <= 10)
-            {
-             percentIfLate = 2;
-            }
-            else if (nrOfDaysLate <= 30)
-            {
-             percentIfLate = 5;
-            }
-            else if (nrOfDaysLate <= 40)
-            {
-             percentIfLate = 10;
-            }
+
+            int percentIfLate = nrOfDaysLate <= 10 ? 2 : nrOfDaysLate <= 30 ? 5 : 10; 
             decimal penalty = ( rent * percentIfLate) / 100;
             return rent + penalty * nrOfDaysLate;
 
