@@ -40,11 +40,7 @@ namespace FarmerFieldSize
             double x1 = (-additionalLength + Math.Sqrt(Delta)) / 2;
             double x2 = (-additionalLength + Math.Sqrt(Delta)) / 2;
 
-            if (x1 > 0)
-            {
-                return x1;
-            }
-            else return x2;
+            return x1 > 0 ?x1:x2;
         }
     }
 }
