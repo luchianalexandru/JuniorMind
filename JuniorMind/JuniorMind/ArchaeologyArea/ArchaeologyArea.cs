@@ -24,11 +24,13 @@ namespace ArchaeologyArea
 
         decimal HouseArea(decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)
         {
-
-            decimal AreaDeterminant = ((x1 * y2 * 1) + (x2 * y3 * 1) + (x3 * y1 * 1) - (x3 * y2 * 1) - (x1 * y3 * 1) - (x2 * y1 * 1));
-            decimal AbsoluteValueOfDeterminant = Math.Abs(AreaDeterminant);
-            return 2 * 0.5m * AbsoluteValueOfDeterminant;
+            decimal AreaDeterminant = determinantCalculation(x1, y1, x2, y2, x3, y3);
+            return 2 * 0.5m * Math.Abs(AreaDeterminant);
         }
 
+        private static decimal determinantCalculation(decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)
+        {
+            return ((x1 * y2 * 1) + (x2 * y3 * 1) + (x3 * y1 * 1) - (x3 * y2 * 1) - (x1 * y3 * 1) - (x2 * y1 * 1));
+        }
     }
 }
