@@ -7,8 +7,14 @@ namespace FarmerFieldSize
     public class FarmerFieldSize
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FieldSizeTest1()
         {
+            Assert.AreEqual(1, fieldSizeCalculation(1, 2));
+        }
+
+        double fieldSizeCalculation(int additionalLength, int totalArea)
+        {
+        return 5;
         }
     }
 }
