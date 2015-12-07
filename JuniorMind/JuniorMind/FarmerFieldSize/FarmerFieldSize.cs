@@ -12,6 +12,12 @@ namespace FarmerFieldSize
             Assert.AreEqual(1, fieldSizeCalculation(1, 2));
         }
 
+        [TestMethod]
+        public void FieldSizeTest2()
+        {
+            Assert.AreEqual(5, fieldSizeCalculation(10, 75));
+        }
+
         double fieldSizeCalculation(int additionalLength, int totalArea)
         {
             //functia de gradul 2: a*x*x +b*x - c = 0 
