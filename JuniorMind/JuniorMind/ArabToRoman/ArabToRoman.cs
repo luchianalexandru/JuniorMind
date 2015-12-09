@@ -7,10 +7,15 @@ namespace ArabToRoman
     public class ArabToRoman
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ArabToRomanTest1()
         {
+            Assert.AreEqual("I", arabToRoman(100));
         }
-    
+
+    string arabToRoman(int numberToConvert)
+    {
+            return "";
+    }  
   
     }
 
