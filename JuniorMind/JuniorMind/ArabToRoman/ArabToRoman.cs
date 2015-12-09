@@ -36,6 +36,19 @@ namespace ArabToRoman
             Assert.AreEqual("L", arabToRoman(50));
         }
 
+        [TestMethod]
+        public void ArabToRomanTestFor10()
+        {
+            Assert.AreEqual("X", arabToRoman(10));
+        }
+
+        [TestMethod]
+        public void ArabToRomanTestFor70()
+        {
+            Assert.AreEqual("LXX", arabToRoman(70));
+        }
+
+
         string arabToRoman(int numberToConvert)
         {
             if (numberToConvert > 100) return "number not in range!";
@@ -43,6 +56,7 @@ namespace ArabToRoman
             if (numberToConvert == 100) return "C";
             if (numberToConvert >= 90) return "XC" + arabToRoman(numberToConvert - 90);
             if (numberToConvert >= 50) return "L" + arabToRoman(numberToConvert - 50);
+            if (numberToConvert >= 10) return "X" + arabToRoman(numberToConvert - 10);
             return "";
         }  
   
