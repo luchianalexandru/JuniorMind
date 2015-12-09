@@ -23,15 +23,22 @@ namespace ArabToRoman
         {
             Assert.AreEqual("XC", arabToRoman(90));
         }
-
+   
+        [TestMethod]
+        public void ArabToRomanTestFor0()
+        {
+           Assert.AreEqual("", arabToRoman(0));
+        }
 
         string arabToRoman(int numberToConvert)
-    {
+        {
             if (numberToConvert > 100) return "number not in range!";
+            if (numberToConvert < 1) return "";
             if (numberToConvert == 100) return "C";
             if (numberToConvert >= 90) return "XC" + arabToRoman(numberToConvert - 90);
+           
             return "";
-    }  
+        }  
   
     }
 
