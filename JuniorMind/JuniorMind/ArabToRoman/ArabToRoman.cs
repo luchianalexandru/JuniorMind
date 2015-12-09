@@ -61,6 +61,37 @@ namespace ArabToRoman
             Assert.AreEqual("XL", arabToRoman(40));
         }
 
+        [TestMethod]
+        public void ArabToRomanTestFor9()
+        {
+            Assert.AreEqual("IX", arabToRoman(9));
+        }
+
+        [TestMethod]
+        public void ArabToRomanTestFor5()
+        {
+            Assert.AreEqual("V", arabToRoman(5));
+        }
+
+        [TestMethod]
+        public void ArabToRomanTestFor6()
+        {
+            Assert.AreEqual("VI", arabToRoman(6));
+        }
+
+        [TestMethod]
+        public void ArabToRomanTestFor3()
+        {
+            Assert.AreEqual("III", arabToRoman(3));
+        }
+
+        [TestMethod]
+        public void ArabToRomanTestFor1()
+        {
+            Assert.AreEqual("I", arabToRoman(1));
+        }
+
+
         string arabToRoman(int numberToConvert)
         {
             string caractereRomane = "";
@@ -94,19 +125,33 @@ namespace ArabToRoman
                 nrIntermediar -= (multipluDeZece * 10);
             }
 
+            if (nrIntermediar >= 9)
+            {
+                caractereRomane += "IX";
+                nrIntermediar -= 9;
+            }
+
+            if(nrIntermediar >= 5)
+            {
+                caractereRomane += "V";
+                nrIntermediar -= 5;
+            }
+
+            if (nrIntermediar >= 4)
+            {
+                caractereRomane += "IV";
+                nrIntermediar -= 4;
+            }
+
+            while (nrIntermediar > 0)
+                {
+                    caractereRomane += "I";
+                    nrIntermediar -= 1;
+                }
+
             return caractereRomane;
         }  
   
     }
 
-    //Convertește un număr dat, între 1 și 100, în cifre romane.
-
-    //I - 1
-    //IV - 4
-    //V - 5
-    //IX - 9
-    //X - 10
-    //L - 50
-    //XC - 90
-    //C - 100
 }
