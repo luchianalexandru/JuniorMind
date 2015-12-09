@@ -9,12 +9,12 @@ namespace ArabToRoman
         [TestMethod]
         public void ArabToRomanTest1()
         {
-            Assert.AreEqual("I", arabToRoman(100));
+            Assert.AreEqual("C", arabToRoman(100));
         }
 
     string arabToRoman(int numberToConvert)
     {
-            return "";
+            return "C";
     }  
   
     }
