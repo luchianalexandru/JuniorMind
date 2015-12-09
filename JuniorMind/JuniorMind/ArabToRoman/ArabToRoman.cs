@@ -12,8 +12,15 @@ namespace ArabToRoman
             Assert.AreEqual("C", arabToRoman(100));
         }
 
+        [TestMethod]
+        public void ArabToRomanTestForNrNotInRange()
+        {
+            Assert.AreEqual("number not in range!", arabToRoman(101));
+        }
+
     string arabToRoman(int numberToConvert)
     {
+            if (numberToConvert < 1 || numberToConvert > 100) return "number not in range!";
             if (numberToConvert == 100) return "C";
             return "";
     }  
