@@ -51,7 +51,7 @@ namespace ArabToRoman
         [TestMethod]
         public void ArabToRomanTestFor40()
         {
-            Assert.AreEqual("XXXX", arabToRoman(40));
+            Assert.AreEqual("XL", arabToRoman(40));
         }
 
         string arabToRoman(int numberToConvert)
@@ -72,12 +72,17 @@ namespace ArabToRoman
                 caractereRomane += "L";
                 nrIntermediar -= 50;
             }
-            
-            if (nrIntermediar >= 10)
+
+            if (nrIntermediar >= 40)
+            {
+                caractereRomane += "XL";
+                nrIntermediar -= 40;
+            }
+
+            if (nrIntermediar >= 9)
             {
                 caractereRomane += "X";
                 nrIntermediar -= 10;
-                
             }
             return caractereRomane;
         }  
