@@ -91,6 +91,11 @@ namespace ArabToRoman
             Assert.AreEqual("I", arabToRoman(1));
         }
 
+        [TestMethod]
+        public void ArabToRomanTestFor4()
+        {
+            Assert.AreEqual("IV", arabToRoman(4));
+        }
 
         string arabToRoman(int numberToConvert)
         {
