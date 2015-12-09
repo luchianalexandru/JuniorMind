@@ -18,10 +18,18 @@ namespace ArabToRoman
             Assert.AreEqual("number not in range!", arabToRoman(101));
         }
 
-    string arabToRoman(int numberToConvert)
+        [TestMethod]
+        public void ArabToRomanTestFor90()
+        {
+            Assert.AreEqual("XC", arabToRoman(90));
+        }
+
+
+        string arabToRoman(int numberToConvert)
     {
-            if (numberToConvert < 1 || numberToConvert > 100) return "number not in range!";
+            if (numberToConvert > 100) return "number not in range!";
             if (numberToConvert == 100) return "C";
+            if (numberToConvert >= 90) return "XC" + arabToRoman(numberToConvert - 90);
             return "";
     }  
   
