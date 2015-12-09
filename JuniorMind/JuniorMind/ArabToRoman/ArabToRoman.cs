@@ -58,25 +58,26 @@ namespace ArabToRoman
         {
             string caractereRomane = "";
             int nrIntermediar = numberToConvert;
-            if (numberToConvert > 100) return "number not in range!";
-            if (numberToConvert < 1) return "";
-            if (numberToConvert == 100) return "C";
-            if (numberToConvert >= 90)
+            if (nrIntermediar > 100) return "number not in range!";
+            if (nrIntermediar < 1) return "";
+            if (nrIntermediar == 100) return "C";
+            if (nrIntermediar >= 90)
             {
-                nrIntermediar -= 90; 
                 caractereRomane += "XC";
+                nrIntermediar -= 90; 
             }
 
-            if (numberToConvert >= 50)
+            if (nrIntermediar >= 50)
             {
-                nrIntermediar -= 50;
                 caractereRomane += "L";
+                nrIntermediar -= 50;
             }
             
-            if (numberToConvert >= 10)
+            if (nrIntermediar >= 10)
             {
+                caractereRomane += "X";
                 nrIntermediar -= 10;
-                caractereRomane += "I";
+                
             }
             return caractereRomane;
         }  
