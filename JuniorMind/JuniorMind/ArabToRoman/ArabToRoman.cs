@@ -48,6 +48,11 @@ namespace ArabToRoman
             Assert.AreEqual("LXX", arabToRoman(70));
         }
 
+        [TestMethod]
+        public void ArabToRomanTestFor40()
+        {
+            Assert.AreEqual("XXXX", arabToRoman(40));
+        }
 
         string arabToRoman(int numberToConvert)
         {
