@@ -49,6 +49,13 @@ namespace ArabToRoman
         }
 
         [TestMethod]
+        public void ArabToRomanTestFor60()
+        {
+            Assert.AreEqual("LX", arabToRoman(60));
+        }
+
+
+        [TestMethod]
         public void ArabToRomanTestFor40()
         {
             Assert.AreEqual("XL", arabToRoman(40));
@@ -79,11 +86,14 @@ namespace ArabToRoman
                 nrIntermediar -= 40;
             }
 
-            if (nrIntermediar >= 9)
+            if (nrIntermediar >= 10)
             {
-                caractereRomane += "X";
-                nrIntermediar -= 10;
+                int multipluDeZece = nrIntermediar / 10; 
+                for(int i = 0; i < multipluDeZece; i++)
+                    caractereRomane += "X";
+                nrIntermediar -= (multipluDeZece * 10);
             }
+
             return caractereRomane;
         }  
   
