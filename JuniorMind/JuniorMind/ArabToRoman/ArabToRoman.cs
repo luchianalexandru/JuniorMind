@@ -30,13 +30,19 @@ namespace ArabToRoman
            Assert.AreEqual("", arabToRoman(0));
         }
 
+        [TestMethod]
+        public void ArabToRomanTestFor50()
+        {
+            Assert.AreEqual("L", arabToRoman(50));
+        }
+
         string arabToRoman(int numberToConvert)
         {
             if (numberToConvert > 100) return "number not in range!";
             if (numberToConvert < 1) return "";
             if (numberToConvert == 100) return "C";
             if (numberToConvert >= 90) return "XC" + arabToRoman(numberToConvert - 90);
-           
+            if (numberToConvert >= 50) return "L" + arabToRoman(numberToConvert - 50);
             return "";
         }  
   
