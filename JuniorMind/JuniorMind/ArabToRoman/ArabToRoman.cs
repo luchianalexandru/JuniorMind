@@ -97,66 +97,21 @@ namespace ArabToRoman
             Assert.AreEqual("IV", arabToRoman(4));
         }
 
-        string arabToRoman(int numberToConvert)
-        {
-            string caractereRomane = "";
-            int nrIntermediar = numberToConvert;
-            if (nrIntermediar > 100) return "number not in range!";
-            if (nrIntermediar < 1) return "";
-            if (nrIntermediar == 100) return "C";
-            if (nrIntermediar >= 90)
-            {
-                caractereRomane += "XC";
-                nrIntermediar -= 90; 
-            }
-
-            if (nrIntermediar >= 50)
-            {
-                caractereRomane += "L";
-                nrIntermediar -= 50;
-            }
-
-            if (nrIntermediar >= 40)
-            {
-                caractereRomane += "XL";
-                nrIntermediar -= 40;
-            }
-
-            if (nrIntermediar >= 10)
-            {
-                int multipluDeZece = nrIntermediar / 10; 
-                for(int i = 0; i < multipluDeZece; i++)
-                    caractereRomane += "X";
-                nrIntermediar -= (multipluDeZece * 10);
-            }
-
-            if (nrIntermediar >= 9)
-            {
-                caractereRomane += "IX";
-                nrIntermediar -= 9;
-            }
-
-            if(nrIntermediar >= 5)
-            {
-                caractereRomane += "V";
-                nrIntermediar -= 5;
-            }
-
-            if (nrIntermediar >= 4)
-            {
-                caractereRomane += "IV";
-                nrIntermediar -= 4;
-            }
-
-            while (nrIntermediar > 0)
-                {
-                    caractereRomane += "I";
-                    nrIntermediar -= 1;
-                }
-
-            return caractereRomane;
-        }  
   
-    }
+
+       string arabToRoman(int numberToConvert)
+       {
+            string caractereRomane = "";
+            string[] zeci = { "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C" };
+            string[] unitati = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+            int remainder = numberToConvert % 10;
+            if (numberToConvert > 100) return "number not in range!";
+            if (numberToConvert < 1) return "";
+            if (numberToConvert >= 10) caractereRomane += zeci[numberToConvert / 10 - 1];
+            if (remainder > 0) caractereRomane += unitati[remainder - 1];
+            return caractereRomane;
+       }
+
+}
 
 }
