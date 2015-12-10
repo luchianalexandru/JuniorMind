@@ -97,9 +97,20 @@ namespace ArabToRoman
             Assert.AreEqual("IV", arabToRoman(4));
         }
 
-  
+        [TestMethod]
+        public void ArabToRomanTestFor57()
+        {
+            Assert.AreEqual("LVII", arabToRoman(57));
+        }
 
-       string arabToRoman(int numberToConvert)
+        [TestMethod]
+        public void ArabToRomanTestFor99()
+        {
+            Assert.AreEqual("XCIX", arabToRoman(99));
+        }
+
+
+        string arabToRoman(int numberToConvert)
        {
             string caractereRomane = "";
             string[] zeci = { "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C" };
