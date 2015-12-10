@@ -113,13 +113,12 @@ namespace ArabToRoman
         string arabToRoman(int numberToConvert)
        {
             string caractereRomane = "";
-            string[] zeci = { "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C" };
-            string[] unitati = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
-            int remainder = numberToConvert % 10;
+            string[] zeci = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C" };
+            string[] unitati = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
             if (numberToConvert > 100) return "number not in range!";
             if (numberToConvert < 1) return "";
-            if (numberToConvert >= 10) caractereRomane += zeci[numberToConvert / 10 - 1];
-            if (remainder > 0) caractereRomane += unitati[remainder - 1];
+            if (numberToConvert >= 10) caractereRomane += zeci[numberToConvert / 10];
+            if ((numberToConvert % 10) > 0) caractereRomane += unitati[numberToConvert % 10];
             return caractereRomane;
        }
 
