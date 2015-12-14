@@ -12,19 +12,27 @@ namespace CubeSuffix
             Assert.AreEqual(192, cubeForGivenNumber(1));
         }
 
+        [TestMethod]
+        public void SecondTestForCube()
+        {
+            Assert.AreEqual(442, cubeForGivenNumber(2));
+        }
+
         decimal cubeForGivenNumber ( int number)
         {
            int numberOfCubes = 0;
-           int numberOfIterations = 0;
-           for (int i = 1;numberOfCubes <= number;i++)
+          // int numberOfIterations = 0;
+           for (int i = 1;;i++)
             {
                 if ( i*i*i % 1000 == 888)
                 {
                     numberOfCubes+=1;
-                    numberOfIterations = i;
-                } 
+                }
+                if (numberOfCubes == number)
+                    return i;
+            //    numberOfIterations = i;
             }
-            return numberOfIterations;
+            //return numberOfIterations;
         }
     }
 }
