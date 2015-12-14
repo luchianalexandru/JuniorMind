@@ -7,14 +7,31 @@ namespace ChessBoard
     public class ChessBoard
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestforSquareOf1By1()
         {
-            Assert.AreEqual(1, squaresOnBoard(2));
+            Assert.AreEqual(1, squaresOnBoard(1));
+        }
+
+        [TestMethod]
+        public void TestforSquareOf2By2()
+        {
+            Assert.AreEqual(5, squaresOnBoard(2));
+        }
+
+        [TestMethod]
+        public void TestforSquareOf3By3()
+        {
+            Assert.AreEqual(14, squaresOnBoard(3));
         }
 
         int squaresOnBoard ( int boardSizeLength)
         {
-            return 0;
+           int squares = 0; 
+           for (int i = 1; i <= boardSizeLength; i++)
+            {
+                squares += i * i;
+            }
+           return squares;
         }
     }
 }
