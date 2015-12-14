@@ -24,6 +24,12 @@ namespace ChessBoard
             Assert.AreEqual(14, squaresOnBoard(3));
         }
 
+        [TestMethod]
+        public void TestforSquareOf4By4()
+        {
+            Assert.AreEqual(30, squaresOnBoard(4));
+        }
+
         int squaresOnBoard ( int boardSizeLength)
         {
            int squares = 0; 
