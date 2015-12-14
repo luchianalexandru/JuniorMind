@@ -7,9 +7,15 @@ namespace WordsPrefix
     public class WordsPrefix
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FirstTest()
         {
+            Assert.AreEqual("b", prefix("a", "b"));
         }
 
+        string prefix ( string firstWord, string secondWord)
+        {
+
+            return "a";
+        }
     }
 }
