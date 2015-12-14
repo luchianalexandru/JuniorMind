@@ -30,6 +30,12 @@ namespace ChessBoard
             Assert.AreEqual(30, squaresOnBoard(4));
         }
 
+        [TestMethod]
+        public void TestforSquareOf8By8()
+        {
+            Assert.AreEqual(204, squaresOnBoard(8));
+        }
+
         int squaresOnBoard ( int boardSizeLength)
         {
            int squares = 0; 
