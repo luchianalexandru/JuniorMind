@@ -24,6 +24,12 @@ namespace CubeSuffix
             Assert.AreEqual(692, cubeForGivenNumber(3));
         }
 
+        [TestMethod]
+        public void ForthTestForCube()
+        {
+            Assert.AreEqual(942, cubeForGivenNumber(4));
+        }
+
 
         decimal cubeForGivenNumber ( int number)
         {
