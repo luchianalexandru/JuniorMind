@@ -38,12 +38,14 @@ namespace ChessBoard
 
         int squaresOnBoard ( int boardSizeLength)
         {
-           int squares = 0; 
-           for (int i = 1; i <= boardSizeLength; i++)
-            {
-                squares += i * i;
-            }
-           return squares;
+
+            return boardSizeLength * (boardSizeLength + 1) * (2 * boardSizeLength + 1) / 6;
+           //int squares = 0; 
+           //for (int i = 1; i <= boardSizeLength; i++)
+           // {
+           //     squares += i * i;
+           // }
+           //return squares;
         }
     }
 }
