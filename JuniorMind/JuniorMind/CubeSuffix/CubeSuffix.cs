@@ -18,6 +18,13 @@ namespace CubeSuffix
             Assert.AreEqual(442, cubeForGivenNumber(2));
         }
 
+        [TestMethod]
+        public void ThirdTestForCube()
+        {
+            Assert.AreEqual(692, cubeForGivenNumber(3));
+        }
+
+
         decimal cubeForGivenNumber ( int number)
         {
            int numberOfCubes = 0;
