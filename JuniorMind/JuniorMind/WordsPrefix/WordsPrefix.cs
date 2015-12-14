@@ -6,16 +6,22 @@ namespace WordsPrefix
     [TestClass]
     public class WordsPrefix
     {
+        //[TestMethod]
+        //public void FirstTest()
+        //{
+        //    Assert.AreEqual("a", wordsPrefix("a", "ab"));
+        //}
+
         [TestMethod]
-        public void FirstTest()
+        public void SecondTestForNoPrefix()
         {
-            Assert.AreEqual("b", prefix("a", "b"));
+            Assert.AreEqual("", wordsPrefix("a", "b"));
         }
 
-        string prefix ( string firstWord, string secondWord)
+        string wordsPrefix ( string firstWord, string secondWord)
         {
-
-            return "a";
+            string prefix = "";
+            return prefix;
         }
     }
 }
