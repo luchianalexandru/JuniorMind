@@ -30,10 +30,27 @@ namespace LotteryChances
             Assert.AreEqual(0.25d, CalculateLotteryOdds(1, 4), 0.01);
         }
 
+        [TestMethod]
+        public void LottoChance6of49()
+        {
+            Assert.AreEqual(0.00000007151123842018516d, CalculateLotteryOdds(6, 49), 0.00000000001);
+        }
+
+        [TestMethod]
+        public void LottoChance5of49()
+        {
+            Assert.AreEqual(0.0000005244157484146906d, CalculateLotteryOdds(5, 49), 0.00000000001);
+        }
+
+
         double CalculateLotteryOdds(double NrOfPicks, double RangeOfNrToPick)
         {
-            double chance;
-            chance = NrOfPicks / RangeOfNrToPick;
+            double chance = 1;
+            for(int i=0 ; i < NrOfPicks ;i++)
+            {
+
+                chance *= (NrOfPicks - i) / (RangeOfNrToPick - i);
+            }
             return chance;
 
         }
