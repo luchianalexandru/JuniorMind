@@ -38,15 +38,28 @@ namespace LunchWithFriends
 
         public int CalculateLeastCommonMultiplier(int nr1, int nr2)
         {
+
             int max = Math.Max(nr1, nr2);
-            for(int i= max + 1; ;i++)
+            int maxlimit = nr1 * nr2;
+            for (int i = max + 1; i <= maxlimit; i++)
             {
-                if ( i%nr1 == 0 && i%nr2 == 0)
+                if (i % nr1 == 0 && i % nr2 == 0)
                 {
                     return i;
                 }
-
+                
             }
+            return -1;
+
+            //int max = Math.Max(nr1, nr2);
+            //for(int i= max + 1; ;i++)
+            //{
+            //    if ( i%nr1 == 0 && i%nr2 == 0)
+            //    {
+            //        return i;
+            //    }
+
+            //}
 
         }
     }
