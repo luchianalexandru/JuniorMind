@@ -27,20 +27,21 @@ namespace Pangram
         [TestMethod]
         public void TestFourSentenceIsExactly26()
         {
-            Assert.AreEqual(true, IsPangram("mrjocktvquizphdbagsfewlynx"));
+            Assert.AreEqual(true, IsPangram("MrJockTvQuizPhdBagsFewLynx"));
         }
 
-
+        
         bool IsPangram(string sentence)
         {
+            string s = sentence.ToLower();
             string[] pangramContents = new string[26] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-            if (!SentenceLength(sentence))
+            if (!SentenceLength(s))
             {
                 return false;
             }
-            for(int i=0;i<sentence.Length ;i++)
+            for(int i=0;i<s.Length ;i++)
             {
-                if (!sentence.Contains(pangramContents[i]))
+                if (!s.Contains(pangramContents[i]))
                 {
                     return false;
 
@@ -49,9 +50,9 @@ namespace Pangram
             return true;
         }
 
-        private static bool SentenceLength(string sentence)
+        private static bool SentenceLength(string s)
         {
-            if (sentence.Length < 26)
+            if (s.Length < 26)
             {
                 return false;
             }
