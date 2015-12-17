@@ -9,13 +9,22 @@ namespace Pangram
         [TestMethod]
         public void TestOnePangramIsTrue()
         {
-            Assert.AreEqual(true, IsPangram("istrue"));
+            Assert.AreEqual(true, IsPangram("abcdefghijklmnopqrstuvwxyz"));
         }
 
-        bool IsPangram(string Sentence)
+        bool IsPangram(string sentence)
         {
+            string[] pangramContents = new string[26] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+            return SentenceLength(sentence);
+        }
 
-            return true;
+        private static bool SentenceLength(string sentence)
+        {
+            if (sentence.Length < 26)
+            {
+                return false;
+            }
+            else return true;
         }
     }
 }
