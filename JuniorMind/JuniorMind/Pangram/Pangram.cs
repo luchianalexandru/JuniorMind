@@ -7,9 +7,15 @@ namespace Pangram
     public class Pangram
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestOnePangramIsTrue()
         {
+            Assert.AreEqual(true, IsPangram("istrue"));
         }
 
+        bool IsPangram(string Sentence)
+        {
+
+            return true;
+        }
     }
 }
