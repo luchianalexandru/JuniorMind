@@ -30,7 +30,7 @@ namespace Pangram
             Assert.AreEqual(true, IsPangram("MrJockTvQuizPhdBagsFewLynx"));
         }
 
-        
+
         bool IsPangram(string sentence)
         {
             string s = sentence.ToLower();
@@ -39,12 +39,12 @@ namespace Pangram
             {
                 return false;
             }
-            for(int i=0;i<s.Length ;i++)
+
+            for(int i=0;i<pangramContents.Length ;i++)
             {
                 if (!s.Contains(pangramContents[i]))
                 {
                     return false;
-
                 }
             }
             return true;
