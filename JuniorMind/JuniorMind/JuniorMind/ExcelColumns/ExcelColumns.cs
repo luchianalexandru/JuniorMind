@@ -23,7 +23,14 @@ namespace ExcelColumns
         {
             Assert.AreEqual("d", ColumnsInExcelForGivenNumber(4));
         }
-        
+
+
+        [TestMethod]
+        public void TestFor27()
+        {
+            Assert.AreEqual("aa", ColumnsInExcelForGivenNumber(27));
+        }
+
         [TestMethod]
         public void TestFor28()
         {
@@ -61,6 +68,13 @@ namespace ExcelColumns
         {
             Assert.AreEqual("aaa", ColumnsInExcelForGivenNumber(703));
         }
+
+        [TestMethod]
+        public void TestFor704()
+        {
+            Assert.AreEqual("aab", ColumnsInExcelForGivenNumber(704));
+        }
+
 
 
         string ColumnsInExcelForGivenNumber(int columnNumber)
