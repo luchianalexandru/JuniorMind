@@ -7,12 +7,16 @@ namespace ExcelColumns
     public class ExcelColumns
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FirstTestWithNothingInString()
         {
-
+            Assert.AreEqual("", ColumnsInExcelForGivenNumber(0));
         }
 
+        string ColumnsInExcelForGivenNumber(int number)
+        {
 
+            return "";
+
+        }
     }
-
 }
