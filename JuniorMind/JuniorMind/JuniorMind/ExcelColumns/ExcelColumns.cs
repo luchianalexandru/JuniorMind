@@ -9,24 +9,78 @@ namespace ExcelColumns
         [TestMethod]
         public void FirstTestWithNothingInString()
         {
-            Assert.AreEqual("", ColumnsInExcelForGivenNumber(27));
+            Assert.AreEqual("", ColumnsInExcelForGivenNumber(0));
         }
 
         [TestMethod]
         public void TestForNumberUpTo26()
         {
-            Assert.AreEqual("p", ColumnsInExcelForGivenNumber(15));
+            Assert.AreEqual("o", ColumnsInExcelForGivenNumber(15));
         }
 
-        string ColumnsInExcelForGivenNumber(int number)
+        [TestMethod]
+        public void TestForAnotherNumberUpTo26()
         {
-            string column = "";
+            Assert.AreEqual("d", ColumnsInExcelForGivenNumber(4));
+        }
+        
+        [TestMethod]
+        public void TestFor28()
+        {
+            Assert.AreEqual("ab", ColumnsInExcelForGivenNumber(28));
+        }
+
+
+        [TestMethod]
+        public void TestFor52()
+        {
+            Assert.AreEqual("az", ColumnsInExcelForGivenNumber(52));
+        }
+
+        [TestMethod]
+        public void TestFor56()
+        {
+            Assert.AreEqual("bd", ColumnsInExcelForGivenNumber(56));
+        }
+
+
+        [TestMethod]
+        public void TestFor92()
+        {
+            Assert.AreEqual("cn", ColumnsInExcelForGivenNumber(92));
+        }
+
+        [TestMethod]
+        public void TestFor702()
+        {
+            Assert.AreEqual("zz", ColumnsInExcelForGivenNumber(702));
+        }
+
+        [TestMethod]
+        public void TestFor703()
+        {
+            Assert.AreEqual("aaa", ColumnsInExcelForGivenNumber(703));
+        }
+
+
+        string ColumnsInExcelForGivenNumber(int columnNumber)
+        {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            string columnName = "";
+            int dividend = columnNumber;
+            int modulo = 1; 
 
-            if (number <= 26) return column += alphabet[number];
+            while(dividend != 0)
+            {
 
-            return "";
+                modulo = (dividend - 1) % 26;
+                columnName = alphabet[modulo] + columnName;
+                dividend = (dividend - modulo) / 26;
 
+            }
+
+            return columnName;
+            
         }
     }
 }
