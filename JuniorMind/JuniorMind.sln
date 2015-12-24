@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goats", "Goats\Goats.csproj", "{E07A3DF7-93AA-4856-8DCC-3FD92A7E7BAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelColumns", "ExcelColumns\ExcelColumns.csproj", "{E59B7408-1376-42EA-91A7-BA9D415C2964}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E07A3DF7-93AA-4856-8DCC-3FD92A7E7BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E07A3DF7-93AA-4856-8DCC-3FD92A7E7BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E07A3DF7-93AA-4856-8DCC-3FD92A7E7BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E07A3DF7-93AA-4856-8DCC-3FD92A7E7BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59B7408-1376-42EA-91A7-BA9D415C2964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59B7408-1376-42EA-91A7-BA9D415C2964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59B7408-1376-42EA-91A7-BA9D415C2964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59B7408-1376-42EA-91A7-BA9D415C2964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

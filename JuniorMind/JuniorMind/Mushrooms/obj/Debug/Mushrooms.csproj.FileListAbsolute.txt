@@ -1,6 +1,0 @@
-C:\Github Projects\JuniorMind\JuniorMind\Mushrooms\bin\Debug\Mushrooms.dll
-C:\Github Projects\JuniorMind\JuniorMind\Mushrooms\bin\Debug\Mushrooms.pdb
-C:\Github Projects\JuniorMind\JuniorMind\Mushrooms\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Github Projects\JuniorMind\JuniorMind\Mushrooms\obj\Debug\Mushrooms.csprojResolveAssemblyReference.cache
-C:\Github Projects\JuniorMind\JuniorMind\Mushrooms\obj\Debug\Mushrooms.dll
-C:\Github Projects\JuniorMind\JuniorMind\Mushrooms\obj\Debug\Mushrooms.pdb
