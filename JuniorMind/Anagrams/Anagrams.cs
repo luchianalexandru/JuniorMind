@@ -42,15 +42,52 @@ namespace Anagrams
             Assert.AreEqual(24, factorial(4));
         }
 
+        [TestMethod]
+        public void AnagramTestFor1Letter()
+        {
+            Assert.AreEqual(1, CountAnagrams("a"));
+        }
+
+        [TestMethod]
+        public void AnagramTestFor2Letters()
+        {
+            Assert.AreEqual(2, CountAnagrams("ab"));
+        }
+
+
+        [TestMethod]
+        public void AnagramTestFor3Letters()
+        {
+            Assert.AreEqual(6, CountAnagrams("abc"));
+        }
+
+        [TestMethod]
+        public void AnagramTestFor4Letters()
+        {
+            Assert.AreEqual(24, CountAnagrams("abcd"));
+        }
+
+        [TestMethod]
+        public void AnagramTestFor5Letters()
+        {
+            Assert.AreEqual(120, CountAnagrams("abcde"));
+        }
+
+
+        [TestMethod]
+        public void AnagramTestFor6Letters()
+        {
+            Assert.AreEqual(6, CountAnagrams("aaabbc"));
+        }
+
+
         int factorial(int number)
         {
             int f = 1;
             for (int i = 1; i <= number; i++) f *= i;
             return f;
         }
-
-
-
+        
         int Contains(string ToCheck, char c)
         {
             int contained = 0;
@@ -63,17 +100,22 @@ namespace Anagrams
         }
 
 
-   
-
         int CountAnagrams(string word)
         {
             int counter = 0;
             string NewString = "";
-
-           
-
-            return 0;
-
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (Contains(word, word[i]) >= 1)
+                {
+                    if (Contains(NewString, word[i]) < 1)
+                    {
+                        NewString = NewString + word[i];
+                        if (Contains(word, word[i]) > 1) counter += Contains(word, word[i]);
+                    }
+                }
+            }
+            return factorial(word.Length) / factorial(counter);
         }
     }
 }
