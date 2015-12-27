@@ -24,7 +24,33 @@ namespace Anagrams
             Assert.AreEqual(5, Contains("aaabbbbcbc", 'b'));
         }
 
-  
+        [TestMethod]
+        public void FactorialTestFor2()
+        {
+            Assert.AreEqual(2, factorial(2));
+        }
+
+        [TestMethod]
+        public void FactorialTestfor3()
+        {
+            Assert.AreEqual(6, factorial(3));
+        }
+
+        [TestMethod]
+        public void FactorialTestfor4()
+        {
+            Assert.AreEqual(24, factorial(4));
+        }
+
+        int factorial(int number)
+        {
+            int f = 1;
+            for (int i = 1; i <= number; i++) f *= i;
+            return f;
+        }
+
+
+
         int Contains(string ToCheck, char c)
         {
             int contained = 0;
