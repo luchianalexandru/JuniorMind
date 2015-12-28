@@ -115,6 +115,8 @@ namespace Anagrams
                     }
                 }
             }
+            int pfactoriale = 1;
+            for (int i = 0; i < NewString.Length; i++) pfactoriale *= factorial(Contains("NewString[i]",NewString[i]));
             return factorial(word.Length) / factorial(counter);
         }
     }
