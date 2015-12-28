@@ -77,9 +77,14 @@ namespace Anagrams
         [TestMethod]
         public void AnagramTestFor6Letters()
         {
-            Assert.AreEqual(720, CountAnagrams("aaabbc"));
+            Assert.AreEqual(60, CountAnagrams("aaabbc"));
         }
 
+        [TestMethod]
+        public void AnagramTestFor10Letters()
+        {
+            Assert.AreEqual(5040, CountAnagrams("aaaaabbbcd"));
+        }
 
         int factorial(int number)
         {
@@ -116,7 +121,7 @@ namespace Anagrams
                 }
             }
             int pfactoriale = 1;
-            for (int i = 0; i < NewString.Length; i++) pfactoriale *= factorial(Contains(NewString,NewString[i]));
+            for (int i = 0; i < NewString.Length; i++) pfactoriale *= factorial(Contains(word,NewString[i]));
             return factorial(word.Length) / pfactoriale;
         }
     }
