@@ -9,37 +9,37 @@ namespace Anagrams
         [TestMethod]
         public void IfWordContainsTest1()
         {
-            Assert.AreEqual(1, Contains("a",'a'));
+            Assert.AreEqual(1, NrOfTimesCharIsContained("a",'a'));
         }
 
         [TestMethod]
         public void IfWordContainsTest2()
         {
-            Assert.AreEqual(3, Contains("aaabbbbcbc", 'a'));
+            Assert.AreEqual(3, NrOfTimesCharIsContained("aaabbbbcbc", 'a'));
         }
 
         [TestMethod]
         public void IfWordContainsTest3()
         {
-            Assert.AreEqual(5, Contains("aaabbbbcbc", 'b'));
+            Assert.AreEqual(5, NrOfTimesCharIsContained("aaabbbbcbc", 'b'));
         }
 
         [TestMethod]
         public void FactorialTestFor2()
         {
-            Assert.AreEqual(2, factorial(2));
+            Assert.AreEqual(2, Factorial(2));
         }
 
         [TestMethod]
         public void FactorialTestfor3()
         {
-            Assert.AreEqual(6, factorial(3));
+            Assert.AreEqual(6, Factorial(3));
         }
 
         [TestMethod]
         public void FactorialTestfor4()
         {
-            Assert.AreEqual(24, factorial(4));
+            Assert.AreEqual(24, Factorial(4));
         }
 
         [TestMethod]
@@ -84,21 +84,21 @@ namespace Anagrams
         public void AnagramTestFor10Letters()
         {
             Assert.AreEqual(5040, CountAnagrams("aaaaabbbcd"));
-        }
+        }   
 
-        int factorial(int number)
+        int Factorial(int number)
         {
             int f = 1;
             for (int i = 1; i <= number; i++) f *= i;
             return f;
         }
         
-        int Contains(string ToCheck, char c)
+        int NrOfTimesCharIsContained(string tocheck, char c)
         {
             int contained = 0;
-            for (int i = 0; i < ToCheck.Length; i++)
+            for (int i = 0; i < tocheck.Length; i++)
             {
-                if (ToCheck[i] == c) contained++;
+                if (tocheck[i] == c) contained++;
 
             }
             return contained;
@@ -108,21 +108,21 @@ namespace Anagrams
         int CountAnagrams(string word)
         {
             int counter = 0;
-            string NewString = "";
+            string newstring = "";
             for (int i = 0; i < word.Length; i++)
             {
-                if (Contains(word, word[i]) >= 1)
+                if (NrOfTimesCharIsContained(word, word[i]) >= 1)
                 {
-                    if (Contains(NewString, word[i]) < 1)
+                    if (NrOfTimesCharIsContained(newstring, word[i]) < 1)
                     {
-                        NewString = NewString + word[i];
-                        if (Contains(word, word[i]) > 1) counter += Contains(word, word[i]);
+                        newstring = newstring + word[i];
+                        if (NrOfTimesCharIsContained(word, word[i]) > 1) counter += NrOfTimesCharIsContained(word, word[i]);
                     }
                 }
             }
             int pfactoriale = 1;
-            for (int i = 0; i < NewString.Length; i++) pfactoriale *= factorial(Contains(word,NewString[i]));
-            return factorial(word.Length) / pfactoriale;
+            for (int i = 0; i < newstring.Length; i++) pfactoriale *= Factorial(NrOfTimesCharIsContained(word,newstring[i]));
+            return Factorial(word.Length) / pfactoriale;
         }
     }
 }
