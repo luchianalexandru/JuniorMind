@@ -7,13 +7,16 @@ namespace BaseConverter
     public class BaseConverter
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ConvertFromBase10ToBase2Test1()
         {
+            CollectionAssert.AreEqual(new byte[] { }, ConvertFromBase10ToBase2(1));
         }
 
         byte[] ConvertFromBase10ToBase2(int number)
         {
-            return ;
+            byte[] array = { };
+
+            return array;
         }
     }
 }
