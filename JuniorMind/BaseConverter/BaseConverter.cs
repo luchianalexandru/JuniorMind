@@ -53,9 +53,28 @@ namespace BaseConverter
                 number /= 2;
             }
 
+            //byte[] reversedArray = Inverter(array);
+
+            return Inverter(array);
+        }
+
+
+        [TestMethod]
+        public void InverterTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 3, 2, 1 }, Inverter(new byte[] { 1, 2, 3 }));
+        }
+
+        [TestMethod]
+        public void InverterTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 3, 9, 7 }, Inverter(new byte[] { 7, 9, 3 }));
+        }
+
+        private static byte[] Inverter(byte[] array)
+        {
             byte[] reversedArray = new byte[array.Length];
             for (int i = 0; i < array.Length; i++) reversedArray[i] = array[array.Length - 1 - i];
-            
             return reversedArray;
         }
     }
