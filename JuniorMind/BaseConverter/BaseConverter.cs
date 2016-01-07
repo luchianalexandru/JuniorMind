@@ -54,6 +54,29 @@ namespace BaseConverter
             CollectionAssert.AreEqual(new byte[] { 3, 9, 7 }, Inverter(new byte[] { 7, 9, 3 }));
         }
 
+        [TestMethod]
+        public void NotOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0 }, NotOperation(new byte[] { 0, 1 }));
+        }
+
+        [TestMethod]
+        public void NotOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, NotOperation(new byte[] { 1, 0, 0 }));
+        }
+
+        [TestMethod]
+        public void NotOperationTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 1, 0 }, NotOperation(new byte[] { 1, 0, 0, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void NotOperationTest4()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0, 0, 0, 0 }, NotOperation(new byte[] { 1, 1, 0, 1, 1, 1, 1, 1 }));
+        }
 
         byte[] ConvertFromBase10ToBase2(int number)
         {
@@ -76,23 +99,12 @@ namespace BaseConverter
             for (int i = 0; i < array.Length; i++) reversedArray[i] = array[array.Length - 1 - i];
             return reversedArray;
         }
+                
 
-        [TestMethod]
-        public void NotOperationTest1()
-        {
-            CollectionAssert.AreEqual(new byte[] { 1, 0 }, NotOperation(new byte[] { 0, 1}));
-        }
-
-      
         byte[] NotOperation(byte[] array)
         {
             byte[] notArray = new byte[array.Length];
-
-            for(int i = 0; i < notArray.Length -1 ; i++)
-            {
-                if (array[i] == (byte)0) notArray[i] = (byte)1;
-                else notArray[i] = (byte)0;
-            }
+            for(int i = 0; i < notArray.Length; i++) notArray[i] = array[i] == (byte)0 ? (byte)1 : (byte)0;
             return notArray;
         }
     }
