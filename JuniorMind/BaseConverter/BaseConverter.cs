@@ -202,8 +202,7 @@ namespace BaseConverter
         byte ReturnNullIfArrayTooShort(byte[] array, int i)
         {
             if (i < array.Length) return array[i];
-            else return (byte)0;
-
+            return (byte)0;
         }
     }
 }
