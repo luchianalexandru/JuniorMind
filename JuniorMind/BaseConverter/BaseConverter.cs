@@ -126,15 +126,67 @@ namespace BaseConverter
             CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 0 }, AndOperation(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }));
         }
 
+        [TestMethod]
+        public void AndOperationTest4()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 1, 1 }, AndOperation(new byte[] { 1, 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }));
+        }
+
+        [TestMethod]
+        public void AndOperationTest5()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0 }, AndOperation(new byte[] { 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
         byte[] AndOperation(byte[] arrayA, byte[] arrayB)
         {
-            byte[] result = new byte[arrayA.Length];
-            for(int i = 0; i < arrayA.Length; i++)
-            {
-                if (arrayA[i] == (byte)1 && arrayB[i] == (byte)1) result[i] = (byte)1;
-                else result[i] = (byte)0;
-            }
+            int l = Math.Max(arrayA.Length, arrayB.Length);
+            byte[] result = new byte[l];
+
+            if (arrayA.Length < arrayB.Length) arrayA = MakeArraysToHaveSameLength(arrayA, arrayB);
+            else if (arrayA.Length > arrayB.Length) arrayB = MakeArraysToHaveSameLength(arrayB, arrayA);
+
+            for (int i = 0; i < l; i++) result[i] = (arrayA[i] == (byte)1 && arrayB[i] == (byte)1 ? (byte)1 : (byte)0);
             return result; 
+        }
+
+
+        [TestMethod]
+        public void TestForMakingArraysHaveSameLength1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, MakeArraysToHaveSameLength(new byte[] { 1, 1 }, new byte[] { 1, 1, 0 }));
+        }
+
+        [TestMethod]
+        public void TestForMakingArraysHaveSameLength2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0 }, MakeArraysToHaveSameLength(new byte[] { 1, 0 }, new byte[] { 1, 1, 0 }));
+        }
+
+        [TestMethod]
+        public void TestForMakingArraysHaveSameLength3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0 }, MakeArraysToHaveSameLength(new byte[] { 1, 1, 0 }, new byte[] { 1, 0, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void TestForMakingArraysHaveSameLength4()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, 0, 1, 1, 0 }, MakeArraysToHaveSameLength(new byte[] { 1, 0, 1, 1, 0 }, new byte[] { 1, 0, 0, 1, 1, 0, 0, 1 }));
+        }
+
+
+        byte[] MakeArraysToHaveSameLength(byte[] shortArray, byte[] longArray)
+        {
+            byte[] intermediateArray = new byte[] { };
+            intermediateArray = Inverter(shortArray);
+            for ( int i = shortArray.Length; i < longArray.Length; i++)
+            {
+                Array.Resize(ref intermediateArray, intermediateArray.Length + 1);
+                intermediateArray[i] = (byte)0;
+            }
+                
+            return Inverter(intermediateArray);
 
         }
     }
