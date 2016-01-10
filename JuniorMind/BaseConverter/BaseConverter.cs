@@ -177,13 +177,13 @@ namespace BaseConverter
 
         byte[] AndOperation(byte[] arrayA, byte[] arrayB)
         {
-            int l = Math.Max(arrayA.Length, arrayB.Length);
-            byte[] result = new byte[l];
+            // int l = Math.Max(arrayA.Length, arrayB.Length);
+            byte[] result = new byte[Math.Max(arrayA.Length, arrayB.Length)];
 
-            if (arrayA.Length < arrayB.Length) arrayA = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayA, arrayB);
-            else if (arrayA.Length > arrayB.Length) arrayB = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayB, arrayA);
+            //if (arrayA.Length < arrayB.Length) arrayA = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayA, arrayB);
+            //else if (arrayA.Length > arrayB.Length) arrayB = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayB, arrayA);
 
-            for (int i = 0; i < l; i++) result[i] = (arrayA[i] == (byte)1 && arrayB[i] == (byte)1 ? (byte)1 : (byte)0);
+            for (int i = 0; i < Math.Max(arrayA.Length, arrayB.Length); i++) result[i] = ((ReturnNullIfArrayTooShort(arrayA,i) == (byte)1) && (ReturnNullIfArrayTooShort(arrayB, i) == (byte)1) ? (byte)1 : (byte)0);
             return result; 
         }
 
