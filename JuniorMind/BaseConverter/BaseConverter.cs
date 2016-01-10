@@ -107,5 +107,35 @@ namespace BaseConverter
             for(int i = 0; i < notArray.Length; i++) notArray[i] = array[i] == (byte)0 ? (byte)1 : (byte)0;
             return notArray;
         }
+
+        [TestMethod]
+        public void AndOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1}, AndOperation(new byte[] { 1, 1 }, new byte[] { 1, 1 }));
+        }
+
+        [TestMethod]
+        public void AndOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0 }, AndOperation(new byte[] { 1, 1 }, new byte[] { 1, 0 }));
+        }
+        
+        [TestMethod]
+        public void AndOperationTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 0 }, AndOperation(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }));
+        }
+
+        byte[] AndOperation(byte[] arrayA, byte[] arrayB)
+        {
+            byte[] result = new byte[arrayA.Length];
+            for(int i = 0; i < arrayA.Length; i++)
+            {
+                if (arrayA[i] == (byte)1 && arrayB[i] == (byte)1) result[i] = (byte)1;
+                else result[i] = (byte)0;
+            }
+            return result; 
+
+        }
     }
 }
