@@ -177,29 +177,30 @@ namespace BaseConverter
 
         byte[] AndOperation(byte[] arrayA, byte[] arrayB)
         {
-            // int l = Math.Max(arrayA.Length, arrayB.Length);
+          
             byte[] result = new byte[Math.Max(arrayA.Length, arrayB.Length)];
 
             //if (arrayA.Length < arrayB.Length) arrayA = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayA, arrayB);
             //else if (arrayA.Length > arrayB.Length) arrayB = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayB, arrayA);
 
-            for (int i = 0; i < Math.Max(arrayA.Length, arrayB.Length); i++) result[i] = ((ReturnNullIfArrayTooShort(arrayA,i) == (byte)1) && (ReturnNullIfArrayTooShort(arrayB, i) == (byte)1) ? (byte)1 : (byte)0);
+            int l = Math.Max(arrayA.Length, arrayB.Length);
+            for (int i = 0; i < l; i++) result[i] = ((GetNullIfShort(arrayA,l-i-1) == (byte)1) && (GetNullIfShort(arrayB, l-i-1) == (byte)1) ? (byte)1 : (byte)0);
             return result; 
         }
 
         [TestMethod]
         public void ReturnNullIfArrayTooShortTest1()
         {
-            Assert.AreEqual((byte)0 , ReturnNullIfArrayTooShort(new byte[] { 1, 1 }, 3));
+            Assert.AreEqual((byte)0 , GetNullIfShort(new byte[] { 1, 1 }, 3));
         }
 
         [TestMethod]
         public void ReturnNullIfArrayTooShortTest2()
         {
-            Assert.AreEqual((byte)1, ReturnNullIfArrayTooShort(new byte[] { 1, 1 }, 1));
+            Assert.AreEqual((byte)1, GetNullIfShort(new byte[] { 1, 1 }, 1));
         }
 
-        byte ReturnNullIfArrayTooShort(byte[] array, int i)
+        byte GetNullIfShort(byte[] array, int i)
         {
             if (i < array.Length) return array[i];
             return (byte)0;
