@@ -57,25 +57,25 @@ namespace BaseConverter
         [TestMethod]
         public void TestForMakingArraysHaveSameLength1()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, MakeArraysToHaveSameLength(new byte[] { 1, 1 }, new byte[] { 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ReturnsTheShorterArrayWithZeroesAtTheBeginning(new byte[] { 1, 1 }, new byte[] { 1, 1, 0 }));
         }
 
         [TestMethod]
         public void TestForMakingArraysHaveSameLength2()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0 }, MakeArraysToHaveSameLength(new byte[] { 1, 0 }, new byte[] { 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0 }, ReturnsTheShorterArrayWithZeroesAtTheBeginning(new byte[] { 1, 0 }, new byte[] { 1, 1, 0 }));
         }
 
         [TestMethod]
         public void TestForMakingArraysHaveSameLength3()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0 }, MakeArraysToHaveSameLength(new byte[] { 1, 1, 0 }, new byte[] { 1, 0, 0, 1 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0 }, ReturnsTheShorterArrayWithZeroesAtTheBeginning(new byte[] { 1, 1, 0 }, new byte[] { 1, 0, 0, 1 }));
         }
 
         [TestMethod]
         public void TestForMakingArraysHaveSameLength4()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, 0, 1, 1, 0 }, MakeArraysToHaveSameLength(new byte[] { 1, 0, 1, 1, 0 }, new byte[] { 1, 0, 0, 1, 1, 0, 0, 1 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, 0, 1, 1, 0 }, ReturnsTheShorterArrayWithZeroesAtTheBeginning(new byte[] { 1, 0, 1, 1, 0 }, new byte[] { 1, 0, 0, 1, 1, 0, 0, 1 }));
         }
 
 
@@ -155,7 +155,7 @@ namespace BaseConverter
             return reversedArray;
         }
 
-        byte[] MakeArraysToHaveSameLength(byte[] shortArray, byte[] longArray)
+        byte[] ReturnsTheShorterArrayWithZeroesAtTheBeginning(byte[] shortArray, byte[] longArray)
         {
             byte[] intermediateArray = new byte[] { };
             intermediateArray = Inverter(shortArray);
@@ -180,8 +180,8 @@ namespace BaseConverter
             int l = Math.Max(arrayA.Length, arrayB.Length);
             byte[] result = new byte[l];
 
-            if (arrayA.Length < arrayB.Length) arrayA = MakeArraysToHaveSameLength(arrayA, arrayB);
-            else if (arrayA.Length > arrayB.Length) arrayB = MakeArraysToHaveSameLength(arrayB, arrayA);
+            if (arrayA.Length < arrayB.Length) arrayA = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayA, arrayB);
+            else if (arrayA.Length > arrayB.Length) arrayB = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayB, arrayA);
 
             for (int i = 0; i < l; i++) result[i] = (arrayA[i] == (byte)1 && arrayB[i] == (byte)1 ? (byte)1 : (byte)0);
             return result; 
