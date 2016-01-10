@@ -133,6 +133,19 @@ namespace BaseConverter
             CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0 }, AndOperation(new byte[] { 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1 }));
         }
 
+        [TestMethod]
+        public void ReturnNullIfArrayTooShortTest1()
+        {
+            Assert.AreEqual((byte)0, GetNullIfShort(new byte[] { 1, 1 }, 3));
+        }
+
+        [TestMethod]
+        public void ReturnNullIfArrayTooShortTest2()
+        {
+            Assert.AreEqual((byte)1, GetNullIfShort(new byte[] { 1, 1 }, 1));
+        }
+
+
         byte[] ConvertFromBase10ToBase2(int number)
         {
             byte[] array = { };
@@ -168,6 +181,12 @@ namespace BaseConverter
 
         }
 
+        byte GetNullIfShort(byte[] array, int i)
+        {
+            if (i < array.Length) return array[i];
+            return (byte)0;
+        }
+
         byte[] NotOperation(byte[] array)
         {
             byte[] notArray = new byte[array.Length];
@@ -179,31 +198,12 @@ namespace BaseConverter
         {
           
             byte[] result = new byte[Math.Max(arrayA.Length, arrayB.Length)];
-
-            //if (arrayA.Length < arrayB.Length) arrayA = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayA, arrayB);
-            //else if (arrayA.Length > arrayB.Length) arrayB = ReturnsTheShorterArrayWithZeroesAtTheBeginning(arrayB, arrayA);
-
             int l = Math.Max(arrayA.Length, arrayB.Length);
-            for (int i = 0; i < l; i++) result[i] = ((GetNullIfShort(arrayA,l-i-1) == (byte)1) && (GetNullIfShort(arrayB, l-i-1) == (byte)1) ? (byte)1 : (byte)0);
+            for (int i = l - 1; i >= 0 ; i--) result[i] = ((GetNullIfShort(arrayA,i) == (byte)1) && (GetNullIfShort(arrayB, i) == (byte)1) ? (byte)1 : (byte)0);
             return result; 
         }
 
-        [TestMethod]
-        public void ReturnNullIfArrayTooShortTest1()
-        {
-            Assert.AreEqual((byte)0 , GetNullIfShort(new byte[] { 1, 1 }, 3));
-        }
-
-        [TestMethod]
-        public void ReturnNullIfArrayTooShortTest2()
-        {
-            Assert.AreEqual((byte)1, GetNullIfShort(new byte[] { 1, 1 }, 1));
-        }
-
-        byte GetNullIfShort(byte[] array, int i)
-        {
-            if (i < array.Length) return array[i];
-            return (byte)0;
-        }
+        
+       
     }
 }
