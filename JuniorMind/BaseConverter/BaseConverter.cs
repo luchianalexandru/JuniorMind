@@ -187,5 +187,23 @@ namespace BaseConverter
             return result; 
         }
 
+        [TestMethod]
+        public void ReturnNullIfArrayTooShortTest1()
+        {
+            Assert.AreEqual((byte)0 , ReturnNullIfArrayTooShort(new byte[] { 1, 1 }, 3));
+        }
+
+        [TestMethod]
+        public void ReturnNullIfArrayTooShortTest2()
+        {
+            Assert.AreEqual((byte)1, ReturnNullIfArrayTooShort(new byte[] { 1, 1 }, 1));
+        }
+
+        byte ReturnNullIfArrayTooShort(byte[] array, int i)
+        {
+            if (i < array.Length) return array[i];
+            else return (byte)0;
+
+        }
     }
 }
