@@ -183,7 +183,7 @@ namespace BaseConverter
 
         byte GetNullIfShort(byte[] array, int i)
         {
-            if (i < array.Length) return array[i];
+            if (i < array.Length) return array[array.Length - i - 1];
             return (byte)0;
         }
 
@@ -192,14 +192,14 @@ namespace BaseConverter
             byte[] notArray = new byte[array.Length];
             for(int i = 0; i < notArray.Length; i++) notArray[i] = array[i] == (byte)0 ? (byte)1 : (byte)0;
             return notArray;
-        }
+        }   
 
         byte[] AndOperation(byte[] arrayA, byte[] arrayB)
         {
           
             byte[] result = new byte[Math.Max(arrayA.Length, arrayB.Length)];
-            int l = Math.Max(arrayA.Length, arrayB.Length);
-            for (int i = l - 1; i >= 0 ; i--) result[i] = ((GetNullIfShort(arrayA,i) == (byte)1) && (GetNullIfShort(arrayB, i) == (byte)1) ? (byte)1 : (byte)0);
+            for (int i = 0; i < result.Length ; i++)
+                result[result.Length - i - 1] = ((GetNullIfShort(arrayA,i) == (byte)1) && (GetNullIfShort(arrayB, i) == (byte)1) ? (byte)1 : (byte)0);
             return result; 
         }
 
