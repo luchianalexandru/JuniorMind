@@ -106,31 +106,73 @@ namespace BaseConverter
         [TestMethod]
         public void AndOperationTest1()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1 }, OperationPerByte(new byte[] { 1, 1 }, new byte[] { 1, 1 }, "AND"));
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, OperationForEachByteInArray(new byte[] { 1, 1 }, new byte[] { 1, 1 }, "AND"));
         }
 
         [TestMethod]
         public void AndOperationTest2()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0 }, OperationPerByte(new byte[] { 1, 1 }, new byte[] { 1, 0 }, "AND"));
+            CollectionAssert.AreEqual(new byte[] { 1, 0 }, OperationForEachByteInArray(new byte[] { 1, 1 }, new byte[] { 1, 0 }, "AND"));
         }
 
         [TestMethod]
         public void AndOperationTest3()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 0 }, OperationPerByte(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "AND"));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "AND"));
         }
 
         [TestMethod]
         public void AndOperationTest4()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 1, 0 }, OperationPerByte(new byte[] { 1, 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "AND" ));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 1, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "AND" ));
         }
 
         [TestMethod]
         public void AndOperationTest5()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0 }, OperationPerByte(new byte[] { 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1 }, "AND"));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1 }, "AND"));
+        }
+
+        [TestMethod]
+        public void OrOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, OperationForEachByteInArray(new byte[] { 0, 1 }, new byte[] { 1, 0 }, "OR"));
+        }
+
+        [TestMethod]
+        public void OrOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "OR"));
+        }
+
+        [TestMethod]
+        public void OrOperationTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 0, 1, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 0, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "OR"));
+        }
+
+        [TestMethod]
+        public void XorOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, OperationForEachByteInArray(new byte[] { 0, 1 }, new byte[] { 1, 0 }, "XOR"));
+        }
+
+        [TestMethod]
+        public void XorOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "XOR"));
+        }
+
+        [TestMethod]
+        public void XorOperationTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 0, 0, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 0, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "XOR"));
+        }
+
+        [TestMethod]
+        public void OperationTestForWhenOperationIsNeither()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 0 }, OperationForEachByteInArray(new byte[] { 1, 1, 1, 0, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "RETURNS EMPTY BYTE ARRAY"));
         }
 
         [TestMethod]
@@ -144,7 +186,7 @@ namespace BaseConverter
         {
             Assert.AreEqual((byte)1, GetNullIfShort(new byte[] { 1, 1 }, 1));
         }
-
+          
 
         byte[] ConvertFromBase10ToBase2(int number)
         {
@@ -159,7 +201,6 @@ namespace BaseConverter
 
             return Inverter(array);
         }
-
 
         private static byte[] Inverter(byte[] array)
         {
@@ -194,21 +235,28 @@ namespace BaseConverter
             return notArray;
         }   
 
-        byte[] OperationPerByte(byte[] arrayA, byte[] arrayB, string operation)
+        byte[] OperationForEachByteInArray(byte[] arrayA, byte[] arrayB, string operation)
         {
 
             byte[] result = new byte[Math.Max(arrayA.Length, arrayB.Length)];
             for (int i = 0; i < result.Length; i++)
-                result[result.Length - i - 1] = OperationSwitch(GetNullIfShort(arrayA, i), GetNullIfShort(arrayB, i), i, operation);
+                result[result.Length - i - 1] = OperationSwitch(GetNullIfShort(arrayA, i), GetNullIfShort(arrayB, i), operation);
             return result;
         }
 
-        private byte OperationSwitch(byte a, byte b, int i, string operation)
+        private byte OperationSwitch(byte a, byte b, string operation)
         {
-            if (operation == "AND") return (a == (byte)1 &&  b == (byte)1) ? (byte)1 : (byte)0;
-            return 0;
+            switch (operation)
+            {
+                case "AND":
+                    return a == (byte)1 && b == (byte)1 ? (byte)1 : (byte)0;
+                case "OR":
+                    return a == (byte)1 || b == (byte)1 ? (byte)1 : (byte)0;
+                case "XOR":
+                    return a == b ? (byte)0 : (byte)1;
+                default:
+                    return 0;
+            }
         }
-
-
     }
 }
