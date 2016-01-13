@@ -106,31 +106,31 @@ namespace BaseConverter
         [TestMethod]
         public void AndOperationTest1()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1 }, AndOperation(new byte[] { 1, 1 }, new byte[] { 1, 1 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, OperationPerByte(new byte[] { 1, 1 }, new byte[] { 1, 1 }, "AND"));
         }
 
         [TestMethod]
         public void AndOperationTest2()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0 }, AndOperation(new byte[] { 1, 1 }, new byte[] { 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 0 }, OperationPerByte(new byte[] { 1, 1 }, new byte[] { 1, 0 }, "AND"));
         }
 
         [TestMethod]
         public void AndOperationTest3()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 0 }, AndOperation(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 0 }, OperationPerByte(new byte[] { 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "AND"));
         }
 
         [TestMethod]
         public void AndOperationTest4()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 1, 0 }, AndOperation(new byte[] { 1, 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 1, 0 }, OperationPerByte(new byte[] { 1, 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1, 0 }, "AND" ));
         }
 
         [TestMethod]
         public void AndOperationTest5()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0 }, AndOperation(new byte[] { 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 0, 0 }, OperationPerByte(new byte[] { 1, 1, 1, 1, 0 }, new byte[] { 1, 0, 1 }, "AND"));
         }
 
         [TestMethod]
@@ -194,16 +194,21 @@ namespace BaseConverter
             return notArray;
         }   
 
-        byte[] AndOperation(byte[] arrayA, byte[] arrayB)
+        byte[] OperationPerByte(byte[] arrayA, byte[] arrayB, string operation)
         {
-          
+
             byte[] result = new byte[Math.Max(arrayA.Length, arrayB.Length)];
-            for (int i = 0; i < result.Length ; i++)
-                result[result.Length - i - 1] = ((GetNullIfShort(arrayA,i) == (byte)1) && (GetNullIfShort(arrayB, i) == (byte)1) ? (byte)1 : (byte)0);
-            return result; 
+            for (int i = 0; i < result.Length; i++)
+                result[result.Length - i - 1] = OperationSwitch(GetNullIfShort(arrayA, i), GetNullIfShort(arrayB, i), i, operation);
+            return result;
         }
 
-        
-       
+        private byte OperationSwitch(byte a, byte b, int i, string operation)
+        {
+            if (operation == "AND") return (a == (byte)1 &&  b == (byte)1) ? (byte)1 : (byte)0;
+            return 0;
+        }
+
+
     }
 }
