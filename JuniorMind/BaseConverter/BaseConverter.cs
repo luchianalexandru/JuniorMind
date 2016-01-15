@@ -302,6 +302,17 @@ namespace BaseConverter
             Assert.AreEqual(true, GreaterThan(new byte[] { 0, 0, 1, 1, 1 }, new byte[] { 0, 1, 1, 0 }));
         }
 
+        [TestMethod]
+        public void NotEqualToTest1()
+        {
+            Assert.AreEqual(true, NotEqual(new byte[] { 0, 1, 1, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void NotEqualToTest2()
+        {
+            Assert.AreEqual(true, NotEqual(new byte[] { 0, 0, 1, 1, 1, 1, 0 }, new byte[] { 0, 0, 1, 1, 1 }));
+        }
 
         byte[] ConvertFromBase10ToBase2(int number)
         {
@@ -444,7 +455,11 @@ namespace BaseConverter
 
         }
 
-      
+        bool NotEqual(byte[] a, byte[] b)
+        {
+            return !EqualTo(a, b);
+            
+        }
 
     }
 }
