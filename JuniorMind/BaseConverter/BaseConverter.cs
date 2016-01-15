@@ -9,39 +9,51 @@ namespace BaseConverter
         [TestMethod]
         public void ConvertFromBase10ToBase2Test1()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0 }, ConvertFromBase10ToBase2(2));
+            CollectionAssert.AreEqual(new byte[] { 1, 0 }, ConvertFromBase10ToAnother(2, 2));
         }
 
         [TestMethod]
         public void ConvertFromBase10ToBase2Test2()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, ConvertFromBase10ToBase2(4));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, ConvertFromBase10ToAnother(4, 2));
         }
 
         [TestMethod]
         public void ConvertFromBase10ToBase2Test3()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 1 }, ConvertFromBase10ToBase2(5));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1 }, ConvertFromBase10ToAnother(5, 2));
         }
 
         [TestMethod]
         public void ConvertFromBase10ToBase2Test4()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 1 }, ConvertFromBase10ToBase2(9));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 1 }, ConvertFromBase10ToAnother(9, 2));
         }
 
         [TestMethod]
         public void ConvertFromBase10ToBase2Test5()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 1 }, ConvertFromBase10ToBase2(17));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 1 }, ConvertFromBase10ToAnother(17, 2 ));
         }
 
         [TestMethod]
         public void ConvertFromBase10ToBase2Test6()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 1, 1, 1, 1 }, ConvertFromBase10ToBase2(223));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 1, 1, 1, 1 }, ConvertFromBase10ToAnother(223, 2));
         }
-        
+
+        [TestMethod]
+        public void ConvertFromAnyBaseToAnyBaseTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 2 }, ConvertFromBase10ToAnother(2, 3));
+        }
+
+        [TestMethod]
+        public void ConvertFromAnyBaseToAnyBaseTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 9 }, ConvertFromBase10ToAnother(9, 10));
+        }
+
         [TestMethod]
         public void InverterTest1()
         {
@@ -77,7 +89,6 @@ namespace BaseConverter
         {
             CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, 0, 1, 1, 0 }, ReturnsTheShorterArrayWithZeroesAtTheBeginning(new byte[] { 1, 0, 1, 1, 0 }, new byte[] { 1, 0, 0, 1, 1, 0, 0, 1 }));
         }
-
 
         [TestMethod]
         public void NotOperationTest1()
@@ -186,7 +197,6 @@ namespace BaseConverter
         {
             Assert.AreEqual((byte)1, GetNullIfShort(new byte[] { 1, 1 }, 1));
         }
-
 
         [TestMethod]
         public void LeftHandShiftOperationTest1()
@@ -314,15 +324,39 @@ namespace BaseConverter
             Assert.AreEqual(true, NotEqual(new byte[] { 0, 0, 1, 1, 1, 1, 0 }, new byte[] { 0, 0, 1, 1, 1 }));
         }
 
-        byte[] ConvertFromBase10ToBase2(int number)
+        [TestMethod]
+        public void AdditionTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, Addition(new byte[] { 0, 1 }, new byte[] { 1, 0 }, 2));
+        }
+
+        [TestMethod]
+        public void AdditionTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 1, 1, 1, 1 }, Addition(new byte[] { 1, 1, 0, 1, 0, 1 }, new byte[] { 1, 1, 0, 1, 0 }, 2));
+        }
+
+        [TestMethod]
+        public void SubstractionTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1 }, Substraction(new byte[] { 1, 0 }, new byte[] { 1 }));
+        }
+
+        [TestMethod]
+        public void SubstractionTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 0 }, Substraction(new byte[] { 1, 1, 1, 1 }, new byte[] { 1 }));
+        }
+
+        byte[] ConvertFromBase10ToAnother(int number, int baza )
         {
             byte[] array = { };
 
             while (number > 0)
             {
                 Array.Resize(ref array, array.Length + 1);
-                array[array.Length - 1] = (byte)(number % 2);
-                number /= 2;
+                array[array.Length - 1] = (byte)(number % baza);
+                number /= baza;
             }
 
             return Inverter(array);
@@ -461,5 +495,45 @@ namespace BaseConverter
             
         }
 
+        byte[] Addition(byte[] a, byte[] b, int baza)
+        {            
+            int rest = 0;
+            byte[] rezultat = new byte[Math.Max(a.Length, b.Length) + 1];
+            int suma;
+            for(int i = rezultat.Length-1; i >=0; i--)
+            {
+                suma = GetNullIfShort(a, rezultat.Length - i - 1) + GetNullIfShort(b, rezultat.Length - i - 1) + rest;
+                rest = suma / baza;
+                rezultat[i] = (byte)(suma % baza);
+            }
+            return MakeArrayWithout0AtBeginning(rezultat);
+        }
+
+        byte[] Substraction(byte[] a, byte[] b)
+        {
+            if (EqualTo(a, b)) return new byte[] { };
+            byte[] descazut = new byte[] { };
+            byte[] scazator = new byte[] { };
+            descazut = GreaterThan(a, b) ? a : b;
+            scazator = LessThan(a, b) ? a : b;
+            scazator = RightHandShift(scazator, descazut.Length - scazator.Length);
+
+            byte[] rezultat = new byte[descazut.Length];
+            int diferenta = 0;
+            int rest = 0;
+
+            for (int i = descazut.Length-1; i >= 0; i-- )
+            {
+                diferenta = descazut[i] - scazator[i] - rest;
+                rest = 0;
+                if (diferenta < 0)
+                {
+                    rest++;
+                    rezultat[i] = (byte)Math.Abs(diferenta);
+                }
+                else rezultat[i] = (byte)diferenta;
+            }
+            return MakeArrayWithout0AtBeginning(rezultat);
+        }
     }
 }
