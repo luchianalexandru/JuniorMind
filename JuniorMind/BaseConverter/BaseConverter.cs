@@ -186,7 +186,37 @@ namespace BaseConverter
         {
             Assert.AreEqual((byte)1, GetNullIfShort(new byte[] { 1, 1 }, 1));
         }
-          
+
+
+        [TestMethod]
+        public void LeftHandShiftOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 0 }, LeftHandShift(new byte[] { 0, 1 }, 2));
+        }
+
+        [TestMethod]
+        public void LeftHandShiftOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 0, 1, 0, 0, 0, 0 }, LeftHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 4));
+        }
+
+        [TestMethod]
+        public void RightHandShiftOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, }, RightHandShift(new byte[] { 0, 1 }, 2));
+        }
+
+        [TestMethod]
+        public void RightHandShiftOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 4));
+        }
+
+        [TestMethod]
+        public void RightHandShiftOperationTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 7));
+        }
 
         byte[] ConvertFromBase10ToBase2(int number)
         {
@@ -259,18 +289,6 @@ namespace BaseConverter
             }
         }
 
-        [TestMethod]
-        public void LeftHandShiftOperationTest1()
-        {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 0 }, LeftHandShift(new byte[] { 0, 1 }, 2));
-        }
-
-        [TestMethod]
-        public void LeftHandShiftOperationTest2()
-        {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 0, 1, 0, 0, 0, 0 }, LeftHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 4));
-        }
-
         private byte[] LeftHandShift(byte[] array, int steps)
         {
             byte[] finalArray = new byte[array.Length+steps];
@@ -283,24 +301,6 @@ namespace BaseConverter
             return finalArray;
         }
 
-        [TestMethod]
-        public void RightHandShiftOperationTest1()
-        {
-             CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, }, RightHandShift(new byte[] { 0, 1 }, 2));
-        }
-
-        [TestMethod]
-        public void RightHandShiftOperationTest2()
-        {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 4));
-        }
-
-        [TestMethod]
-        public void RightHandShiftOperationTest3()
-        {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 7));
-        }
-
         private byte[] RightHandShift(byte[] array, int steps)
         {
             byte[] finalArray = new byte[array.Length + steps];
@@ -311,6 +311,36 @@ namespace BaseConverter
                 else finalArray[i] = array[i-steps];
             }
             return finalArray;
+        }
+
+        [TestMethod]
+        public void ALessThanBTest1()
+        {
+            Assert.AreEqual(true, LessThan(new byte[] { 0, 1 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void ALessThanBTest2()
+        {
+            Assert.AreEqual(true, LessThan(new byte[] { 1, 0, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void ALessThanBTest3()
+        {
+            Assert.AreEqual(false, LessThan(new byte[] { 1, 0, 1 }, new byte[] { 1, 0, 0 }));
+        }
+
+
+        bool LessThan(byte[] a, byte[] b)
+        {
+            if (a.Length < b.Length) return true;
+            if (a.Length == b.Length)
+                for(int i = 0; i < a.Length; i++)
+                {
+                    if (a[i] < b[i]) return true;
+                }
+            return false;
         }
 
     }
