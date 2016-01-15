@@ -278,6 +278,31 @@ namespace BaseConverter
             Assert.AreEqual(true, EqualTo(new byte[] { 0, 0, 1, 1, 0 }, new byte[] { 1, 1, 0 }));
         }
 
+        [TestMethod]
+        public void GreaterThanTest1()
+        {
+            Assert.AreEqual(true, GreaterThan(new byte[] { 1, 1, 1 }, new byte[] { 1, 1, 0 }));
+        }
+
+        [TestMethod]
+        public void GreaterThanTest2()
+        {
+            Assert.AreEqual(false, GreaterThan(new byte[] { 1, 1, 0 }, new byte[] { 1, 1, 1 }));
+        }
+
+        [TestMethod]
+        public void GreaterThanTest3()
+        {
+            Assert.AreEqual(false, GreaterThan(new byte[] { 0, 0, 1, 1, 0 }, new byte[] { 0, 1, 1, 1 }));
+        }
+
+        [TestMethod]
+        public void GreaterThanTest4()
+        {
+            Assert.AreEqual(true, GreaterThan(new byte[] { 0, 0, 1, 1, 1 }, new byte[] { 0, 1, 1, 0 }));
+        }
+
+
         byte[] ConvertFromBase10ToBase2(int number)
         {
             byte[] array = { };
@@ -372,21 +397,7 @@ namespace BaseConverter
             }
             return finalArray;
         }
- 
-        bool LessThan(byte[] a, byte[] b)
-        {
-            a = MakeArrayWithout0AtBeginning(a);
-            b = MakeArrayWithout0AtBeginning(b);
 
-            if (a.Length < b.Length) return true;
-            if (a.Length == b.Length)
-                for (int i = 0; i < a.Length; i++)
-                {
-                    if (a[i] < b[i]) return true;
-                }
-            return false;
-        }
-        
         private static byte[] MakeArrayWithout0AtBeginning(byte[] array)
         {
             int i = 0;
@@ -405,10 +416,35 @@ namespace BaseConverter
             return temp;
         }
 
+        bool LessThan(byte[] a, byte[] b)
+        {
+            a = MakeArrayWithout0AtBeginning(a);
+            b = MakeArrayWithout0AtBeginning(b);
+
+            if (a.Length < b.Length) return true;
+            if (a.Length == b.Length)
+                for (int i = 0; i < a.Length; i++)
+                {
+                    if (a[i] < b[i]) return true;
+                }
+            return false;
+        }
+
         bool EqualTo(byte[] a, byte[]b)
         {
             if (LessThan(a, b) == false && LessThan(b, a) == false) return true;
             return false;
         }
+
+        bool GreaterThan(byte[] a, byte[] b)
+        {
+            if (LessThan(a, b) != true)
+                if (LessThan(b, a) == true) return true;
+            return false;
+
+        }
+
+      
+
     }
 }
