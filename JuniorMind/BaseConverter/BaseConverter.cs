@@ -260,6 +260,24 @@ namespace BaseConverter
             CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1 }, MakeArrayWithout0AtBeginning(new byte[] { 0, 0, 0, 0, 1, 1, 0, 1 }));
         }
 
+        [TestMethod]
+        public void EqualToTest1()
+        {
+            Assert.AreEqual(false, EqualTo(new byte[] { 0, 1, 1, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void EqualToTest2()
+        {
+            Assert.AreEqual(true, EqualTo(new byte[] { 1, 1, 0 }, new byte[] { 1, 1, 0 }));
+        }
+
+        [TestMethod]
+        public void EqualToTest3()
+        {
+            Assert.AreEqual(true, EqualTo(new byte[] { 0, 0, 1, 1, 0 }, new byte[] { 1, 1, 0 }));
+        }
+
         byte[] ConvertFromBase10ToBase2(int number)
         {
             byte[] array = { };
@@ -385,6 +403,12 @@ namespace BaseConverter
             }
             
             return temp;
+        }
+
+        bool EqualTo(byte[] a, byte[]b)
+        {
+            if (LessThan(a, b) == false && LessThan(b, a) == false) return true;
+            return false;
         }
     }
 }
