@@ -274,14 +274,44 @@ namespace BaseConverter
         private byte[] LeftHandShift(byte[] array, int steps)
         {
             byte[] finalArray = new byte[array.Length+steps];
-
-
+            
             for(int i = 0; i < finalArray.Length; i++)
             {
                 if (i >= array.Length) finalArray[i] = 0;
                 else finalArray[i] = array[i];
             }
             return finalArray;
-        } 
+        }
+
+        [TestMethod]
+        public void RightHandShiftOperationTest1()
+        {
+             CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, }, RightHandShift(new byte[] { 0, 1 }, 2));
+        }
+
+        [TestMethod]
+        public void RightHandShiftOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 4));
+        }
+
+        [TestMethod]
+        public void RightHandShiftOperationTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 7));
+        }
+
+        private byte[] RightHandShift(byte[] array, int steps)
+        {
+            byte[] finalArray = new byte[array.Length + steps];
+
+            for (int i = 0; i < finalArray.Length; i++)
+            {
+                if (i < steps) finalArray[i] = 0;
+                else finalArray[i] = array[i-steps];
+            }
+            return finalArray;
+        }
+
     }
 }
