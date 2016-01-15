@@ -339,14 +339,21 @@ namespace BaseConverter
         [TestMethod]
         public void SubstractionTest1()
         {
-            CollectionAssert.AreEqual(new byte[] { 1 }, Substraction(new byte[] { 1, 0 }, new byte[] { 1 }));
+            CollectionAssert.AreEqual(new byte[] { 1 }, Substraction(new byte[] { 1, 0 }, new byte[] { 1 }, 2));
         }
 
         [TestMethod]
         public void SubstractionTest2()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 0 }, Substraction(new byte[] { 1, 1, 1, 1 }, new byte[] { 1 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 0 }, Substraction(new byte[] { 1, 1, 1, 1 }, new byte[] { 1 }, 2));
         }
+
+        [TestMethod]
+        public void SubstractionTest3()
+        {
+            CollectionAssert.AreEqual(new byte[] { 7, 8 }, Substraction(new byte[] { 8, 7 }, new byte[] { 9 }, 10));
+        }
+
 
         byte[] ConvertFromBase10ToAnother(int number, int baza )
         {
@@ -509,7 +516,7 @@ namespace BaseConverter
             return MakeArrayWithout0AtBeginning(rezultat);
         }
 
-        byte[] Substraction(byte[] a, byte[] b)
+        byte[] Substraction(byte[] a, byte[] b, int baza)
         {
             if (EqualTo(a, b)) return new byte[] { };
             byte[] descazut = new byte[] { };
@@ -529,7 +536,8 @@ namespace BaseConverter
                 if (diferenta < 0)
                 {
                     rest++;
-                    rezultat[i] = (byte)Math.Abs(diferenta);
+                    diferenta = baza - (scazator[i] - descazut[i]);
+                    rezultat[i] = (byte)diferenta;
                 }
                 else rezultat[i] = (byte)diferenta;
             }
