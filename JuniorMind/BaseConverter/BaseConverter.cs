@@ -218,6 +218,48 @@ namespace BaseConverter
             CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1 }, RightHandShift(new byte[] { 0, 1, 0, 1, 0, 1 }, 7));
         }
 
+        [TestMethod]
+        public void ALessThanBTest1()
+        {
+            Assert.AreEqual(true, LessThan(new byte[] { 0, 1 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void ALessThanBTest2()
+        {
+            Assert.AreEqual(true, LessThan(new byte[] { 1, 0, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void ALessThanBTest3()
+        {
+            Assert.AreEqual(false, LessThan(new byte[] { 1, 0, 1 }, new byte[] { 1, 0, 0 }));
+        }
+
+        [TestMethod]
+        public void ALessThanBTest4()
+        {
+            Assert.AreEqual(true, LessThan(new byte[] { 0, 1, 0, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void ALessThanBTest5()
+        {
+            Assert.AreEqual(true, LessThan(new byte[] { 0, 1, 1, 0 }, new byte[] { 1, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void MakeArrayWithout0AtBeginningTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, MakeArrayWithout0AtBeginning(new byte[] { 0, 0, 1, 0, 0 }));
+        }
+
+        [TestMethod]
+        public void MakeArrayWithout0AtBeginningTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1 }, MakeArrayWithout0AtBeginning(new byte[] { 0, 0, 0, 0, 1, 1, 0, 1 }));
+        }
+
         byte[] ConvertFromBase10ToBase2(int number)
         {
             byte[] array = { };
@@ -312,36 +354,37 @@ namespace BaseConverter
             }
             return finalArray;
         }
-
-        [TestMethod]
-        public void ALessThanBTest1()
-        {
-            Assert.AreEqual(true, LessThan(new byte[] { 0, 1 }, new byte[] { 1, 0, 1 }));
-        }
-
-        [TestMethod]
-        public void ALessThanBTest2()
-        {
-            Assert.AreEqual(true, LessThan(new byte[] { 1, 0, 0 }, new byte[] { 1, 0, 1 }));
-        }
-
-        [TestMethod]
-        public void ALessThanBTest3()
-        {
-            Assert.AreEqual(false, LessThan(new byte[] { 1, 0, 1 }, new byte[] { 1, 0, 0 }));
-        }
-
-
+ 
         bool LessThan(byte[] a, byte[] b)
         {
+            a = MakeArrayWithout0AtBeginning(a);
+            b = MakeArrayWithout0AtBeginning(b);
+
             if (a.Length < b.Length) return true;
             if (a.Length == b.Length)
-                for(int i = 0; i < a.Length; i++)
+                for (int i = 0; i < a.Length; i++)
                 {
                     if (a[i] < b[i]) return true;
                 }
             return false;
         }
+        
+        private static byte[] MakeArrayWithout0AtBeginning(byte[] array)
+        {
+            int i = 0;
+            for (i = 0; i < array.Length; i++)
+            {
+                if (array[i] != 0) break;
+            }
 
+            byte[] temp = new byte[array.Length - i];
+
+            for (int j = i; j < array.Length; j++)
+            {
+                temp[j - i] = array[j];
+            }
+            
+            return temp;
+        }
     }
 }
