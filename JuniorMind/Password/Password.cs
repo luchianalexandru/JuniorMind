@@ -10,18 +10,35 @@ namespace Password
         public void ShouldReturnAPassOfGivenLength()
         {
             var options = new PasswordOptions { length = 8 };
-            string testPass = GeneratePass(options);
-            Assert.AreEqual(8, testPass.Length);
+            Assert.AreEqual(8, GeneratePass(options).Length);
         }
+
+        [TestMethod]
+        public void ShouldReturnTwoDifferentPasswords()
+        {
+            var options = new PasswordOptions { length = 8 };
+            var first = GeneratePass(options);
+            var second = GeneratePass(options);
+            Assert.AreNotEqual(first, second);
+            Assert.AreEqual(first.Length, second.Length);
+        }
+
 
         string GeneratePass(PasswordOptions Options)
         {
             string pass = "";
-            for (int i = 0; i < Options.length; i++)
-            {
-                pass += (char)random.Next();
-            }
+            pass += GeneratePassWithinLimits(Options.length, 65, 123);
             return pass;
+        }
+
+        private string GeneratePassWithinLimits(int length, int lowerLimit, int upperLimit)
+        {
+            string tempString = "";
+            for (int i = 0; i < length; i++)
+            {
+                tempString += (char)random.Next(lowerLimit, upperLimit);
+            }
+            return tempString;
         }
 
         Random random = new Random();
