@@ -54,11 +54,20 @@ namespace Password
 
         }
 
+        [TestMethod]
+        public void ChecksIfContainedWorksAsIntended()
+        {
+           
+            Assert.IsTrue(contained("e","abcdeeeefghijk"));
+
+        }
+
         string GeneratePass(PasswordOptions options)
         {
             string pass = "";
             pass += GeneratePassWithinLimits(options.UpperCase, 65, 91);
             pass += GeneratePassWithinLimits(options.numbers, 48, 58);
+            pass += GeneratePassWithSymbols(options.symbols);
             pass += GeneratePassWithinLimits(options.length - pass.Length, 91, 123);
             return pass;
         }
@@ -71,6 +80,42 @@ namespace Password
                 tempString += (char)random.Next(lowerLimit, upperLimit);
             }
             return tempString;
+        }
+
+        [TestMethod]
+        public void ShouldCheckIfNrOfSymbolsCorrect()
+        {
+            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 2, symbols = 1 };
+            var tempPass = GeneratePass(options);
+            int counter = 0; 
+            for (int i = 0; i < tempPass.Length; i++)
+            {
+                if (!char.IsUpper(tempPass[i]) && (!char.IsNumber(tempPass[i]))) counter++;
+            }
+            Assert.AreEqual(1, counter);
+
+        }
+
+        string GeneratePassWithSymbols(int length)
+        {
+            string tempString = string.Empty;
+            string allowedSymbols = "!@#$%^&*()_+{}[]()/\'~,;.<>";
+            string notAllowedSymbols = "{}[]()/\'~,;.<>";
+            for ( int i = 0; i < length; i++)
+            {
+                int index = random.Next(allowedSymbols.Length);
+                string temp = allowedSymbols[index].ToString();
+                if (contained(temp, notAllowedSymbols) == true ) index = random.Next(allowedSymbols.Length);
+                tempString += allowedSymbols[index];
+            }
+            
+            return tempString;
+        }
+
+        bool contained ( string x, string y)
+        {
+            if (y.Contains(x)) return true;
+            return false;
         }
 
         Random random = new Random();
