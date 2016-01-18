@@ -26,21 +26,39 @@ namespace Password
         [TestMethod]
         public void ShouldCheckIfEnoughUpperCaseChars()
         {
-            var options = new PasswordOptions { length = 8, UpperCase = 3 };
+            var options = new PasswordOptions { length = 8, UpperCase = 7 };
             var tempPass = GeneratePass(options);
             int counter = 0;
             for(int i = 0; i < tempPass.Length - 1; i++)
             {
                 if (char.IsUpper(tempPass[i])) counter++;
             }
-            Assert.AreEqual(3, counter);
+            Assert.AreEqual(7, counter);
           
+        }
+
+        [TestMethod]
+        public void ShouldCheckIfEnoughNumbersAndUpper()
+        {
+            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 4};
+            var tempPass = GeneratePass(options);
+            int counter1 = 0;
+            int counter2 = 0;
+            for (int i = 0; i < tempPass.Length - 1; i++)
+            {
+                if (char.IsUpper(tempPass[i])) counter1++;
+                if (char.IsNumber(tempPass[i])) counter2++;
+            }
+            Assert.AreEqual(3, counter1);
+            Assert.AreEqual(4, counter2);
+
         }
 
         string GeneratePass(PasswordOptions options)
         {
             string pass = "";
             pass += GeneratePassWithinLimits(options.UpperCase, 65, 91);
+            pass += GeneratePassWithinLimits(options.numbers, 48, 58);
             pass += GeneratePassWithinLimits(options.length - pass.Length, 91, 123);
             return pass;
         }
