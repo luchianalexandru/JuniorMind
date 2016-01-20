@@ -26,15 +26,27 @@ namespace Password
         [TestMethod]
         public void ShouldCheckIfEnoughUpperCaseChars()
         {
-            var options = new PasswordOptions { length = 8, UpperCase = 7 };
-            var tempPass = GeneratePass(options);
+            var options = new PasswordOptions { length = 8, UpperCase = 3 };
+            var password = GeneratePass(options);
+            Assert.AreEqual(3, NumberOfUpperChars(password));
+
+        }
+
+        [TestMethod]
+        public void CheckNrOfUpperCaseCharacters()
+        {
+            Assert.AreEqual(7, NumberOfUpperChars("ISUPPERornot"));
+        }
+
+        private static int NumberOfUpperChars(string pass)
+        {
             int counter = 0;
-            for(int i = 0; i < tempPass.Length - 1; i++)
+            foreach (char c in pass)
             {
-                if (char.IsUpper(tempPass[i])) counter++;
+                if (char.IsUpper(c)) counter++;
             }
-            Assert.AreEqual(7, counter);
-          
+
+            return counter;
         }
 
         [TestMethod]
@@ -114,8 +126,7 @@ namespace Password
 
         bool contained ( string x, string y)
         {
-            if (y.Contains(x)) return true;
-            return false;
+            return y.Contains(x);            
         }
 
         Random random = new Random();
