@@ -38,31 +38,19 @@ namespace Password
             Assert.AreEqual(7, NumberOfUpperChars("ISUPPERornot"));
         }
 
-        private static int NumberOfUpperChars(string pass)
+        [TestMethod]
+        public void CheckIfNumberOfDigitsIsCorrect()
         {
-            int counter = 0;
-            foreach (char c in pass)
-            {
-                if (char.IsUpper(c)) counter++;
-            }
-
-            return counter;
+            Assert.AreEqual(6, NumberOfDigits("ISUPPERornot234123"));
         }
 
         [TestMethod]
         public void ShouldCheckIfEnoughNumbersAndUpper()
         {
             var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 4};
-            var tempPass = GeneratePass(options);
-            int counter1 = 0;
-            int counter2 = 0;
-            for (int i = 0; i < tempPass.Length - 1; i++)
-            {
-                if (char.IsUpper(tempPass[i])) counter1++;
-                if (char.IsNumber(tempPass[i])) counter2++;
-            }
-            Assert.AreEqual(3, counter1);
-            Assert.AreEqual(4, counter2);
+            var password = GeneratePass(options);
+            Assert.AreEqual(3, NumberOfUpperChars(password));
+            Assert.AreEqual(4, NumberOfDigits(password));
 
         }
 
@@ -74,14 +62,70 @@ namespace Password
 
         }
 
+        [TestMethod]
+        public void ShouldCheckIfNrOfSymbolsCorrect()
+        {
+            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 2, symbols = 1 };
+            var tempPass = GeneratePass(options);
+            int counter = 0; 
+            foreach (char c in tempPass)
+            {
+                if (!char.IsUpper(c) && !char.IsNumber(c) && !char.IsLower(c)) counter++;
+            }
+            Assert.AreEqual(1, counter);
+
+        }
+
+        [TestMethod]
+        public void CheckIfShuffleWorks()
+        {
+            string password = "abcdefgijklmn";
+            string a = ShuffleString(password);
+            string b = ShuffleString(password);
+            Assert.AreEqual(a.Length, b.Length);
+            Assert.AreNotEqual(a, b);
+        }
+
+        Random random = new Random();
+
+        public struct PasswordOptions
+        {
+            public int length;
+            public int UpperCase;
+            public int numbers;
+            public int symbols;
+        }
+
+        private static int NumberOfUpperChars(string pass)
+        {
+            int counter = 0;
+            foreach (char c in pass)
+            {
+                if (char.IsUpper(c)) counter++;
+            }
+
+            return counter;
+        }
+
+        private static int NumberOfDigits(string pass)
+        {
+            int counter = 0;
+            foreach (char c in pass)
+            {
+                if (char.IsNumber(c)) counter++;
+            }
+
+            return counter;
+        }
+
         string GeneratePass(PasswordOptions options)
         {
             string pass = "";
-            pass += GeneratePassWithinLimits(options.UpperCase, 65, 91);
-            pass += GeneratePassWithinLimits(options.numbers, 48, 58);
             pass += GeneratePassWithSymbols(options.symbols);
-            pass += GeneratePassWithinLimits(options.length - pass.Length, 91, 123);
-            return pass;
+            pass += GeneratePassWithinLimits(options.UpperCase, 'A', 'Z' + 1);
+            pass += GeneratePassWithinLimits(options.numbers, '0', '9' + 1);
+            pass += GeneratePassWithinLimits(options.length - pass.Length, 'a', 'z' + 1);
+            return ShuffleString(pass);
         }
 
         private string GeneratePassWithinLimits(int length, int lowerLimit, int upperLimit)
@@ -94,20 +138,6 @@ namespace Password
             return tempString;
         }
 
-        [TestMethod]
-        public void ShouldCheckIfNrOfSymbolsCorrect()
-        {
-            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 2, symbols = 1 };
-            var tempPass = GeneratePass(options);
-            int counter = 0; 
-            for (int i = 0; i < tempPass.Length; i++)
-            {
-                if (!char.IsUpper(tempPass[i]) && (!char.IsNumber(tempPass[i]))) counter++;
-            }
-            Assert.AreEqual(1, counter);
-
-        }
-
         string GeneratePassWithSymbols(int length)
         {
             string tempString = string.Empty;
@@ -117,7 +147,7 @@ namespace Password
             {
                 int index = random.Next(allowedSymbols.Length);
                 string temp = allowedSymbols[index].ToString();
-                if (contained(temp, notAllowedSymbols) == true ) index = random.Next(allowedSymbols.Length);
+                if (contained(temp, notAllowedSymbols)) index = random.Next(allowedSymbols.Length);
                 tempString += allowedSymbols[index];
             }
             
@@ -128,14 +158,19 @@ namespace Password
         {
             return y.Contains(x);            
         }
-
-        Random random = new Random();
-        public struct PasswordOptions
+        
+        string ShuffleString(string toShuffle)
         {
-            public int length;
-            public int UpperCase;
-            public int numbers;
-            public int symbols;
+            char[] array = toShuffle.ToCharArray();
+            for (int i = 0; i < toShuffle.Length; i++)
+            {
+                var c = array[i];
+                int j = random.Next(0, array.Length);
+                array[i] = array[j];
+                array[j] = c;
+            }
+            string s = new string(array);
+            return s;
         }
     }
 }
