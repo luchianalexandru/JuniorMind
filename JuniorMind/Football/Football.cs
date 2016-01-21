@@ -22,7 +22,7 @@ namespace Football
         public Match[] Leg =
         {
             new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 1, goalsReceivedWinningTeam = 0, losingTeam = "gloria", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 },
-            new Match { winningTeam = "petrolul" , goalsGivenWinningTeam = 2, goalsReceivedWinningTeam = 1, losingTeam = "gloria", goalsGivenLosingTeam = 1, goalsReceivedLosingTeam = 2 },
+            new Match { winningTeam = "petrolul" , goalsGivenWinningTeam = 7, goalsReceivedWinningTeam = 1, losingTeam = "gloria", goalsGivenLosingTeam = 1, goalsReceivedLosingTeam = 7 },
             new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 1, goalsReceivedWinningTeam = 0, losingTeam = "petrolul", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 }
         };
 
@@ -45,5 +45,23 @@ namespace Football
             Leg[Leg.Length - 1].goalsGivenLosingTeam = goalsReceived;
             Leg[Leg.Length - 1].goalsReceivedLosingTeam = goalsGiven;
         }
+
+        [TestMethod]
+        public void TestsIfTotalNumberOfGoalsCorrect()
+        {
+            int c = CalculateTheNumberOfGoalsGivenForTheEntireLeg();
+            Assert.AreEqual(10,c);
+        }
+
+        int CalculateTheNumberOfGoalsGivenForTheEntireLeg()
+        {
+            int counter = 0;
+            for(int i = 0; i < Leg.Length; i++)
+            {
+                counter = counter + Leg[i].goalsGivenWinningTeam + Leg[i].goalsGivenLosingTeam;
+            }
+            return counter;
+        }
+
     }
 }
