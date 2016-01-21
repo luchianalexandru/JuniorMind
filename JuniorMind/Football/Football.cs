@@ -23,7 +23,7 @@ namespace Football
         {
             new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 1, goalsReceivedWinningTeam = 0, losingTeam = "gloria", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 },
             new Match { winningTeam = "petrolul" , goalsGivenWinningTeam = 7, goalsReceivedWinningTeam = 1, losingTeam = "gloria", goalsGivenLosingTeam = 1, goalsReceivedLosingTeam = 7 },
-            new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 1, goalsReceivedWinningTeam = 0, losingTeam = "petrolul", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 }
+            new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 3, goalsReceivedWinningTeam = 0, losingTeam = "petrolul", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 }
         };
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace Football
         public void TestsIfTotalNumberOfGoalsCorrect()
         {
             int c = CalculateTheNumberOfGoalsGivenForTheEntireLeg();
-            Assert.AreEqual(10,c);
+            Assert.AreEqual(12,c);
         }
 
         int CalculateTheNumberOfGoalsGivenForTheEntireLeg()
@@ -61,6 +61,18 @@ namespace Football
                 counter = counter + Leg[i].goalsGivenWinningTeam + Leg[i].goalsGivenLosingTeam;
             }
             return counter;
+        }
+
+        [TestMethod]
+        public void TestsIfAverageNumberOfGoalsForLegIsCorrect()
+        {
+            Assert.AreEqual(4, CalculateTheAverageNumberOfGoalsForEntireLeg());
+        }
+
+
+        decimal CalculateTheAverageNumberOfGoalsForEntireLeg()
+        {
+            return CalculateTheNumberOfGoalsGivenForTheEntireLeg() / Leg.Length;
         }
 
     }
