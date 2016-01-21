@@ -7,6 +7,26 @@ namespace Football
     public class Football
     {
   
+        [TestMethod]
+        public void TestsIfTheLastMatchWasAdded()
+        {
+            AddTheLastMatchOfTheLeg("petrolul", "gloria", 7, 2);
+            Assert.AreEqual("petrolul", Leg[3].winningTeam);
+            Assert.AreEqual(7, Leg[3].goalsGivenWinningTeam);
+        }
+
+        [TestMethod]
+        public void TestsIfTotalNumberOfGoalsCorrect()
+        {
+            int c = CalculateTheNumberOfGoalsGivenForTheEntireLeg();
+            Assert.AreEqual(12,c);
+        }
+
+        [TestMethod]
+        public void TestsIfAverageNumberOfGoalsForLegIsCorrect()
+        {
+            Assert.AreEqual(4, CalculateTheAverageNumberOfGoalsForEntireLeg());
+        }
 
         public struct Match
         {
@@ -16,7 +36,6 @@ namespace Football
             public string losingTeam;
             public int goalsGivenLosingTeam;
             public int goalsReceivedLosingTeam;
-
         }
 
         public Match[] Leg =
@@ -25,15 +44,6 @@ namespace Football
             new Match { winningTeam = "petrolul" , goalsGivenWinningTeam = 7, goalsReceivedWinningTeam = 1, losingTeam = "gloria", goalsGivenLosingTeam = 1, goalsReceivedLosingTeam = 7 },
             new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 3, goalsReceivedWinningTeam = 0, losingTeam = "petrolul", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 }
         };
-
-        [TestMethod]
-        public void TestsIfTheLastMatchWasAdded()
-        {
-            AddTheLastMatchOfTheLeg("petrolul", "gloria", 7, 2);
-            Assert.AreEqual("petrolul", Leg[3].winningTeam);
-            Assert.AreEqual(7, Leg[3].goalsGivenWinningTeam);
-        }
-
 
         public void AddTheLastMatchOfTheLeg(string name1, string name2, int goalsGiven, int goalsReceived)
         {
@@ -46,13 +56,6 @@ namespace Football
             Leg[Leg.Length - 1].goalsReceivedLosingTeam = goalsGiven;
         }
 
-        [TestMethod]
-        public void TestsIfTotalNumberOfGoalsCorrect()
-        {
-            int c = CalculateTheNumberOfGoalsGivenForTheEntireLeg();
-            Assert.AreEqual(12,c);
-        }
-
         int CalculateTheNumberOfGoalsGivenForTheEntireLeg()
         {
             int counter = 0;
@@ -62,17 +65,22 @@ namespace Football
             }
             return counter;
         }
-
-        [TestMethod]
-        public void TestsIfAverageNumberOfGoalsForLegIsCorrect()
-        {
-            Assert.AreEqual(4, CalculateTheAverageNumberOfGoalsForEntireLeg());
-        }
-
-
+        
         decimal CalculateTheAverageNumberOfGoalsForEntireLeg()
         {
             return CalculateTheNumberOfGoalsGivenForTheEntireLeg() / Leg.Length;
+        }
+
+        [TestMethod]
+        public void TestsIfGoalDifferenceInAMatchWorks()
+        {
+            Assert.AreEqual(6, GetGoalDifferenceInAMatch(1));
+        }
+
+
+        int GetGoalDifferenceInAMatch(int i)
+        {
+            return Leg[i].goalsGivenWinningTeam - Leg[i].goalsGivenLosingTeam;
         }
 
     }
