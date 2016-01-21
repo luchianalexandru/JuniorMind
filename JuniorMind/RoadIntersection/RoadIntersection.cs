@@ -18,6 +18,16 @@ namespace RoadIntersection
             }
         }
 
+        [TestMethod]
+        public void ChecksIfRoadMovementWorks()
+        {
+            Point a = new Point(3, 0);
+            RoadMovement('U', ref a);
+            RoadMovement('D', ref a);
+            RoadMovement('L', ref a);
+            RoadMovement('U', ref a);
+            Assert.AreEqual(new Point(4, -1), a);
+        }
 
         public void RoadMovement(char direction, ref Point piece)
         {
@@ -73,7 +83,6 @@ namespace RoadIntersection
             Assert.IsTrue(CheckCrossroads(ref a, ref c));
         }
 
-
         bool CheckCrossroads(ref Point movement, ref Point[] segment)
         {
             for (int i = 0; i < segment.Length; i++)
@@ -83,8 +92,5 @@ namespace RoadIntersection
             }
             return false;
         }
-
-
-
     }
 }
