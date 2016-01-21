@@ -6,6 +6,7 @@ namespace RoadIntersection
     [TestClass]
     public class RoadIntersection
     {
+
         [TestMethod]
         public void TestMethod1()
         {
@@ -23,6 +24,30 @@ namespace RoadIntersection
         }
 
 
+        public void RoadMovement(char direction, ref Point piece)
+        {
+            switch (direction)
+            {
+                case 'U':
+                    piece = new Point(piece.x + 1, piece.y);
+                    break;
 
+                case 'D':
+                    piece = new Point(piece.x - 1, piece.y);
+                    break;
+
+                case 'L':
+                    piece = new Point(piece.x, piece.y - 1);
+                    break;
+
+                case 'R':
+                    piece = new Point(piece.x, piece.y + 1);
+                    break;
+            }
+
+        }
+
+
+        
     }
 }
