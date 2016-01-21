@@ -7,11 +7,6 @@ namespace RoadIntersection
     public class RoadIntersection
     {
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
-
         public struct Point
         {
             public int x;
@@ -68,6 +63,16 @@ namespace RoadIntersection
             }
             return origin;
         }
+
+        [TestMethod]
+        public void ChecksIfTheTheCheckerWorks()
+        {
+            Point a = new Point(2, 3);
+            Point b = new Point(4, 5);
+            Point[] c = { a, b };
+            Assert.IsTrue(CheckCrossroads(ref a, ref c));
+        }
+
 
         bool CheckCrossroads(ref Point movement, ref Point[] segment)
         {
