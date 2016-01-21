@@ -47,7 +47,39 @@ namespace RoadIntersection
 
         }
 
+        public Point ReturnsTheIntersectionPoint(string road)
+        {
+            Point origin = new Point(0, 0);
+            Point[] segment = { origin };
+            Point movement = segment[segment.Length - 1];
 
-        
+            for (int i = 0; i < road.Length; i++)
+            {
+                RoadMovement(road[i], ref movement);
+                if (CheckCrossroads(ref movement, ref segment))
+                {
+                    return movement;
+                }
+                else
+                {
+                    Array.Resize(ref segment, segment.Length + 1);
+                    segment[segment.Length - 1] = movement;
+                }
+            }
+            return origin;
+        }
+
+        bool CheckCrossroads(ref Point movement, ref Point[] segment)
+        {
+            for (int i = 0; i < segment.Length; i++)
+            {
+                if (movement.x == segment[i].x && movement.y == segment[i].y)
+                    return true;
+            }
+            return false;
+        }
+
+
+
     }
 }
