@@ -28,6 +28,12 @@ namespace Football
             Assert.AreEqual(4, CalculateTheAverageNumberOfGoalsForEntireLeg());
         }
 
+        [TestMethod]
+        public void TestsIfGoalDifferenceInAMatchWorks()
+        {
+            Assert.AreEqual(6, GetGoalDifferenceInAMatch(1));
+        }
+
         public struct Match
         {
             public string winningTeam;
@@ -71,17 +77,44 @@ namespace Football
             return CalculateTheNumberOfGoalsGivenForTheEntireLeg() / Leg.Length;
         }
 
-        [TestMethod]
-        public void TestsIfGoalDifferenceInAMatchWorks()
-        {
-            Assert.AreEqual(6, GetGoalDifferenceInAMatch(1));
-        }
-
-
         int GetGoalDifferenceInAMatch(int i)
         {
             return Leg[i].goalsGivenWinningTeam - Leg[i].goalsGivenLosingTeam;
         }
 
+        [TestMethod]
+        public void TestsifRemovingWorks()
+        {
+            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
+            Assert.AreEqual(2, Leg.Length);
+        }
+
+        [TestMethod]
+        public void TestsifRemovingWorksTwice()
+        {
+            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
+            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
+            Assert.AreEqual(1, Leg.Length);
+        }
+
+        public void RemovesTheMatchWithTheBiggestDifferenceOfGoals()
+        {
+            int maxDiff = GetGoalDifferenceInAMatch(0);
+            int positionOfMatchInLeg = 0;
+            for(int i = 0; i < Leg.Length; i++)
+            {
+                if (maxDiff < GetGoalDifferenceInAMatch(i))
+                {
+                    maxDiff = GetGoalDifferenceInAMatch(i);
+                    positionOfMatchInLeg = i;
+                }
+            }
+
+            for ( int j = positionOfMatchInLeg; j < Leg.Length-1; j++)
+            {
+                Leg[j] = Leg[j + 1];
+            }
+            Array.Resize(ref Leg, Leg.Length - 1);
+        }
     }
 }
