@@ -7,17 +7,6 @@ namespace RoadIntersection
     public class RoadIntersection
     {
 
-        public struct Point
-        {
-            public int x;
-            public int y;
-            public Point(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-        }
-
         [TestMethod]
         public void ChecksIfRoadMovementWorks()
         {
@@ -29,6 +18,44 @@ namespace RoadIntersection
             Assert.AreEqual(new Point(4, -1), a);
         }
 
+        [TestMethod]
+        public void ChecksIfTheTheCheckerWorks()
+        {
+            Point a = new Point(2, 3);
+            Point b = new Point(4, 5);
+            Point[] c = { a, b };
+            Assert.IsTrue(CheckCrossroads(ref a, ref c));
+        }
+
+        [TestMethod]
+        public void ChecksIntersectionForPoints1And0()
+        {
+            Assert.AreEqual(new Point(1, 0), ReturnsTheIntersectionPoint("UURDL"));
+        }
+
+        [TestMethod]
+        public void ChecksIntersectionForPoints3And4()
+        {
+            Assert.AreEqual(new Point(3, 4), ReturnsTheIntersectionPoint("RRRRUUUURDL"));
+        }
+
+        [TestMethod]
+        public void ChecksIntersectionForPoints0And1()
+        {
+            Assert.AreEqual(new Point(0, 1), ReturnsTheIntersectionPoint("RUULLDDDRRU"));
+        }
+
+        public struct Point
+        {
+            public int x;
+            public int y;
+            public Point(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        
         public void RoadMovement(char direction, ref Point piece)
         {
             switch (direction)
@@ -72,15 +99,6 @@ namespace RoadIntersection
                 }
             }
             return origin;
-        }
-
-        [TestMethod]
-        public void ChecksIfTheTheCheckerWorks()
-        {
-            Point a = new Point(2, 3);
-            Point b = new Point(4, 5);
-            Point[] c = { a, b };
-            Assert.IsTrue(CheckCrossroads(ref a, ref c));
         }
 
         bool CheckCrossroads(ref Point movement, ref Point[] segment)
