@@ -58,7 +58,7 @@ namespace Password
         public void ChecksIfContainedWorksAsIntended()
         {
            
-            Assert.IsTrue(contained("e","abcdeeeefghijk"));
+            Assert.IsTrue(Contained('e',"abcdeeeefghijk"));
 
         }
 
@@ -146,17 +146,21 @@ namespace Password
             for ( int i = 0; i < length; i++)
             {
                 int index = random.Next(allowedSymbols.Length);
-                string temp = allowedSymbols[index].ToString();
-                if (contained(temp, notAllowedSymbols)) index = random.Next(allowedSymbols.Length);
+                char temp = allowedSymbols[index];
+                if (Contained(temp, notAllowedSymbols)) index = random.Next(allowedSymbols.Length);
                 tempString += allowedSymbols[index];
             }
             
             return tempString;
         }
 
-        bool contained ( string x, string y)
+        bool Contained ( char x, string y)
         {
-            return y.Contains(x);            
+            foreach (char item in y)
+            {
+                if (item == x) return true;
+            }
+            return false;      
         }
         
         string ShuffleString(string toShuffle)
