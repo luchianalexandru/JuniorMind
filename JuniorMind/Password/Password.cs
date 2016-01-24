@@ -94,6 +94,8 @@ namespace Password
             public int UpperCase;
             public int numbers;
             public int symbols;
+            public bool ambiguous;
+            public bool similar;
         }
 
         private static int NumberOfUpperChars(string pass)
@@ -118,39 +120,64 @@ namespace Password
             return counter;
         }
 
-        string GeneratePass(PasswordOptions options)
+        public  string GeneratePass(PasswordOptions options)
         {
             string pass = "";
-            pass += GeneratePassWithSymbols(options.symbols);
-            pass += GeneratePassWithinLimits(options.UpperCase, 'A', 'Z' + 1);
-            pass += GeneratePassWithinLimits(options.numbers, '0', '9' + 1);
-            pass += GeneratePassWithinLimits(options.length - pass.Length, 'a', 'z' + 1);
+            pass += GeneratePassWithSymbols(options.symbols, options.ambiguous);
+            pass += GeneratePassWithinLimits(options.UpperCase, 'A', 'Z' + 1, options.similar);
+            pass += GeneratePassWithinLimits(options.numbers, '0', '9' + 1, options.similar);
+            pass += GeneratePassWithinLimits(options.length - pass.Length, 'a', 'z' + 1, options.similar);
             return ShuffleString(pass);
         }
 
-        private string GeneratePassWithinLimits(int length, int lowerLimit, int upperLimit)
+        private string GeneratePassWithinLimits(int length, int lowerLimit, int upperLimit, bool similar)
         {
             string tempString = "";
+            string notAllowedCharacters = "1lLoO0";
+          
             for (int i = 0; i < length; i++)
             {
-                tempString += (char)random.Next(lowerLimit, upperLimit);
+                char c = (char)random.Next(lowerLimit, upperLimit);
+                while (similar && Contained(c, notAllowedCharacters))
+                {
+                    c = (char)random.Next(lowerLimit, upperLimit);
+                }
+                tempString += c;
             }
             return tempString;
         }
 
-        string GeneratePassWithSymbols(int length)
+        [TestMethod]
+        public void ShouldCheckIfPasswordContainsNotAllowedSymbols()
+        {
+            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 2, symbols = 2 };
+            var tempPass = GeneratePass(options);
+            int counter = 0;
+            string notAllowedSymbols = "{}[]()/\'~,;.<> " + '"';
+            foreach (char c in tempPass)
+            {
+                if (Contained(c,notAllowedSymbols)) counter++;
+            }
+            Assert.AreEqual(0, counter);
+
+        }
+
+        private string GeneratePassWithSymbols(int length, bool ambiguous)
         {
             string tempString = string.Empty;
-            string allowedSymbols = "!@#$%^&*()_+{}[]()/\'~,;.<>";
-            string notAllowedSymbols = "{}[]()/\'~,;.<>";
+            string allowedSymbols = "!@#$%^&*()_+{}[]()/\'~,;.<>" + '"';
+            string notAllowedSymbols = "{}[]()/\'~,;.<> " + '"';
             for ( int i = 0; i < length; i++)
             {
-                int index = random.Next(allowedSymbols.Length);
+                int index = random.Next(0, allowedSymbols.Length);
                 char temp = allowedSymbols[index];
-                if (Contained(temp, notAllowedSymbols)) index = random.Next(allowedSymbols.Length);
+                while (ambiguous && Contained(temp, notAllowedSymbols))
+                {
+                    index = (char)random.Next(0, allowedSymbols.Length);
+                    temp = allowedSymbols[index];
+                } 
                 tempString += allowedSymbols[index];
             }
-            
             return tempString;
         }
 
