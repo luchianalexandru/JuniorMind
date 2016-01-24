@@ -12,7 +12,7 @@ namespace Football
         {
             AddTheLastMatchOfTheLeg("petrolul", "gloria", 7, 2);
             Assert.AreEqual("petrolul", Leg[3].winningTeam);
-            Assert.AreEqual(7, Leg[3].goalsGivenWinningTeam);
+            Assert.AreEqual(7, Leg[3].winningGoals);
         }
 
         [TestMethod]
@@ -37,29 +37,25 @@ namespace Football
         public struct Match
         {
             public string winningTeam;
-            public int goalsGivenWinningTeam;
-            public int goalsReceivedWinningTeam;
             public string losingTeam;
-            public int goalsGivenLosingTeam;
-            public int goalsReceivedLosingTeam;
+            public int winningGoals;
+            public int losingGoals;
         }
 
         public Match[] Leg =
         {
-            new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 1, goalsReceivedWinningTeam = 0, losingTeam = "gloria", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 },
-            new Match { winningTeam = "petrolul" , goalsGivenWinningTeam = 7, goalsReceivedWinningTeam = 1, losingTeam = "gloria", goalsGivenLosingTeam = 1, goalsReceivedLosingTeam = 7 },
-            new Match { winningTeam = "avantul" , goalsGivenWinningTeam = 3, goalsReceivedWinningTeam = 0, losingTeam = "petrolul", goalsGivenLosingTeam = 0, goalsReceivedLosingTeam = 1 }
+            new Match { winningTeam = "avantul" , losingTeam = "gloria", winningGoals = 1, losingGoals = 0 },
+            new Match { winningTeam = "petrolul", losingTeam = "gloria", winningGoals = 7, losingGoals = 1 },
+            new Match { winningTeam = "avantul" , losingTeam = "petrolul", winningGoals = 3, losingGoals = 0 }
         };
 
         public void AddTheLastMatchOfTheLeg(string name1, string name2, int goalsGiven, int goalsReceived)
         {
             Array.Resize(ref Leg, Leg.Length + 1);
             Leg[Leg.Length - 1].winningTeam = name1;
-            Leg[Leg.Length - 1].goalsGivenWinningTeam = goalsGiven;
-            Leg[Leg.Length - 1].goalsReceivedWinningTeam = goalsReceived;
             Leg[Leg.Length - 1].losingTeam = name2;
-            Leg[Leg.Length - 1].goalsGivenLosingTeam = goalsReceived;
-            Leg[Leg.Length - 1].goalsReceivedLosingTeam = goalsGiven;
+            Leg[Leg.Length - 1].winningGoals = goalsGiven;
+            Leg[Leg.Length - 1].losingGoals = goalsReceived;
         }
 
         int CalculateTheNumberOfGoalsGivenForTheEntireLeg()
@@ -67,7 +63,7 @@ namespace Football
             int counter = 0;
             for(int i = 0; i < Leg.Length; i++)
             {
-                counter = counter + Leg[i].goalsGivenWinningTeam + Leg[i].goalsGivenLosingTeam;
+                counter = counter + Leg[i].winningGoals+Leg[i].losingGoals;
             }
             return counter;
         }
@@ -79,7 +75,7 @@ namespace Football
 
         int GetGoalDifferenceInAMatch(int i)
         {
-            return Leg[i].goalsGivenWinningTeam - Leg[i].goalsGivenLosingTeam;
+            return Leg[i].winningGoals - Leg[i].losingGoals;
         }
 
         [TestMethod]
