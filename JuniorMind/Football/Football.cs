@@ -19,7 +19,7 @@ namespace Football
         public void TestsIfTotalNumberOfGoalsCorrect()
         {
             int c = CalculateTheNumberOfGoalsGivenForTheEntireLeg();
-            Assert.AreEqual(12,c);
+            Assert.AreEqual(14,c);
         }
 
         [TestMethod]
@@ -34,6 +34,28 @@ namespace Football
             Assert.AreEqual(6, GetGoalDifferenceInAMatch(1));
         }
 
+        [TestMethod]
+        public void TestsifRemovingWorks()
+        {
+            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
+            Assert.AreEqual(2, Leg.Length);
+        }
+
+        [TestMethod]
+        public void TestsifRemovingWorksTwice()
+        {
+            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
+            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
+            Assert.AreEqual(1, Leg.Length);
+        }
+
+        [TestMethod]
+        public void TestsWhichTeamNameHasLowestAverage()
+        {
+            
+            Assert.AreEqual("gloria", ReturnTeamNameForLowestAverageOfGoals());
+        }
+
         public struct Match
         {
             public string winningTeam;
@@ -44,9 +66,9 @@ namespace Football
 
         public Match[] Leg =
         {
-            new Match { winningTeam = "avantul" , losingTeam = "gloria", winningGoals = 1, losingGoals = 0 },
-            new Match { winningTeam = "petrolul", losingTeam = "gloria", winningGoals = 7, losingGoals = 1 },
-            new Match { winningTeam = "avantul" , losingTeam = "petrolul", winningGoals = 3, losingGoals = 0 }
+            new Match { winningTeam = "avantul" , losingTeam = "gloria", winningGoals = 1, losingGoals = 1 },
+            new Match { winningTeam = "sageata", losingTeam = "concordia", winningGoals = 7, losingGoals = 1 },
+            new Match { winningTeam = "astra" , losingTeam = "ceahlaul", winningGoals = 3, losingGoals = 1 }
         };
 
         public void AddTheLastMatchOfTheLeg(string name1, string name2, int goalsGiven, int goalsReceived)
@@ -77,22 +99,7 @@ namespace Football
         {
             return Leg[i].winningGoals - Leg[i].losingGoals;
         }
-
-        [TestMethod]
-        public void TestsifRemovingWorks()
-        {
-            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
-            Assert.AreEqual(2, Leg.Length);
-        }
-
-        [TestMethod]
-        public void TestsifRemovingWorksTwice()
-        {
-            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
-            RemovesTheMatchWithTheBiggestDifferenceOfGoals();
-            Assert.AreEqual(1, Leg.Length);
-        }
-
+       
         public void RemovesTheMatchWithTheBiggestDifferenceOfGoals()
         {
             int maxDiff = GetGoalDifferenceInAMatch(0);
@@ -111,6 +118,26 @@ namespace Football
                 Leg[j] = Leg[j + 1];
             }
             Array.Resize(ref Leg, Leg.Length - 1);
+        }
+
+        string ReturnTeamNameForLowestAverageOfGoals()
+        {
+            decimal counter = GetAverageOfGoalsForATeam(Leg[0].losingGoals, Leg[0].winningGoals);
+            string teamName = Leg[0].losingTeam;
+            for (int i = 1; i < Leg.Length; i++)
+            {
+                if (counter < GetAverageOfGoalsForATeam(Leg[i].losingGoals, Leg[i].winningGoals))
+                {
+                    counter = GetAverageOfGoalsForATeam(Leg[i].losingGoals, Leg[i].winningGoals);
+                    teamName = Leg[i].losingTeam;
+                }
+            }
+            return teamName;
+        }
+
+        decimal GetAverageOfGoalsForATeam(int goalsGiven, int goalsReceived)
+        {
+            return goalsGiven / goalsReceived;
         }
     }
 }
