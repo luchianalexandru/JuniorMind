@@ -7,8 +7,15 @@ namespace Fibonacci
     public class Fibonacci
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestFibonacciFor3()
         {
+            Assert.AreEqual(1, FindFibonacciForGivenNumber(3));
+        }
+
+        public int FindFibonacciForGivenNumber(int n)
+        {
+
+            return 0;
         }
     }
 }
