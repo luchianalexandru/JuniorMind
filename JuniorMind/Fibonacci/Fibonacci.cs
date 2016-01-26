@@ -31,10 +31,27 @@ namespace Fibonacci
             Assert.AreEqual(2, FindFibonacciForGivenNumber(3));
         }
 
+        [TestMethod]
+        public void TestFibonacciFor5()
+        {
+            Assert.AreEqual(5, FindFibonacciForGivenNumber(5));
+        }
+
+        [TestMethod]
+        public void TestFibonacciFor6()
+        {
+            Assert.AreEqual(8, FindFibonacciForGivenNumber(6));
+        }
+
+        [TestMethod]
+        public void TestFibonacciFor9()
+        {
+            Assert.AreEqual(34, FindFibonacciForGivenNumber(9));
+        }
+
         public int FindFibonacciForGivenNumber(int n)
         {
-            if ((n == 0) || (n == 1)) return n;
-            return FindFibonacciForGivenNumber(n - 1) + FindFibonacciForGivenNumber(n - 2);  
+            return ((n==0) || (n == 1)) ? n : FindFibonacciForGivenNumber(n - 1) + FindFibonacciForGivenNumber(n - 2);
         }
     }
 }
