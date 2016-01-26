@@ -86,6 +86,21 @@ namespace Password
             Assert.AreNotEqual(a, b);
         }
 
+        [TestMethod]
+        public void ShouldCheckIfPasswordContainsNotAllowedSymbols()
+        {
+            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 2, symbols = 2, ambiguous = true };
+            var tempPass = GeneratePass(options);
+            int counter = 0;
+            string notAllowedSymbols = "{}[]()/\'~,;.<> " + '"';
+            foreach (char c in tempPass)
+            {
+                if (Contained(c,notAllowedSymbols)) counter++;
+            }
+            Assert.AreEqual(0, counter);
+
+        }
+
         Random random = new Random();
 
         public struct PasswordOptions
@@ -145,21 +160,6 @@ namespace Password
                 tempString += c;
             }
             return tempString;
-        }
-
-        [TestMethod]
-        public void ShouldCheckIfPasswordContainsNotAllowedSymbols()
-        {
-            var options = new PasswordOptions { length = 8, UpperCase = 3, numbers = 2, symbols = 2 };
-            var tempPass = GeneratePass(options);
-            int counter = 0;
-            string notAllowedSymbols = "{}[]()/\'~,;.<> " + '"';
-            foreach (char c in tempPass)
-            {
-                if (Contained(c,notAllowedSymbols)) counter++;
-            }
-            Assert.AreEqual(0, counter);
-
         }
 
         private string GeneratePassWithSymbols(int length, bool ambiguous)
