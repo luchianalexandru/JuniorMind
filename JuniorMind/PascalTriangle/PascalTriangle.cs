@@ -12,6 +12,12 @@ namespace PascalTriangle
             CollectionAssert.AreEqual(new int[] { 1 }, PascalTriangleGenerator(0));
         }
 
+        [TestMethod]
+        public void TestsTheGeneratorFor1()
+        {
+            CollectionAssert.AreEqual(new int[] { 1 , 1 }, PascalTriangleGenerator(1));
+        }
+
         int[] PascalTriangleGenerator(int n)
         {
             int[] result = new int[n + 1];
