@@ -18,11 +18,17 @@ namespace StringInverterRecursive
             Assert.AreEqual("leber", ReverseString("rebel"));
         }
 
+        [TestMethod]
+        public void TestForReverse3()
+        {
+            Assert.AreEqual("kram si eman ym olleh", ReverseString("hello my name is mark"));
+        } 
+
         string ReverseString(string a)
         {
             if (a.Length > 0)
                 return a[a.Length - 1] + ReverseString(a.Substring(0, a.Length - 1));
-            else return a;
+            return a;
         }
     }
 }
