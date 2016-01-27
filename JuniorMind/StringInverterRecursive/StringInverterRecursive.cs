@@ -7,8 +7,15 @@ namespace StringInverterRecursive
     public class StringInverterRecursive
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestForReverseFail()
         {
+            Assert.AreEqual("ba", ReverseString("ab"));
+        }
+
+        string ReverseString(string a)
+        {
+            return "";
+
         }
     }
 }
