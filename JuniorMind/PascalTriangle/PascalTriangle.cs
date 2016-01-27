@@ -7,9 +7,15 @@ namespace PascalTriangle
     public class PascalTriangle
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestThatFails()
         {
+            CollectionAssert.AreEqual(new int[] { 1 }, PascalTriangleGenerator(0));
         }
 
+        int[] PascalTriangleGenerator(int n)
+        {
+            int[] result = new int[n + 1];
+            return result;
+        }
     }
 }
