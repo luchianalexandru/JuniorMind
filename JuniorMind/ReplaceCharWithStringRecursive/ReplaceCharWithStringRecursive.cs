@@ -7,9 +7,16 @@ namespace ReplaceCharWithStringRecursive
     public class ReplaceCharWithStringRecursive
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ReplaceCharWithStringTest1()
         {
+            Assert.AreEqual("bc", CharReplaceWithString("a", 'a', "bc"));
         }
 
+
+        public static string CharReplaceWithString(string s, char a, string b)
+        {
+            return s; 
+
+        }
     }
 }
