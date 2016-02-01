@@ -7,9 +7,17 @@ namespace CalculatorRecursive
     public class CalculatorRecursive
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CalculatorFirstTest()
         {
+            Assert.AreEqual(0, Calculate("+ 2 3"));
         }
+
+        public double Calculate(string operation)
+        {
+            string[] array = operation.Split(' ');
+            return 0;
+        }
+
 
     }
 }
