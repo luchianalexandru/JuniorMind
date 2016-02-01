@@ -18,6 +18,13 @@ namespace CalculatorRecursive
             Assert.AreEqual(-1, Calculate("+ 3 -4"));
         }
 
+        [TestMethod]
+        public void CalculatorSecondTestMoreOperations()
+        {
+            Assert.AreEqual(3, Calculate("+ + + 3 -4 7 -3"));
+        }
+
+
         public double Calculate(string operation)
         {
             int pos = 0;
@@ -27,14 +34,26 @@ namespace CalculatorRecursive
 
         public double Calculate(string[] operation, ref int pos)
         {
-            double result = 0;
-            if (double.TryParse(operation[ref pos], out result))
+            double result;
+            if (double.TryParse(operation[pos], out result))
             {
                 pos++;
                 return result;
             }
+            string op = operation[pos];
             pos++;
-            return Calculate(operation, ref pos) + Calculate(operation, ref pos);
+            return Operation(operation, op, ref pos);
+        }
+
+        public double Operation(string[] array, string operation, ref int pos)
+        {
+            switch (operation)
+            {
+                case "+":
+                    return Calculate(array, ref pos) + Calculate(array, ref pos);
+                default:
+                    return 0;
+            }
         }
     }
 }
