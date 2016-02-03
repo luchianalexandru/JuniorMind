@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorRecursive", "CalculatorRecursive\CalculatorRecursive.csproj", "{90ED8B0B-1686-4456-9094-75052053C075}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoSorting", "LottoSorting\LottoSorting.csproj", "{CBAAE8FB-AACD-45DD-BFD3-45223D055563}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{90ED8B0B-1686-4456-9094-75052053C075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90ED8B0B-1686-4456-9094-75052053C075}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90ED8B0B-1686-4456-9094-75052053C075}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90ED8B0B-1686-4456-9094-75052053C075}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBAAE8FB-AACD-45DD-BFD3-45223D055563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBAAE8FB-AACD-45DD-BFD3-45223D055563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBAAE8FB-AACD-45DD-BFD3-45223D055563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBAAE8FB-AACD-45DD-BFD3-45223D055563}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
