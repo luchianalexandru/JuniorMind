@@ -52,6 +52,32 @@ namespace RepairCenter
             CollectionAssert.AreEqual(expected, SortRepairs(toSort));
         }
 
+        [TestMethod]
+        public void TestsTheSortForASevenElementStruct()
+        {
+            var toSort = new Repair[]
+            {
+                new Repair("watch","Medium"),
+                new Repair("tv", "High"),
+                new Repair("clock","Medium"),
+                new Repair("lamp","High"),
+                new Repair("toothbrush","Low"),
+                new Repair("radio", "Low"),
+                new Repair("stove","Medium"),
+            };
+            var expected = new Repair[]
+            {
+                new Repair("tv", "High"),
+                new Repair("lamp","High"),
+                new Repair("watch","Medium"),
+                new Repair("clock","Medium"),
+                new Repair("stove","Medium"),
+                new Repair("toothbrush","Low"),
+                new Repair("radio", "Low")
+            };
+            CollectionAssert.AreEqual(expected, SortRepairs(toSort));
+        }
+
 
         public Repair[] SortRepairs ( Repair[] toSort)
         {
