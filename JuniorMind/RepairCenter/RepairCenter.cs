@@ -61,13 +61,36 @@ namespace RepairCenter
                 {
                     if(ReturnsPriorityByNumber(toSort[j].priority) < ReturnsPriorityByNumber(toSort[j+1].priority))
                     {
-                        Repair temp = toSort[j];
-                        toSort[j] = toSort[j + 1];
-                        toSort[j + 1] = temp;
+                        Swap(ref toSort, j);
                     }
                 }
             }
             return toSort;
+        }
+
+
+        [TestMethod]
+        public void TestsSwap()
+        {
+            var expected = new Repair[]
+            {
+                new Repair("tv", "High"),
+                new Repair("clock","Medium")
+            };
+            var toSwap = new Repair[]
+            {
+                new Repair("clock","Medium"),
+                new Repair("tv", "High")
+            };
+            Swap(ref toSwap, 0);
+            CollectionAssert.AreEqual(expected, toSwap);
+        }
+
+        static void Swap(ref Repair[] toSort, int position)
+        {
+            Repair temp = toSort[position];
+            toSort[position] = toSort[position + 1];
+            toSort[position + 1] = temp;
         }
 
         public int ReturnsPriorityByNumber(string priority)
