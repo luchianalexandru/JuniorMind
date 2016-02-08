@@ -7,14 +7,62 @@ namespace RepairCenter
     public class RepairCenter
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ChecksIfPrioritySwitchWorks()
         {
+            Assert.AreEqual(3, ReturnsPriorityByNumber("High"));
         }
 
-        public struct Prioritity
+        [TestMethod]
+        public void ChecksIfPrioritySwitchWorks2()
         {
-            public string priority;
+            Assert.AreEqual(2, ReturnsPriorityByNumber("Medium"));
         }
+
+
+
+        public Repair[] SortRepairs ( Repair[] toSort)
+        {
+            for(int i= 0; i < toSort.Length; i++)
+            {
+                for(int j = 0; j < toSort.Length-1; j++)
+                {
+                    if(ReturnsPriorityByNumber(toSort[j].priority) > ReturnsPriorityByNumber(toSort[j-1].priority))
+                    {
+                        Repair temp = toSort[j];
+                        toSort[j] = toSort[j + 1];
+                        toSort[j + 1] = temp;
+                    }
+                }
+            }
+            return toSort;
+        }
+
+        public int ReturnsPriorityByNumber(string priority)
+        {
+            switch(priority)
+            {
+                case "High":
+                    return 3;
+                case "Medium":
+                    return 2;
+                case "Low":
+                    return 1;
+                default:
+                    return 0;
+            }   
+        }
+
+        public struct Repair
+        {
+            public string name;
+            public string priority;
+            public Repair(string name, string priority)
+            {
+                this.name = name;
+                this.priority = priority;
+            }
+        }
+
 
     }
 }
