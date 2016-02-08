@@ -10,5 +10,11 @@ namespace RepairCenter
         public void TestMethod1()
         {
         }
+
+        public struct Prioritity
+        {
+            public string priority;
+        }
+
     }
 }
