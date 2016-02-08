@@ -18,6 +18,39 @@ namespace RepairCenter
             Assert.AreEqual(2, ReturnsPriorityByNumber("Medium"));
         }
 
+        [TestMethod]
+        public void TestsTheSortForATwoElementStruct()
+        {
+            var expected = new Repair[]
+            {
+                new Repair("tv", "High"),
+                new Repair("radio", "Low")
+            };
+            var toSort = new Repair[]
+            {
+                new Repair("radio", "Low"),
+                new Repair("tv", "High"),
+            };
+            CollectionAssert.AreEqual(expected, SortRepairs(toSort));
+        }
+
+        [TestMethod]
+        public void TestsTheSortForAThreeElementStruct()
+        {
+            var expected = new Repair[]
+            {
+                new Repair("tv", "High"),
+                new Repair("clock","Medium"),
+                new Repair("radio", "Low")    
+            };
+            var toSort = new Repair[]
+            {
+                new Repair("clock","Medium"),
+                new Repair("tv", "High"),
+                new Repair("radio", "Low")
+            };
+            CollectionAssert.AreEqual(expected, SortRepairs(toSort));
+        }
 
 
         public Repair[] SortRepairs ( Repair[] toSort)
@@ -26,7 +59,7 @@ namespace RepairCenter
             {
                 for(int j = 0; j < toSort.Length-1; j++)
                 {
-                    if(ReturnsPriorityByNumber(toSort[j].priority) > ReturnsPriorityByNumber(toSort[j-1].priority))
+                    if(ReturnsPriorityByNumber(toSort[j].priority) < ReturnsPriorityByNumber(toSort[j+1].priority))
                     {
                         Repair temp = toSort[j];
                         toSort[j] = toSort[j + 1];
