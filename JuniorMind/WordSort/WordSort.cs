@@ -9,8 +9,8 @@ namespace WordSort
         [TestMethod]
         public void Test1()
         {
-            var structArray = new WordCount[] { new WordCount("abc", 2), new WordCount("bca", 1)};
-            CollectionAssert.AreEqual(structArray, SortByTextNrOfRepetition("abc abc bca"));
+            var structArray = new WordCount[] { new WordCount("abc", 2), new WordCount("bca", 1), new WordCount("abc", 2) };
+            CollectionAssert.AreEqual(structArray, SortByTextNrOfRepetition("abc bca abc"));
         }
 
 
