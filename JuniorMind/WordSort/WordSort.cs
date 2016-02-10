@@ -13,6 +13,19 @@ namespace WordSort
             CollectionAssert.AreEqual(structArray, SortByTextNrOfRepetition("abc bca abc"));
         }
 
+        [TestMethod]
+        public void TestsTheStructCountForTwoElementsWithMoreRepetitions()
+        {
+            var structArray = new WordCount[] { new WordCount("abc", 4), new WordCount("bca", 2) };
+            CollectionAssert.AreEqual(structArray, SortByTextNrOfRepetition("abc bca abc bca abc abc"));
+        }
+
+        [TestMethod]
+        public void TestsTheStructCountForThreeElements()
+        {
+            var structArray = new WordCount[] { new WordCount("bca", 2), new WordCount("abc", 4), new WordCount("cde", 1) };
+            CollectionAssert.AreEqual(structArray, SortByTextNrOfRepetition("bca abc abc cde bca abc abc"));
+        }
 
         public WordCount[] SortByTextNrOfRepetition(string textToSort)
         {
