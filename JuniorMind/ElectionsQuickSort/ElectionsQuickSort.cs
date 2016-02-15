@@ -7,8 +7,20 @@ namespace ElectionsQuickSort
     public class ElectionsQuickSort
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestsSwap()
         {
+            Politician[] office = { new Politician("zagrean", 10), new Politician("tamas", 5)};
+            Politician[] expected = { new Politician("tamas", 5), new Politician("zagrean", 10)};
+            Swap(ref office[0], ref office[1]);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
+
+        static void Swap(ref Politician a, ref Politician b)
+        {
+            Politician temp = a;
+            a = b;
+            b = temp;
         }
 
         public struct VotesPerOffice
