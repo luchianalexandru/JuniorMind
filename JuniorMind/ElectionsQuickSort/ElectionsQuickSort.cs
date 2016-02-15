@@ -49,6 +49,90 @@ namespace ElectionsQuickSort
             CollectionAssert.AreEqual(expected, GetTotalOfVotes(allResults));
         }
 
+        [TestMethod]
+        public void TestsTheHybridSortFor4Candidates()
+        {
+            Politician[] office = { new Politician("zagrean", 10), new Politician("tamas", 5), new Politician("baciu", 7), new Politician("heghedus", 25) };
+            Politician[] expected = { new Politician("heghedus", 25), new Politician("zagrean", 10), new Politician("baciu", 7), new Politician("tamas", 5) };
+            HybridSort(office);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
+        [TestMethod]
+        public void TestsTheQuickSortFor4Candidates()
+        {
+            Politician[] office = {
+                new Politician("zagrean", 10),
+                new Politician("tamas", 5),
+                new Politician("heghedus", 25),
+                new Politician("baciu", 7)
+            };
+            Politician[] expected = {
+                new Politician("heghedus", 25),
+                new Politician("zagrean", 10),
+                new Politician("baciu", 7),
+                new Politician("tamas", 5)
+            };
+            QuickSort(ref office, 0, 3);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
+        [TestMethod]
+        public void TestsTheQuickSortFor7Candidates()
+        {
+            Politician[] office = {
+                new Politician("zagrean", 10),
+                new Politician("zamfir", 3),
+                new Politician("negrean", 15),
+                new Politician("sava", 29),
+                new Politician("tamas", 5),
+                new Politician("heghedus", 25),
+                new Politician("baciu", 7)
+            };
+            Politician[] expected = {
+                new Politician("sava", 29),
+                new Politician("heghedus", 25),
+                new Politician("negrean", 15),
+                new Politician("zagrean", 10),
+                new Politician("baciu", 7),
+                new Politician("tamas", 5),
+                new Politician("zamfir", 3)
+            };
+            QuickSort(ref office, 0, 6);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
+        [TestMethod]
+        public void TestsTheQuickSortFor10Candidates()
+        {
+            Politician[] office = {
+                new Politician("zagrean", 100),
+                new Politician("balea", 120),
+                new Politician("muresan", 157),
+                new Politician("chetan", 10),
+                new Politician("zamfir", 99),
+                new Politician("negrean", 15),
+                new Politician("sava", 29),
+                new Politician("tamas", 5),
+                new Politician("heghedus", 25),
+                new Politician("baciu", 7)
+            };
+            Politician[] expected = {
+                new Politician("muresan", 157),
+                new Politician("balea", 120),
+                new Politician("zagrean", 100),
+                new Politician("zamfir", 99),
+                new Politician("sava", 29),
+                new Politician("heghedus", 25),
+                new Politician("negrean", 15),
+                new Politician("chetan", 10),
+                new Politician("baciu", 7),
+                new Politician("tamas", 5),
+            };
+            QuickSort(ref office, 0, 9);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
         private static Politician[] CentralizeVotes(VotesPerOffice[] results)
         {
             Politician[] total = new Politician[results[0].office.Length];
@@ -73,25 +157,32 @@ namespace ElectionsQuickSort
             return totalVotes;
         }
 
-        [TestMethod]
-        public void TestsTheQuickSortFor3Candidates()
+        public static void QuickSort(ref Politician[] input, int left, int right)
         {
-            Politician[] office = { new Politician("zagrean", 10), new Politician("tamas", 5), new Politician("baciu", 7) };
-            Politician[] expected = { new Politician("zagrean", 10), new Politician("baciu", 7), new Politician("tamas", 5) };
-            QuickSort(office, 0, 2);
-            CollectionAssert.AreEqual(expected, office);
+            if (left < right)
+            {
+                int q = Partition(ref input, left, right);
+                QuickSort(ref input, left, q - 1);
+                QuickSort(ref input, q + 1, right);
+            }
         }
 
-        [TestMethod]
-        public void TestsTheHybridSortFor4Candidates()
+        static int Partition(ref Politician[] input, int left, int right)
         {
-            Politician[] office = { new Politician("zagrean", 10), new Politician("tamas", 5), new Politician("baciu", 7), new Politician("heghedus", 25) };
-            Politician[] expected = { new Politician("heghedus", 25), new Politician("zagrean", 10), new Politician("baciu", 7), new Politician("tamas", 5) };
-            HybridSort(ref office);
-            CollectionAssert.AreEqual(expected, office);
+            Politician pivot = input[right];
+            int i = left;
+
+            for (int j = left; j < right; j++)
+            {
+                if (input[j].votes > pivot.votes)
+                    Swap(ref input[j], ref input[i++]);
+            }
+            input[right] = input[i];
+            input[i] = pivot;
+            return i;
         }
 
-        public void HybridSort(ref Politician[] input)
+        public void HybridSort(Politician[] input)
         {
             for (int i = 0; i < input.Length; i++)
             {
@@ -103,34 +194,6 @@ namespace ElectionsQuickSort
                     }
                 }
             }
-        }
-
-        public static void QuickSort(Politician[] input, int left, int right)
-        {
-            if (left < right)
-            {
-                int q = Partition(input, left, right);
-                QuickSort(input, left, q - 1);
-                QuickSort(input, q + 1, right);
-            }
-        }
-
-        static int Partition(Politician[] input, int left, int right)
-        {
-            Politician pivot = input[right];
-            int i = left;
-
-            for (int j = left; j < right; j++)
-            {
-                if (input[j].votes < pivot.votes)
-                {
-                    Swap(ref input[j], ref input[i]);
-                    i++;
-                }
-            }
-            input[right] = input[i];
-            input[i] = pivot;
-            return i;
         }
 
         static void Swap(ref Politician a, ref Politician b)
