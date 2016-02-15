@@ -73,6 +73,43 @@ namespace ElectionsQuickSort
             return totalVotes;
         }
 
+        [TestMethod]
+        public void TestsTheQuickSortFor3Candidates()
+        {
+            Politician[] office = { new Politician("zagrean", 10), new Politician("tamas", 5), new Politician("baciu", 7) };
+            Politician[] expected = { new Politician("zagrean", 10), new Politician("baciu", 7), new Politician("tamas", 5) };
+            QuickSort(office, 0, 2);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
+
+        public static void QuickSort(Politician[] input, int left, int right)
+        {
+            if (left < right)
+            {
+                int q = Partition(input, left, right);
+                QuickSort(input, left, q - 1);
+                QuickSort(input, q + 1, right);
+            }
+        }
+
+        static int Partition(Politician[] input, int left, int right)
+        {
+            Politician pivot = input[right];
+            int i = left;
+
+            for (int j = left; j < right; j++)
+            {
+                if (input[j].votes < pivot.votes)
+                {
+                    Swap(ref input[j], ref input[i]);
+                    i++;
+                }
+            }
+            input[right] = input[i];
+            input[i] = pivot;
+            return i;
+        }
 
         static void Swap(ref Politician a, ref Politician b)
         {
