@@ -82,6 +82,28 @@ namespace ElectionsQuickSort
             CollectionAssert.AreEqual(expected, office);
         }
 
+        [TestMethod]
+        public void TestsTheHybridSortFor4Candidates()
+        {
+            Politician[] office = { new Politician("zagrean", 10), new Politician("tamas", 5), new Politician("baciu", 7), new Politician("heghedus", 25) };
+            Politician[] expected = { new Politician("heghedus", 25), new Politician("zagrean", 10), new Politician("baciu", 7), new Politician("tamas", 5) };
+            HybridSort(ref office);
+            CollectionAssert.AreEqual(expected, office);
+        }
+
+        public void HybridSort(ref Politician[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                for (int j = input.Length - 1; j > i; j--)
+                {
+                    if (input[i].votes < input[j].votes)
+                    {
+                        Swap(ref input[i], ref input[j]);
+                    }
+                }
+            }
+        }
 
         public static void QuickSort(Politician[] input, int left, int right)
         {
