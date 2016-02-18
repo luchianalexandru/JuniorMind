@@ -48,7 +48,7 @@ namespace Catalog
         }
 
         [TestMethod]
-        public void TestsTheSortingAlgorithmForAlphabeticalOrder()
+        public void TestsTheQuickSortingAlgorithmForAlphabeticalOrder()
         {
             Subject math1 = new Subject("Mathematics", new int[] { 10, 9 });
             Subject sport1 = new Subject("Sport", new int[] { 7, 5 });
@@ -69,6 +69,44 @@ namespace Catalog
             QuickSort(ref allClass, 0, 2);
             CollectionAssert.AreEqual(new string[] { "Alex", "Petrica", "Zorand" }, BuildsStudentArray(allClass));
 
+        }
+
+        [TestMethod]
+        public void TestsTheSelectionSortingAlgorithmForAlphabeticalOrder()
+        {
+            Subject math1 = new Subject("Mathematics", new int[] { 10, 9 });
+            Subject sport1 = new Subject("Sport", new int[] { 7, 5 });
+            Subject[] subjects1 = { math1, sport1 };
+            Student zorand = new Student { name = "Zorand", subjectAndGrades = subjects1 };
+
+            Subject math2 = new Subject("Mathematics", new int[] { 7, 5 });
+            Subject sport2 = new Subject("Sport", new int[] { 10, 9 });
+            Subject[] subjects2 = { math2, sport2 };
+            Student alex = new Student { name = "Alex", subjectAndGrades = subjects2 };
+
+            Subject math3 = new Subject("Mathematics", new int[] { 7, 5 });
+            Subject sport3 = new Subject("Sport", new int[] { 10, 9 });
+            Subject[] subjects3 = { math3, sport3 };
+            Student petrica = new Student { name = "Petrica", subjectAndGrades = subjects3 };
+
+            Student[] allClass = { zorand, alex, petrica };
+            SelectionSort(ref allClass);
+            CollectionAssert.AreEqual(new string[] { "Alex", "Petrica", "Zorand" }, BuildsStudentArray(allClass));
+
+        }
+
+        public static void SelectionSort(ref Student[] theClass)
+        {
+            for (int i = 0; i < theClass.Length - 1; i++)
+            {
+                for (int j = i + 1; j < theClass.Length; j++)
+                {
+                    if (theClass[i].name.CompareTo(theClass[j].name) < 0)
+                    {
+                        Swap(ref theClass[i], ref theClass[j]);
+                    }
+                }
+            };
         }
 
         public static void QuickSort(ref Student[] theClass, int left, int right)
