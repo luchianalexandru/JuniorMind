@@ -92,7 +92,6 @@ namespace Catalog
             Student[] allClass = { zorand, alex, petrica };
             SelectionSort(ref allClass);
             CollectionAssert.AreEqual(new string[] { "Alex", "Petrica", "Zorand" }, BuildsStudentArray(allClass));
-
         }
 
         public static void SelectionSort(ref Student[] theClass)
@@ -101,12 +100,10 @@ namespace Catalog
             {
                 for (int j = i + 1; j < theClass.Length; j++)
                 {
-                    if (theClass[i].name.CompareTo(theClass[j].name) < 0)
-                    {
+                    if (theClass[j].name.CompareTo(theClass[i].name) < 0)
                         Swap(ref theClass[i], ref theClass[j]);
-                    }
                 }
-            };
+            }
         }
 
         public static void QuickSort(ref Student[] theClass, int left, int right)
