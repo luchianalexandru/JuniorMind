@@ -94,16 +94,55 @@ namespace Catalog
             CollectionAssert.AreEqual(new string[] { "Alex", "Petrica", "Zorand" }, BuildsStudentArray(allClass));
         }
 
+        [TestMethod]
+        public void TestsTheGeneralAverageCalculationForOneStudent()
+        {
+            Subject math1 = new Subject("Mathematics", new int[] { 10, 9 });
+            Subject sport1 = new Subject("Sport", new int[] { 7, 5 });
+            Subject[] subjects1 = { math1, sport1 };
+            Student zorand = new Student { name = "Zorand", subjectAndGrades = subjects1 };
+
+            Student[] allClass = { zorand };
+
+            Assert.AreEqual(7.75m, CalculateGeneralAveragePerStudent(zorand));
+        }
+
+        [TestMethod]
+        public void TestsTheAverageCalculationPerStudentPerOneSubject()
+        {
+            Subject math1 = new Subject("Mathematics", new int[] { 10, 9 });
+            Subject sport1 = new Subject("Sport", new int[] { 7, 5 });
+            Subject[] subjects1 = { math1, sport1 };
+            Student zorand = new Student { name = "Zorand", subjectAndGrades = subjects1 };
+
+            Student[] allClass = { zorand};
+
+            //Assert.AreEqual(9.5m, CalculateAveragePerSubjectPerStudent(math1));
+            Assert.AreEqual(6, CalculateAveragePerSubjectPerStudent(sport1));
+        }
+
+        private decimal CalculateGeneralAveragePerStudent(Student student)
+        {
+            decimal sum = 0;
+            for (int i = 0; i < student.subjectAndGrades.Length; i++)
+                sum += CalculateAveragePerSubjectPerStudent(student.subjectAndGrades[i]);
+            return sum / student.subjectAndGrades.Length;
+        }
+        
+        private decimal CalculateAveragePerSubjectPerStudent(Subject subject)
+        {
+            int sum = 0;
+            for(int i = 0; i < subject.grade.Length; i++)
+                sum += subject.grade[i];
+            return (decimal)sum / subject.grade.Length;
+        }
+
         public static void SelectionSort(ref Student[] theClass)
         {
             for (int i = 0; i < theClass.Length - 1; i++)
-            {
                 for (int j = i + 1; j < theClass.Length; j++)
-                {
-                    if (theClass[j].name.CompareTo(theClass[i].name) < 0)
+                  if (theClass[j].name.CompareTo(theClass[i].name) < 0)
                         Swap(ref theClass[i], ref theClass[j]);
-                }
-            }
         }
 
         public static void QuickSort(ref Student[] theClass, int left, int right)
@@ -147,7 +186,6 @@ namespace Catalog
             }
             return studentsNames;
         }
-
         public struct Student
         {
             public string name;
@@ -164,6 +202,7 @@ namespace Catalog
                 this.grade = grade;
             }
         }
+
 
     }
 }
