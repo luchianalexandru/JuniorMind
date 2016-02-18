@@ -121,7 +121,18 @@ namespace Catalog
             Assert.AreEqual(6, CalculateAveragePerSubjectPerStudent(sport1));
         }
 
-        private decimal CalculateGeneralAveragePerStudent(Student student)
+        private static Average[] BuildAverageArray(Student[] fullClass)
+        {
+            Average[] students = new Average[fullClass.Length];    
+            for (int i = 0; i < fullClass.Length; i++)
+            {
+                students[i].name = fullClass[i].name;
+                students[i].average = CalculateGeneralAveragePerStudent(fullClass[i]);
+            }
+            return students;
+        }
+
+        public decimal CalculateGeneralAveragePerStudent(Student student)
         {
             decimal sum = 0;
             for (int i = 0; i < student.subjectAndGrades.Length; i++)
@@ -186,6 +197,18 @@ namespace Catalog
             }
             return studentsNames;
         }
+
+        public struct Average
+        {
+            public string name;
+            public decimal[] average;
+            public Average(string name, decimal[] average)
+            {
+                this.name = name;
+                this.average = average;
+            }
+        }
+
         public struct Student
         {
             public string name;
