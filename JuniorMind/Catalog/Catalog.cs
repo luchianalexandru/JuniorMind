@@ -121,7 +121,18 @@ namespace Catalog
             Assert.AreEqual(6, CalculateAveragePerSubjectPerStudent(sport1));
         }
 
-        private static Average[] BuildAverageArray(Student[] fullClass)
+
+
+        public void SelectionSortForGeneralAverage(ref Student[] fullClass)
+        {
+            Average[] allClassWithAverage = BuildAverageArray(fullClass);
+            for (int i = 0; i < allClassWithAverage.Length - 1; i++)
+                for (int j = i + 1; j < allClassWithAverage.Length; j++)
+                    if (allClassWithAverage[j].average > allClassWithAverage[i].average)
+                        SwapForAverage(ref allClassWithAverage[i], ref allClassWithAverage[j]);
+        }
+
+        public Average[] BuildAverageArray(Student[] fullClass)
         {
             Average[] students = new Average[fullClass.Length];    
             for (int i = 0; i < fullClass.Length; i++)
@@ -132,6 +143,13 @@ namespace Catalog
             return students;
         }
 
+        static void SwapForAverage(ref Average a, ref Average b)
+        {
+            Average temp = a;
+            a = b;
+            b = temp;
+        }
+
         public decimal CalculateGeneralAveragePerStudent(Student student)
         {
             decimal sum = 0;
@@ -140,7 +158,7 @@ namespace Catalog
             return sum / student.subjectAndGrades.Length;
         }
         
-        private decimal CalculateAveragePerSubjectPerStudent(Subject subject)
+        public decimal CalculateAveragePerSubjectPerStudent(Subject subject)
         {
             int sum = 0;
             for(int i = 0; i < subject.grade.Length; i++)
@@ -148,7 +166,7 @@ namespace Catalog
             return (decimal)sum / subject.grade.Length;
         }
 
-        public static void SelectionSort(ref Student[] theClass)
+        public void SelectionSort(ref Student[] theClass)
         {
             for (int i = 0; i < theClass.Length - 1; i++)
                 for (int j = i + 1; j < theClass.Length; j++)
@@ -156,7 +174,7 @@ namespace Catalog
                         Swap(ref theClass[i], ref theClass[j]);
         }
 
-        public static void QuickSort(ref Student[] theClass, int left, int right)
+        public void QuickSort(ref Student[] theClass, int left, int right)
         {
             if (left < right)
             {
@@ -188,7 +206,7 @@ namespace Catalog
             b = temp;
         }
 
-        private static string[] BuildsStudentArray(Student[] fullClass)
+        public string[] BuildsStudentArray(Student[] fullClass)
         {
             string[] studentsNames = new string[fullClass.Length];
             for (int i = 0; i < fullClass.Length; i++)
@@ -201,8 +219,8 @@ namespace Catalog
         public struct Average
         {
             public string name;
-            public decimal[] average;
-            public Average(string name, decimal[] average)
+            public decimal average;
+            public Average(string name, decimal average)
             {
                 this.name = name;
                 this.average = average;
@@ -225,7 +243,6 @@ namespace Catalog
                 this.grade = grade;
             }
         }
-
 
     }
 }
