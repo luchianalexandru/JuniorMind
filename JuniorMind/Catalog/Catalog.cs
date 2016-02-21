@@ -117,10 +117,30 @@ namespace Catalog
 
             Student[] allClass = { zorand};
 
-            //Assert.AreEqual(9.5m, CalculateAveragePerSubjectPerStudent(math1));
-            Assert.AreEqual(6, CalculateAveragePerSubjectPerStudent(sport1));
+            Assert.AreEqual(9.5m, CalculateAveragePerSubjectPerStudent(math1));
+            //Assert.AreEqual(6, CalculateAveragePerSubjectPerStudent(sport1));
         }
 
+        [TestMethod]
+        public void TestsIfBuildingTheAverageArrayForTwoStudentsWorks()
+        {
+            Subject maths = new Subject("Mathematics", new int[] { 10, 9 });
+            Subject sports = new Subject("Sport", new int[] { 7, 5 });
+            Subject[] subjects = { maths, sports };
+            Student ion = new Student { name = "Ion", subjectAndGrades = subjects };
+
+            Subject math = new Subject("Mathematics", new int[] { 7, 5 });
+            Subject sport = new Subject("Sport", new int[] { 10, 9 });
+            Subject[] subject = { math, sport };
+            Student vasile = new Student { name = "Vasile", subjectAndGrades = subject };
+
+            Student[] allClass = { ion, vasile };
+            Average[] averageArray = BuildAverageArray(allClass);
+
+            Average[] expected = { new Average("Ion", 7.75m), new Average("Vasile", 7.75m) };
+
+            CollectionAssert.AreEqual(expected, averageArray);
+        }
 
 
         public void SelectionSortForGeneralAverage(ref Student[] fullClass)
