@@ -168,6 +168,52 @@ namespace Catalog
             CollectionAssert.AreEqual(expected, averageArray);
         }
 
+        [TestMethod]
+        public void FindsTwoStudentsWithSpecificAverage()
+        {
+            Subject math1 = new Subject("Mathematics", new int[] { 5, 5 });
+            Subject sport1 = new Subject("Sport", new int[] { 10, 4 });
+            Subject[] subject1 = { math1, sport1 };
+            Student gheorghe = new Student { name = "Gheorghe", subjectAndGrades = subject1 };
+
+            Subject math2 = new Subject("Mathematics", new int[] { 10, 9 });
+            Subject sport2 = new Subject("Sport", new int[] { 7, 5 });
+            Subject[] subject2 = { math2, sport2 };
+            Student ion = new Student { name = "Ion", subjectAndGrades = subject2 };
+
+            Subject math3 = new Subject("Mathematics", new int[] { 7, 5 });
+            Subject sport3 = new Subject("Sport", new int[] { 10, 8 });
+            Subject[] subject3 = { math3, sport3 };
+            Student vasile = new Student { name = "Vasile", subjectAndGrades = subject3 };
+
+            Subject math4 = new Subject("Mathematics", new int[] { 5, 5 });
+            Subject sport4 = new Subject("Sport", new int[] { 10, 4 });
+            Subject[] subject4 = { math4, sport4 };
+            Student grigore = new Student { name = "Grigore", subjectAndGrades = subject4 };
+
+            Student[] allClass = { gheorghe, ion, vasile, grigore };
+            Average[] averageArray = SelectionSortForGeneralAverage(ref allClass);
+            string[] toFind = FindSpecificAverage(allClass, 6m);
+            string[] expected = { "Gheorghe", "Grigore" };
+            CollectionAssert.AreEqual(toFind, expected);
+        }
+
+        public string[] FindSpecificAverage(Student[] fullClass, decimal averageToFind)
+        {
+
+            string[] studentsArray = { };
+            Average[] averageArray = SelectionSortForGeneralAverage(ref fullClass);
+            for (int i = 0; i < averageArray.Length; i++)
+            {
+                if (averageArray[i].average == averageToFind)
+                {
+                    Array.Resize(ref studentsArray, studentsArray.Length + 1);
+                    studentsArray[studentsArray.Length - 1] = averageArray[i].name;
+                }
+            }
+            return studentsArray;
+        }
+
         public Average[] SelectionSortForGeneralAverage(ref Student[] fullClass)
         {
             Average[] allClassWithAverage = BuildAverageArray(fullClass);
