@@ -130,26 +130,52 @@ namespace Catalog
             Student ion = new Student { name = "Ion", subjectAndGrades = subjects };
 
             Subject math = new Subject("Mathematics", new int[] { 7, 5 });
-            Subject sport = new Subject("Sport", new int[] { 10, 9 });
+            Subject sport = new Subject("Sport", new int[] { 10, 8 });
             Subject[] subject = { math, sport };
             Student vasile = new Student { name = "Vasile", subjectAndGrades = subject };
 
             Student[] allClass = { ion, vasile };
             Average[] averageArray = BuildAverageArray(allClass);
 
-            Average[] expected = { new Average("Ion", 7.75m), new Average("Vasile", 7.75m) };
+            Average[] expected = { new Average("Ion", 7.75m), new Average("Vasile", 7.5m) };
 
             CollectionAssert.AreEqual(expected, averageArray);
         }
 
+        [TestMethod]
+        public void TestsTheSortForTheAverageStructArray()
+        {
+            Subject math1 = new Subject("Mathematics", new int[] { 5, 5 });
+            Subject sport1 = new Subject("Sport", new int[] { 10, 4 });
+            Subject[] subject1 = { math1, sport1 };
+            Student gheorghe = new Student { name = "Gheorghe", subjectAndGrades = subject1 };
 
-        public void SelectionSortForGeneralAverage(ref Student[] fullClass)
+            Subject math2 = new Subject("Mathematics", new int[] { 10, 9 });
+            Subject sport2 = new Subject("Sport", new int[] { 7, 5 });
+            Subject[] subject2 = { math2, sport2 };
+            Student ion = new Student { name = "Ion", subjectAndGrades = subject2 };
+
+            Subject math3 = new Subject("Mathematics", new int[] { 7, 5 });
+            Subject sport3 = new Subject("Sport", new int[] { 10, 8 });
+            Subject[] subject3 = { math3, sport3 };
+            Student vasile = new Student { name = "Vasile", subjectAndGrades = subject3 };
+        
+
+            Student[] allClass = { gheorghe, ion, vasile };
+            Average[] averageArray = SelectionSortForGeneralAverage(ref allClass);
+
+            Average[] expected = { new Average("Ion", 7.75m), new Average("Vasile", 7.5m), new Average("Gheorghe", 6) };
+            CollectionAssert.AreEqual(expected, averageArray);
+        }
+
+        public Average[] SelectionSortForGeneralAverage(ref Student[] fullClass)
         {
             Average[] allClassWithAverage = BuildAverageArray(fullClass);
             for (int i = 0; i < allClassWithAverage.Length - 1; i++)
                 for (int j = i + 1; j < allClassWithAverage.Length; j++)
                     if (allClassWithAverage[j].average > allClassWithAverage[i].average)
                         SwapForAverage(ref allClassWithAverage[i], ref allClassWithAverage[j]);
+            return allClassWithAverage;
         }
 
         public Average[] BuildAverageArray(Student[] fullClass)
