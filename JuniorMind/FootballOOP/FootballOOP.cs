@@ -7,8 +7,12 @@ namespace FootballOOP
     public class FootballOOP
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AddNewMatch()
         {
+            Leg leg = new Leg();
+            leg.AddMatch(new Match("avantul", "gloria", 1, 1));
+            Assert.AreEqual(1, leg.CountMatches());
         }
     }
+   
 }

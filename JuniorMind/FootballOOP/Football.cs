@@ -6,28 +6,38 @@ using System.Threading.Tasks;
 
 namespace FootballOOP
 {
-    class Football
+    public class Match
     {
-        public class Match
+         public string winningTeam;
+         public string losingTeam;
+         public int winningGoals;
+         public int losingGoals;
+         public Match(string winningTeam, string losingTeam, int winningGoals, int losingGoals)
+         {
+              this.winningTeam = winningTeam;
+              this.losingTeam = losingTeam;
+              this.winningGoals = winningGoals;
+              this.losingGoals = losingGoals;
+         }
+    }
+
+    public class Leg
+    {
+        private Match[] matches;
+        public Leg()
         {
-            private string winningTeam;
-            private string losingTeam;
-            private int winningGoals;
-            private int losingGoals;
-            public Match(string winningTeam, string losingTeam, int winningGoals, int losingGoals)
-            {
-                this.winningTeam = winningTeam;
-                this.losingTeam = losingTeam;
-                this.winningGoals = winningGoals;
-                this.losingGoals = losingGoals;
-            }
+            matches = new Match[0];
         }
 
-        public class Leg
+        public void AddMatch(Match match)
         {
-            Match newMatch1 = new Match("avantul", "gloria", 1, 1);
-            Match newMatch2 = new Match("sageata", "concordia", 7, 1);
-            Match newMatch3 = new Match("astra", "ceahlaul", 3, 1);
-        };
-    }
+            Array.Resize(ref matches, matches.Length + 1);
+            matches[matches.Length - 1] = match;
+        }
+
+        public int CountMatches()
+        {
+            return matches.Length;
+        }
+    };
 }
