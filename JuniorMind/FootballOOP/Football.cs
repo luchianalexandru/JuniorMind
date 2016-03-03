@@ -39,5 +39,15 @@ namespace FootballOOP
         {
             return matches.Length;
         }
+
+        public int CountTotalGoals()
+        {
+            int count = 0;
+            for (int i = 0; i < matches.Length; i++)
+            {
+                count += matches[i].winningGoals + matches[i].losingGoals;
+            }
+            return count;
+        }
     };
 }
