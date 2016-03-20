@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballOOP", "FootballOOP\FootballOOP.csproj", "{67A0101A-8B95-4D1C-A6D0-A250EEA857EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vector", "Vector\Vector.csproj", "{D797A10C-1A47-4490-8041-881B8D856FC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{67A0101A-8B95-4D1C-A6D0-A250EEA857EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67A0101A-8B95-4D1C-A6D0-A250EEA857EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67A0101A-8B95-4D1C-A6D0-A250EEA857EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67A0101A-8B95-4D1C-A6D0-A250EEA857EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D797A10C-1A47-4490-8041-881B8D856FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D797A10C-1A47-4490-8041-881B8D856FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D797A10C-1A47-4490-8041-881B8D856FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D797A10C-1A47-4490-8041-881B8D856FC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
