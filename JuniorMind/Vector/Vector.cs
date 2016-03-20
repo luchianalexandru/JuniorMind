@@ -9,6 +9,14 @@ namespace Vector
 {
     class Vector<T> : IList<T>
     {
+        private int counter;
+        private T[] list = new T[10];
+
+        public Vector()
+        {
+            counter = 0;
+        }
+
         public T this[int index]
         {
             get
