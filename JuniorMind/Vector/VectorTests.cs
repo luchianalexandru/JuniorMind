@@ -8,8 +8,20 @@ namespace Vector
     public class VectorTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ShouldCheckIfAddingWorksFor1Element()
         {
+            Vector<int> list = new Vector<int>();
+            list.Add(0);
+            Assert.AreEqual(1, list.Count);
+        }
+
+        [TestMethod]
+        public void ShouldCheckIfAddingWorksFor2Elements()
+        {
+            Vector<int> list = new Vector<int>();
+            list.Add(0);
+            list.Add(2);
+            Assert.AreEqual(2, list.Count);
         }
     }
 }

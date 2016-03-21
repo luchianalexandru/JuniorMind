@@ -21,12 +21,12 @@ namespace Vector
         {
             get
             {
-                throw new NotImplementedException();
+                return list[index];
             }
 
             set
             {
-                throw new NotImplementedException();
+                list[index] = value;
             }
         }
 
@@ -34,7 +34,7 @@ namespace Vector
         {
             get
             {
-                throw new NotImplementedException();
+                return counter;
             }
         }
 
@@ -46,9 +46,10 @@ namespace Vector
             }
         }
 
-        public void Add(T item)
+        public void Add(T value)
         {
-            throw new NotImplementedException();
+            if (counter < list.Length)
+                list[counter++] = value;
         }
 
         public void Clear()
