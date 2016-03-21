@@ -23,5 +23,23 @@ namespace Vector
             list.Add(2);
             Assert.AreEqual(2, list.Count);
         }
+
+        [TestMethod]
+        public void ShouldCheckIfStringAdded()
+        {
+            Vector<string> list = new Vector<string>();
+            list.Add("hello");
+            Assert.AreEqual(1, list.Count);
+        }
+
+        [TestMethod]
+        public void ShouldCheckIfTwoStringsAdded()
+        {
+            Vector<string> list = new Vector<string>() {
+                "hello1",
+                "hello2"
+            };
+            Assert.AreEqual(2, list.Count);
+        }
     }
 }
