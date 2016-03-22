@@ -59,10 +59,9 @@ namespace Vector
 
         public bool Contains(T value)
         {
-            bool contained = false;
-            for(int i = 0; i < list.Length; i++)
-                if (list[i].Equals(value)) contained = true;
-            return contained;
+            for (int i = 0; i < list.Length; i++)
+                if (list[i].Equals(value)) return true;
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
