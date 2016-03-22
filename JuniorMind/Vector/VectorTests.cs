@@ -71,6 +71,17 @@ namespace Vector
                 "hello3"
             };
             Assert.IsTrue(list.Contains("hello2"));
-        }   
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfNotContained()
+        {
+            Vector<string> list = new Vector<string>() {
+                "hello1",
+                "hello2",
+                "hello3"
+            };
+            Assert.IsFalse(list.Contains("hello4"));
+        }
     }
 }

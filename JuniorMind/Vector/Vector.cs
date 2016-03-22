@@ -59,7 +59,7 @@ namespace Vector
 
         public bool Contains(T value)
         {
-            for (int i = 0; i < list.Length; i++)
+            for (int i = 0; i < counter; i++)
                 if (list[i].Equals(value)) return true;
             return false;
         }
