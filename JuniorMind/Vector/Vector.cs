@@ -42,7 +42,7 @@ namespace Vector
         {
             get
             {
-                throw new NotImplementedException();
+                return false;
             }
         }
 
@@ -54,12 +54,15 @@ namespace Vector
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            counter = 0;
         }
 
-        public bool Contains(T item)
+        public bool Contains(T value)
         {
-            throw new NotImplementedException();
+            bool contained = false;
+            for(int i = 0; i < list.Length; i++)
+                if (list[i].Equals(value)) contained = true;
+            return contained;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
