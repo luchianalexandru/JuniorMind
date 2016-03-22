@@ -83,5 +83,19 @@ namespace Vector
             };
             Assert.IsFalse(list.Contains("hello4"));
         }
+
+        [TestMethod]
+        public void ShouldTestIfCopyWorksForInteger()
+        {
+            Vector<int> list = new Vector<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(4);
+            list.Add(5);
+            list.Add(7);
+            int[] value = new int[list.Count];
+            list.CopyTo(value, 0);
+            Assert.AreEqual(3, value[0]);
+        }
     }
 }

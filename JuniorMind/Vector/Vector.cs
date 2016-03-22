@@ -66,8 +66,14 @@ namespace Vector
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            int j = arrayIndex;
+            for (int i = 0; i < Count; i++)
+            {
+                array.SetValue(list[i], j);
+                j++;
+            }
         }
+
 
         public IEnumerator<T> GetEnumerator()
         {
