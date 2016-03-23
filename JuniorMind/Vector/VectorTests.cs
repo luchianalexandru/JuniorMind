@@ -109,5 +109,20 @@ namespace Vector
             list.Add(7);
             Assert.AreEqual(4, list.IndexOf(7));
         }
+
+        [TestMethod]
+        public void ShouldInsertANumberAtIndex3()
+        {
+            Vector<int> list = new Vector<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(4);
+            list.Add(5);
+            list.Add(7);
+            list.Insert(2, 9);
+            Assert.AreEqual(2, list.IndexOf(9));
+
+        }
+
     }
 }

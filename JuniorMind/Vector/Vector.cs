@@ -89,7 +89,9 @@ namespace Vector
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            for (int i = counter - 1; i > index; i--)
+                list[i] = list[i - 1];
+            list[index] = item;
         }
 
         public bool Remove(T item)
