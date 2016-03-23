@@ -99,7 +99,12 @@ namespace Vector
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            if (Contains(item))
+            {
+                RemoveAt(IndexOf(item));
+                return true;
+            }
+            return false;
         }
 
         public void RemoveAt(int index)

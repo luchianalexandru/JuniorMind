@@ -121,7 +121,6 @@ namespace Vector
             list.Add(7);
             list.Insert(2, 9);
             Assert.AreEqual(2, list.IndexOf(9));
-
         }
 
         [TestMethod]
@@ -139,7 +138,6 @@ namespace Vector
                 9,
                 10
             };
-
             list.Insert(2, 20);
             list.Insert(3, 25);
             Assert.AreEqual(12, list.Count);
@@ -156,7 +154,19 @@ namespace Vector
             list.Add(7);
             list.RemoveAt(1);
             Assert.AreEqual(4, list[1]);
+        }
 
+        [TestMethod]
+        public void ShouldRemoveTheFirstInstanceOf5()
+        {
+            Vector<int> list = new Vector<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(4);
+            list.Add(5);
+            list.Add(6);
+            Assert.IsTrue(list.Remove(5));
+            Assert.AreEqual(3, list.IndexOf(6));
         }
 
     }
