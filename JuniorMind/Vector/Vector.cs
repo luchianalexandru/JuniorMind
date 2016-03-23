@@ -69,7 +69,7 @@ namespace Vector
             int j = arrayIndex;
             for (int i = 0; i < Count; i++)
             {
-                array.SetValue(list[i], j);
+                array.SetValue(list[j], i);
                 j++;
             }
         }
@@ -89,6 +89,8 @@ namespace Vector
 
         public void Insert(int index, T item)
         {
+            if ( counter == list.Length )
+                Array.Resize(ref list, list.Length * 2);
             for (int i = counter - 1; i > index; i--)
                 list[i] = list[i - 1];
             list[index] = item;

@@ -124,5 +124,26 @@ namespace Vector
 
         }
 
+        [TestMethod]
+        public void ShouldTestIfTheListLengthIsIncreased()
+        {
+            Vector<int> list = new Vector<int>() {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            };
+
+            list.Insert(2, 20);
+            list.Insert(3, 25);
+            Assert.AreEqual(11, list.Count);
+        }
+
     }
 }
