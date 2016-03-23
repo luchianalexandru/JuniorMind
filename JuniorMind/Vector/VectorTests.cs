@@ -97,5 +97,17 @@ namespace Vector
             list.CopyTo(value, 0);
             Assert.AreEqual(3, value[0]);
         }
+
+        [TestMethod]
+        public void ShouldReturnTheIndexOfAGivenValue()
+        {
+            Vector<int> list = new Vector<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(4);
+            list.Add(5);
+            list.Add(7);
+            Assert.AreEqual(4, list.IndexOf(7));
+        }
     }
 }
