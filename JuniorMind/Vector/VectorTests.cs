@@ -142,7 +142,7 @@ namespace Vector
 
             list.Insert(2, 20);
             list.Insert(3, 25);
-            Assert.AreEqual(11, list.Count);
+            Assert.AreEqual(12, list.Count);
         }
 
     }

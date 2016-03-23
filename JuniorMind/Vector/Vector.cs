@@ -94,6 +94,7 @@ namespace Vector
             for (int i = counter - 1; i > index; i--)
                 list[i] = list[i - 1];
             list[index] = item;
+            counter++;
         }
 
         public bool Remove(T item)
