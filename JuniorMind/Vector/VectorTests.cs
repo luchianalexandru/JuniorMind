@@ -145,5 +145,19 @@ namespace Vector
             Assert.AreEqual(12, list.Count);
         }
 
+        [TestMethod]    
+        public void ShouldRemoveTheElementAtIndex1()
+        {
+            Vector<int> list = new Vector<int>();
+            list.Add(3);
+            list.Add(2);
+            list.Add(4);
+            list.Add(5);
+            list.Add(7);
+            list.RemoveAt(1);
+            Assert.AreEqual(4, list[1]);
+
+        }
+
     }
 }

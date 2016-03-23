@@ -104,7 +104,9 @@ namespace Vector
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            for (int i = index; i < Count - 1; i++)
+                list[i] = list[i + 1];
+            counter--;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
