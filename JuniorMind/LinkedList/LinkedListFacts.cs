@@ -20,5 +20,17 @@ namespace LinkedList
             Assert.Equal(1, list.Count);
 
         }
+
+        [Fact]
+        public void ShouldClearTheList()
+        {
+            LinkedList<int> list = new LinkedList<int>();
+            list.Add(2);
+            Assert.Equal(1, list.Count);
+            list.Clear();
+            Assert.Equal(0, list.Count);
+
+        }
+
     }
 }

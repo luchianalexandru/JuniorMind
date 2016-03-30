@@ -51,6 +51,13 @@ namespace LinkedList
             }
             counter++;
         }
+
+        public void Clear()
+        {
+            counter = 0;
+            guard.next = guard;
+            guard.previous = guard;
+        }
     
     }
 }
