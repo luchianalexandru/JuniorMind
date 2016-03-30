@@ -44,6 +44,7 @@ namespace LinkedList
                 {
                     guard = guard.next;
                 }
+                node.value = item;
                 guard.next = node;
                 guard.previous = node;
                 node.next = guard;
