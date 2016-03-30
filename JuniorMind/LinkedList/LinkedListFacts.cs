@@ -5,9 +5,13 @@ namespace LinkedList
 {
     public class LinkedListFacts
     {
+        
+
         [Fact]
-        public void TestMethod1()
+        public void ShouldCount0ItemsInTheList()
         {
+            LinkedList<int> list = new LinkedList<int>();
+            Assert.Equal(0, list.Count());
         }
     }
 }
