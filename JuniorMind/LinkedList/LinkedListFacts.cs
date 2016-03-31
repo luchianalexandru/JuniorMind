@@ -17,7 +17,9 @@ namespace LinkedList
         {
             LinkedList<int> list = new LinkedList<int>();
             list.Add(2);
-            Assert.Equal(1, list.Count);
+            list.Add(3);
+            list.Add(4);
+            Assert.Equal(3, list.Count);
 
         }
 
@@ -30,6 +32,18 @@ namespace LinkedList
             list.Clear();
             Assert.Equal(0, list.Count);
 
+        }
+
+        [Fact]
+        public void ShouldAddItemAsFirst()
+        {
+            LinkedList<int> list = new LinkedList<int>();
+            list.Add(9);
+            list.Add(2);
+            list.Add(7);
+            list.AddFirst(5);
+
+            Assert.Equal(4, list.Count);
         }
 
     }

@@ -30,26 +30,11 @@ namespace LinkedList
         public void Add(T item)
         {
             Node node = new Node();
-            if (counter == 0)
-            {
-                node.value = item;
-                node.next = guard;
-                node.previous = guard;
-                guard.next = node;
-                guard.previous = node;
-            }
-            else
-            {
-                while(guard.next != guard)
-                {
-                    guard = guard.next;
-                }
-                node.value = item;
-                guard.next = node;
-                guard.previous = node;
-                node.next = guard;
-                node.previous = guard;
-            }
+
+            node.value = item;
+            node.next = guard;
+            node.previous = guard.previous;
+            guard.previous = node;
             counter++;
         }
 
@@ -58,6 +43,19 @@ namespace LinkedList
             counter = 0;
             guard.next = guard;
             guard.previous = guard;
+        }
+
+        public void AddFirst(T item)
+        {
+            Node node = new Node
+            {
+                value = item,
+                next = guard.next,
+                previous = guard
+            };
+            node.previous = node;
+            guard.next = node;
+            counter++;
         }
     
     }
