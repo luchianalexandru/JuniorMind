@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LinkedList
 {
     public class LinkedList<T> 
@@ -26,6 +27,8 @@ namespace LinkedList
                 return counter;
             }
         }
+
+
 
         public void Add(T item)
         {
@@ -57,6 +60,14 @@ namespace LinkedList
             guard.next = node;
             counter++;
         }
-    
+
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for(Node i = guard.next; i!= guard; i = i.next)
+            {
+                yield return i.value;
+            }
+        }
     }
 }

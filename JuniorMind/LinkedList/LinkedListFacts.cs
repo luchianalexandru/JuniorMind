@@ -46,5 +46,17 @@ namespace LinkedList
             Assert.Equal(4, list.Count);
         }
 
+        [Fact]
+        public void ShouldReturnNumberOrItems()
+        {
+            LinkedList<int> list = new LinkedList<int>();
+            list.Add(9);
+            list.Add(2);
+            list.Add(7);
+            list.Add(5);
+            int k = 0;
+            foreach (int value in list) k+= value;
+            Assert.Equal(23, k);
+        }
     }
 }
