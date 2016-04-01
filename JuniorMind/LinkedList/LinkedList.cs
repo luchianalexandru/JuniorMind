@@ -20,6 +20,11 @@ namespace LinkedList
         private int counter;
         Node guard = new Node();
 
+        public LinkedList()
+        {
+            guard.next = guard;
+            guard.previous = guard;
+        }
 
         public int Count
         {
@@ -37,8 +42,8 @@ namespace LinkedList
                 next = guard,   
                 previous = guard.previous
             };
+            node.previous.next = node;
             guard.previous = node;
-            guard.previous.next = node;
             counter++;
         }
 
