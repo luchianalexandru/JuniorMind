@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class LinkedList<T> 
+    public class LinkedList<T> : IEnumerable<T>, IEnumerable
     {
         private class Node
         {
@@ -20,6 +20,7 @@ namespace LinkedList
         private int counter;
         Node guard = new Node();
 
+
         public int Count
         {
             get
@@ -28,16 +29,16 @@ namespace LinkedList
             }
         }
 
-
-
         public void Add(T item)
         {
-            Node node = new Node();
-
-            node.value = item;
-            node.next = guard;
-            node.previous = guard.previous;
+            Node node = new Node()
+            {
+                value = item,
+                next = guard,   
+                previous = guard.previous
+            };
             guard.previous = node;
+            guard.previous.next = node;
             counter++;
         }
 
@@ -68,6 +69,11 @@ namespace LinkedList
             {
                 yield return i.value;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+          return this.GetEnumerator();
         }
     }
 }

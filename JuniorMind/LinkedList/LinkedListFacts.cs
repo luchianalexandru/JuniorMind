@@ -15,11 +15,9 @@ namespace LinkedList
         [Fact]
         public void ShouldAddItemAtTheEndOfTheList()
         {
-            LinkedList<int> list = new LinkedList<int>();
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            Assert.Equal(3, list.Count);
+            LinkedList<int> list = new LinkedList<int> { 2, 3, 4 };
+            list.Add(5);
+            Assert.Equal(new int[] { 2, 3, 4, 5},  list);
 
         }
 
@@ -37,23 +35,15 @@ namespace LinkedList
         [Fact]
         public void ShouldAddItemAsFirst()
         {
-            LinkedList<int> list = new LinkedList<int>();
-            list.Add(9);
-            list.Add(2);
-            list.Add(7);
+            LinkedList<int> list = new LinkedList<int>() { 9, 2, 7 };
             list.AddFirst(5);
-
             Assert.Equal(4, list.Count);
         }
 
         [Fact]
         public void ShouldReturnNumberOrItems()
         {
-            LinkedList<int> list = new LinkedList<int>();
-            list.Add(9);
-            list.Add(2);
-            list.Add(7);
-            list.Add(5);
+            LinkedList<int> list = new LinkedList<int>() { 9, 2, 7, 5 };
             int k = 0;
             foreach (int value in list) k+= value;
             Assert.Equal(23, k);
