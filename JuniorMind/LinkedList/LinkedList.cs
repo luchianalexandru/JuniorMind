@@ -97,5 +97,24 @@ namespace LinkedList
         {
             return this.IndexOf(item) >= 0;
         }
+
+        public void Remove(int index)
+        {
+            Node current = guard.next;
+            if (index == 0)
+            {
+                guard.next = current.next;
+                current.next.previous = guard;
+                counter--;
+            }
+            else
+            {
+                for (int i = 0; i < index - 1; i++)
+                    current = current.next;
+                current.next = current.next.next;
+                current.next.previous = current;
+                counter--;
+            }
+        }
     }
 }

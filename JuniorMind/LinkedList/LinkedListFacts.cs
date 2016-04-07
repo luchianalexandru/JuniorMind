@@ -65,5 +65,19 @@ namespace LinkedList
             Assert.True(list.Contains(7));
         }
 
+        [Fact]
+        public void ShouldCheckIfValueAtIndexIsRemoved()
+        {
+            var list = new LinkedList<int>() { 9, 2, 7, 5 };
+            //list.Remove(2);
+            //int[] result = new int[] { 9, 2, 5 };
+
+            list.Remove(0);
+            int[] result = new int[] { 2, 7, 5 };
+
+            Assert.Equal(result,list);
+            Assert.Equal(3, list.Count);
+        }
+
     }
 }
