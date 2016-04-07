@@ -80,5 +80,22 @@ namespace LinkedList
         {
           return this.GetEnumerator();
         }
+
+        public int IndexOf(T item)
+        {
+            Node current = guard.next;
+            for(int i = 0; i < counter; i++)
+            {
+                if (current.value.Equals(item))
+                    return i;
+                current = current.next;
+            }
+            return -1;
+        }
+
+        public bool Contains(T item)
+        {
+            return this.IndexOf(item) >= 0;
+        }
     }
 }

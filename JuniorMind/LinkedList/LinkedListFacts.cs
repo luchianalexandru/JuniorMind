@@ -17,7 +17,7 @@ namespace LinkedList
         {
             var list = new LinkedList<int> { 2, 3, 4 };
             list.Add(5);
-            Assert.Equal(new int[] { 2, 3, 4, 5},  list);
+            Assert.Equal(new int[] { 2, 3, 4, 5 }, list);
 
         }
 
@@ -29,7 +29,7 @@ namespace LinkedList
             Assert.Equal(1, list.Count);
             list.Clear();
             Assert.Equal(0, list.Count);
-             
+
         }
 
         [Fact]
@@ -48,5 +48,22 @@ namespace LinkedList
             int[] result = new int[] { 3, 9, 2, 7, 5 };
             Assert.Equal(result, list);
         }
+
+        [Fact]
+        public void ShouldReturnIndexOfAGivenValue()
+        {
+            var list = new LinkedList<int>() { 9, 2, 7, 5 };
+            Assert.Equal(2, list.IndexOf(7));
+            Assert.Equal(-1, list.IndexOf(3));
+
+        }
+
+        [Fact]
+        public void ShouldCheckIfAValueIsContained()
+        {
+            var list = new LinkedList<int>() { 9, 2, 7, 5 };
+            Assert.True(list.Contains(7));
+        }
+
     }
 }
