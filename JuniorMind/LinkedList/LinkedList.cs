@@ -95,7 +95,7 @@ namespace LinkedList
 
         public bool Contains(T item)
         {
-            return this.IndexOf(item) >= 0;
+            return IndexOf(item) >= 0;
         }
 
         public void Remove(int index)
@@ -115,6 +115,36 @@ namespace LinkedList
                 current.next.previous = current;
                 counter--;
             }
+        }
+
+        public void InsertBefore(T valueToInsert, int index)
+        {
+            Node current = guard.next;
+            Node newNode = new Node();
+            newNode.value = valueToInsert;
+
+            if (index == 0)
+            {
+                guard.next = newNode;
+                current.previous = newNode;
+                newNode.next = current;
+                newNode.previous = guard;
+                counter++;
+            }
+            else
+            {
+                for (int i = 0; i < index; i++)
+                    current = current.next;
+
+                current.previous.next = newNode;
+                newNode.previous = current.previous;
+
+                current.previous = newNode;
+                newNode.next = current;
+                
+                counter++;
+            }
+
         }
     }
 }
