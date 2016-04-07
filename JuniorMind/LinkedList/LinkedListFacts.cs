@@ -103,5 +103,29 @@ namespace LinkedList
             Assert.Equal(5, list.Count);
         }
 
+        [Fact]
+        public void ShouldCheckIfInsertAfterIndex0Works()
+        {
+            var list = new LinkedList<int>() { 9, 2, 7, 5 };
+
+            list.InsertAfter(3, 0);
+            int[] result = new int[] { 9, 3, 2, 7, 5 };
+
+            Assert.Equal(result, list);
+            Assert.Equal(5, list.Count);
+        }
+
+        [Fact]
+        public void ShouldCheckIfInsertAfterIndex3Works()
+        {
+            var list = new LinkedList<int>() { 9, 2, 7, 5 };
+
+            list.InsertAfter(3, 3);
+            int[] result = new int[] { 9, 2, 7, 5, 3 };
+
+            Assert.Equal(result, list);
+            Assert.Equal(5, list.Count);
+        }
+
     }
 }

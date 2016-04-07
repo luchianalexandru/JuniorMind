@@ -144,7 +144,11 @@ namespace LinkedList
                 
                 counter++;
             }
+        }
 
+        public void InsertAfter(T valueToInsert, int index)
+        {
+            InsertBefore(valueToInsert, index + 1);
         }
     }
 }
