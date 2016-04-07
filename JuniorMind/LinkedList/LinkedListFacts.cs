@@ -29,11 +29,11 @@ namespace LinkedList
             Assert.Equal(1, list.Count);
             list.Clear();
             Assert.Equal(0, list.Count);
-
+             
         }
 
         [Fact]
-        public void ShouldAddItemAsFirst()
+        public void ShouldAddItemAsFirstCount()
         {
             var list = new LinkedList<int>() { 9, 2, 7 };
             list.AddFirst(5);
@@ -41,10 +41,12 @@ namespace LinkedList
         }
 
         [Fact]
-        public void ShouldReturnNumberOfItems()
+        public void ShouldShowTheItemAddedAsFirst()
         {
-            var list = new LinkedList<int>() { 9, 2, 7, 5 };            
-            Assert.Equal(4, list.Count);
+            var list = new LinkedList<int>() { 9, 2, 7, 5 };
+            list.AddFirst(3);
+            int[] result = new int[] { 3, 9, 2, 7, 5 };
+            Assert.Equal(result, list);
         }
     }
 }
