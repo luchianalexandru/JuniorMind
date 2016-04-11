@@ -111,31 +111,20 @@ namespace LinkedList
 
         public void InsertBefore(T valueToInsert, int index)
         {
-            Node current = guard.next;
+            Node current = guard;
             Node newNode = new Node();
             newNode.value = valueToInsert;
 
-            if (index == 0)
-            {
-                guard.next = newNode;
-                current.previous = newNode;
-                newNode.next = current;
-                newNode.previous = guard;
-                counter++;
-            }
-            else
-            {
-                for (int i = 0; i < index; i++)
-                    current = current.next;
+            for (int i = 0; i < index; i++)
+                current = current.next;
 
-                current.previous.next = newNode;
-                newNode.previous = current.previous;
+            newNode.next = current.next;
+            newNode.previous = current;
+            newNode.next.previous = newNode;
+            current.next = newNode;
 
-                current.previous = newNode;
-                newNode.next = current;
-                
-                counter++;
-            }
+            counter++;
+
         }
 
         public void InsertAfter(T valueToInsert, int index)
