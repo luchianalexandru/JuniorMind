@@ -100,21 +100,13 @@ namespace LinkedList
 
         public void Remove(int index)
         {
-            Node current = guard.next;
-            if (index == 0)
-            {
-                guard.next = current.next;
-                current.next.previous = guard;
-                counter--;
-            }
-            else
-            {
-                for (int i = 0; i < index - 1; i++)
+            Node current = guard;
+            for (int i = 0; i < index; i++)
                     current = current.next;
                 current.next = current.next.next;
                 current.next.previous = current;
                 counter--;
-            }
+
         }
 
         public void InsertBefore(T valueToInsert, int index)
