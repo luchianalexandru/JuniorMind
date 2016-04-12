@@ -10,6 +10,7 @@ namespace Dictionary
     class Dictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>,
     IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
     {
+        public int[] hashKeyIndex = new int[10];
 
         public DictionaryData[] dictData = new DictionaryData[10];
 
