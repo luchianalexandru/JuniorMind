@@ -10,6 +10,23 @@ namespace Dictionary
     class Dictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>,
     IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
     {
+
+        public DictionaryData[] dictData = new DictionaryData[10];
+
+        public struct DictionaryData
+        {
+            private TKey key;
+            private TValue value;
+            private int previous;
+
+            public DictionaryData(TKey key, TValue value, int previous)
+            {
+                this.key = key;
+                this.value = value;
+                this.previous = previous;
+            }
+        }
+
         public int Count
         {
             get
