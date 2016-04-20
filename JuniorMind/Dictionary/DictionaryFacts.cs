@@ -6,8 +6,10 @@ namespace Dictionary
     public class DictionaryFacts
     {
         [Fact]
-        public void TestMethod1()
+        public void ShouldReturnNullForEmptyDictionary()
         {
+            var d = new Dictionary<int, string>();
+            Assert.Equal(0, d.Count);
         }
     }
 }

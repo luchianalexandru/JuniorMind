@@ -7,28 +7,37 @@ using System.Threading.Tasks;
 
 namespace Dictionary
 {
-    class Dictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>,
-    IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
+    class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
-        public int[] hashKeyIndex = new int[10];
 
-        public DictionaryData[] dictData = new DictionaryData[10];
+        private int?[] buckets;
+        private Entry[] entries;
+        private int counter;
 
-        public struct DictionaryData
+        private struct Entry
         {
-            private TKey key;
-            private TValue value;
-            private int previous;
+            public TKey Key;
+            public TValue Value;
+            public int previous;
+        }
 
-            public DictionaryData(TKey key, TValue value, int previous)
-            {
-                this.key = key;
-                this.value = value;
-                this.previous = previous;
-            }
+        private void DictionaryClass(int capacity = 10)
+        {
+            this.buckets = new int?[capacity];
+            this.entries = new Entry[capacity * 2];
+            this.buckets = this.buckets.DefaultIfEmpty(-1).ToArray();
+            this.counter = 0;
         }
 
         public int Count
+        {
+            get
+            {
+                return counter;
+            }
+        }
+
+        public bool IsReadOnly
         {
             get
             {
@@ -36,9 +45,30 @@ namespace Dictionary
             }
         }
 
-        public bool IsReadOnly
+        public ICollection<TKey> Keys
         {
             get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public ICollection<TValue> Values
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public TValue this[TKey key]
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
             {
                 throw new NotImplementedException();
             }
@@ -75,6 +105,26 @@ namespace Dictionary
         }
 
         IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ContainsKey(TKey key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(TKey key, TValue value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(TKey key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryGetValue(TKey key, out TValue value)
         {
             throw new NotImplementedException();
         }
