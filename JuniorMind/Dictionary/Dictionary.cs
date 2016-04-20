@@ -18,7 +18,13 @@ namespace Dictionary
         {
             public TKey Key;
             public TValue Value;
-            public int previous;
+            public int? previous;
+            public Entry(TKey key, TValue value, int? previous)
+            {
+                this.Key = key;
+                this.Value = value;
+                this.previous = previous;
+            }
         }
 
         private void DictionaryClass(int capacity = 10)
@@ -116,7 +122,15 @@ namespace Dictionary
 
         public void Add(TKey key, TValue value)
         {
-            throw new NotImplementedException();
+            var hash = GetHashCode(key);
+            entries[counter] = new Entry() { Key = key, Value = value, previous = buckets[hash] };
+            buckets[hash] = counter;
+            counter += 1;
+        }
+
+        private int GetHashCode(TKey key)
+        {
+            return Math.Abs(key.GetHashCode() % buckets.Length);
         }
 
         public bool Remove(TKey key)
