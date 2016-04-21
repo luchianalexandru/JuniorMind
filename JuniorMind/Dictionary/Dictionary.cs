@@ -117,20 +117,21 @@ namespace Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            return (GetValueOfKey(key) > 0) ? true : false;
+            if (GetValueOfKey(key) >= 0) return true;
+            return false;
+
         }
 
         public int GetValueOfKey(TKey key)
         {
-            int keyValue = 0;
             if (buckets[GetHashCode(key)].HasValue)
             {
-                for (var current = buckets[GetHashCode(key)]; current >= 0; current = entries[current.Value].previous)
+                for (var current = buckets[GetHashCode(key)]; current != null; current = entries[current.Value].previous)
                 {
-                    if (entries[current.Value].Key.Equals(key)) keyValue = current.Value;
+                    if (entries[current.Value].Key.Equals(key)) return current.Value;
                 }
             }
-            return keyValue;
+            return -1;
         }
 
         public void Add(TKey key, TValue value)
