@@ -71,7 +71,7 @@ namespace Dictionary
         {
             get
             {
-                throw new NotImplementedException();
+                return entries[GetValueOfKey(key)].Value;
             }
 
             set
@@ -117,6 +117,11 @@ namespace Dictionary
 
         public bool ContainsKey(TKey key)
         {
+            return (GetValueOfKey(key) > 0) ? true : false;
+        }
+
+        public int GetValueOfKey(TKey key)
+        {
             int keyValue = 0;
             if (buckets[GetHashCode(key)].HasValue)
             {
@@ -124,16 +129,8 @@ namespace Dictionary
                 {
                     if (entries[current.Value].Key.Equals(key)) keyValue = current.Value;
                 }
-
-                //do
-                //{
-                //    if (entries[current.Value].Key.Equals(key))
-                //        keyValue = current.Value;
-                //    current = entries[current.Value].previous;
-                //} while (current != null);
             }
-
-            return (keyValue >= 0) ? true : false;
+            return keyValue;
         }
 
         public void Add(TKey key, TValue value)

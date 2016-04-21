@@ -38,7 +38,17 @@ namespace Dictionary
             var d = new Dictionary<string, int>();
             d.Add("cats", 12);
             d.Add("dogs", 133);
+            Assert.True(d.ContainsKey("dogs"));
             Assert.True(d.ContainsKey("cats"));
+        }
+
+        [Fact]
+        public void ShouldNotBeTrueIfKeyIsntContained()
+        {
+            var d = new Dictionary<string, int>();
+            d.Add("cats", 12);
+            d.Add("dogs", 14);
+            Assert.False(d.ContainsKey("mice"));
         }
     }
 }
