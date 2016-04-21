@@ -27,7 +27,7 @@ namespace Dictionary
             }
         }
 
-        private void DictionaryClass(int capacity = 10)
+        public Dictionary(int capacity = 10)
         {
             this.buckets = new int?[capacity];
             this.entries = new Entry[capacity * 2];

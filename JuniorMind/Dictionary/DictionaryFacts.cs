@@ -18,7 +18,8 @@ namespace Dictionary
         {
             var d = new Dictionary<string, int>();
             d.Add("cats", 12);
-            Assert.Equal(1, d.Count);
+            d.Add("dogs", 133);
+            Assert.Equal(2, d.Count);
         }
     }
 }
