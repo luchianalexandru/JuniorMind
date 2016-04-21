@@ -117,7 +117,23 @@ namespace Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            throw new NotImplementedException();
+            int keyValue = 0;
+            if (buckets[GetHashCode(key)].HasValue)
+            {
+                for (var current = buckets[GetHashCode(key)]; current >= 0; current = entries[current.Value].previous)
+                {
+                    if (entries[current.Value].Key.Equals(key)) keyValue = current.Value;
+                }
+
+                //do
+                //{
+                //    if (entries[current.Value].Key.Equals(key))
+                //        keyValue = current.Value;
+                //    current = entries[current.Value].previous;
+                //} while (current != null);
+            }
+
+            return (keyValue >= 0) ? true : false;
         }
 
         public void Add(TKey key, TValue value)
