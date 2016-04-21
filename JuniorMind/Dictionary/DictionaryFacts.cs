@@ -35,9 +35,7 @@ namespace Dictionary
         [Fact]
         public void ShouldBeTrueIfKeyContained()
         {
-            var d = new Dictionary<string, int>();
-            d.Add("cats", 12);
-            d.Add("dogs", 133);
+            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 12 }, { "dogs", 13 } };
             Assert.True(d.ContainsKey("dogs"));
             Assert.True(d.ContainsKey("cats"));
         }
@@ -45,10 +43,18 @@ namespace Dictionary
         [Fact]
         public void ShouldNotBeTrueIfKeyIsntContained()
         {
-            var d = new Dictionary<string, int>();
-            d.Add("cats", 12);
-            d.Add("dogs", 14);
+            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 12 }, { "dogs", 13 } };
+
             Assert.False(d.ContainsKey("mice"));
+        }
+
+        [Fact]
+        public void IsTrueIfRemovingAnItemWorks()
+        {
+            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 12 }, { "dogs", 13 } };
+            bool result = d.Remove("cats");
+            Assert.True(result);
+            Assert.Equal(1, d.Count);
         }
     }
 }
