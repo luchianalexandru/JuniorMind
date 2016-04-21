@@ -87,7 +87,7 @@ namespace Dictionary
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            counter = default(int);
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
