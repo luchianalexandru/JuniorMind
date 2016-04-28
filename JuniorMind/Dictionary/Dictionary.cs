@@ -13,7 +13,9 @@ namespace Dictionary
         private int?[] buckets;
         private Entry[] entries;
         private int? freeIndex;
+
         private int counter;
+        private int freeCount;
 
         private struct Entry
         {
@@ -40,7 +42,7 @@ namespace Dictionary
         {
             get
             {
-                return counter;
+                return counter - freeCount;
             }
         }
 
@@ -150,7 +152,26 @@ namespace Dictionary
 
         public bool Remove(TKey key)
         {
-            return true;
+            var hash = GetHashCode(key);
+            var previous = -1;
+
+            for(var current = buckets[hash]; current != null; current = entries[current.Value].previous)
+            {
+                var keyIndex = current.Value;
+                if(entries[keyIndex].Key.Equals(key))
+                {
+                    if (previous != -1)
+                        entries[previous].previous = entries[keyIndex].previous;
+                    else buckets[hash] = null;
+                    entries[keyIndex].previous = freeIndex;
+                    freeIndex = keyIndex;
+                    freeCount += 1;
+                    return true;
+
+                }
+                previous = keyIndex;
+            }
+            return false;
         }
 
 
