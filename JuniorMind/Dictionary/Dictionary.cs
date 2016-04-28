@@ -12,6 +12,7 @@ namespace Dictionary
 
         private int?[] buckets;
         private Entry[] entries;
+        private int? freeIndex;
         private int counter;
 
         private struct Entry
@@ -149,20 +150,11 @@ namespace Dictionary
 
         public bool Remove(TKey key)
         {
-            int counter = GetValueOfKey(key);
-
-            if (counter < 0)
-                return false;
-
-            while (counter >= 0 && counter < entries.Length - 1)
-            {
-                entries[counter] = entries[counter + 1];
-                counter++;
-            }
-
-            Array.Resize(ref entries, entries.Length - 1);
             return true;
         }
+
+
+
 
         public bool TryGetValue(TKey key, out TValue value)
         {
