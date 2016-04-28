@@ -51,10 +51,33 @@ namespace Dictionary
         [Fact]
         public void IsTrueIfRemovingAnItemWorks()
         {
-            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 12 }, { "dogs", 13 } };
-            Assert.True(d.Remove("cats"));
+            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 12 }, { "dogs", 13 } , { "mice", 15} };
+            d.Remove("cats");
             Assert.False(d.ContainsKey("cats"));
             Assert.True(d.ContainsKey("dogs"));
+            Assert.Equal(2, d.Count);
+        }
+
+        [Fact]
+        public void AddWorksAfterRemove()
+        {
+            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 12 }, { "dogs", 13 }, { "mice", 15 } };
+            d.Remove("cats");
+            d.Add("bunnies", 19);
+            Assert.False(d.ContainsKey("cats"));
+            Assert.True(d.ContainsKey("dogs"));
+            Assert.True(d.ContainsKey("bunnies"));
+            Assert.Equal(3, d.Count);
+        }
+
+        [Fact]
+        public void RemovingWorksIfConflictSituationsArise()
+        {
+            Dictionary<string, int> d = new Dictionary<string, int> { { "cats", 1 }, { "dogs", 1 }, { "mice", 1 } };
+            d.Remove("cats");
+            Assert.False(d.ContainsKey("cats"));
+            Assert.True(d.ContainsKey("dogs"));
+            Assert.Equal(2, d.Count);
         }
     }
 }
