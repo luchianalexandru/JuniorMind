@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Library;
 
 namespace WebAppPassword.Controllers
 {
@@ -11,9 +12,20 @@ namespace WebAppPassword.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            var options = new PasswordOptions
+            {
+                Ambiguous = true,
+                Length = 8,
+                Numbers = 1,
+                Similar = false,
+                Symbols = 3,
+                UpperCase = 2
+            };
+            var passwordGenerator = new PasswordGenerator();
+            var result = passwordGenerator.GeneratePass(options);
+            return result;
         }
 
         // GET api/values/5
