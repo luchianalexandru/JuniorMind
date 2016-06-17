@@ -50,6 +50,7 @@ namespace WebAppPassword
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
