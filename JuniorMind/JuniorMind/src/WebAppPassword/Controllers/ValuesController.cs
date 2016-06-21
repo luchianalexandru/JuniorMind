@@ -11,18 +11,19 @@ namespace WebAppPassword.Controllers
     public class ValuesController : Controller
     {
         // GET api/values
-        [HttpGet]
-        public string Get()
+        [HttpGet("{length}/{upper}/{number}/{symbols}/{similar}/{ambiguous}")]
+        public string Get(int length, int upper, int number, int symbols, bool similar, bool ambiguous)
         {
             var options = new PasswordOptions
             {
-                Ambiguous = true,
-                Length = 8,
-                Numbers = 1,
-                Similar = false,
-                Symbols = 3,
-                UpperCase = 2
+                Length = length,
+                UpperCase = upper,
+                Numbers = number,
+                Symbols = symbols,
+                Similar = similar,
+                Ambiguous = ambiguous,
             };
+
             var passwordGenerator = new PasswordGenerator();
             var result = passwordGenerator.GeneratePass(options);
             return result;
