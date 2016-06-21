@@ -10,11 +10,11 @@
         Please input the password length:<br>
         <input type="number" id="Length" value="0"><br>
         How many Upper Case Letters?<br>
-        <input type="number" id="UpperCase" value="0"><br>
+        <input type="number" id="UpperCase" onchange="checkLength()" value="0"><br>
         How many Numbers ?<br>
-        <input type="number" id="Numbers" value="0"><br>
+        <input type="number" id="Numbers" onchange="checkLength()" value="0"><br>
         How many symbols?<br>
-        <input type="number" id="Symbols" value="0" ><br>
+        <input type="number" id="Symbols" onchange="checkLength()" value="0"><br>
         <input type="checkbox" id="Similar"> Does it contain similar Characters?  <br>
         <input type="checkbox" id="Ambigous"> Does it contain ambiguous Characters? <br>
         <button onclick="pass(); return false;">Submit</button>
@@ -34,15 +34,23 @@
             var amb = document.getElementById("Ambigous").checked;
 
             var xhttp = new XMLHttpRequest();;
-            xhttp.onreadystatechange = function() {
-                     if (xhttp.readyState == 4 && xhttp.status == 200) {
-                            document.getElementById("demo").innerHTML = xhttp.responseText;
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo").innerHTML = xhttp.responseText;
                 }
             };
-            xhttp.open("GET", "http://localhost:5000/api/values/" + length + "/" + upp + "/" + nr + "/"+ symb + "/" + sim + "/" + amb, true);
+            xhttp.open("GET", "http://localhost:5000/api/values/" + length + "/" + upp + "/" + nr + "/" + symb + "/" + sim + "/" + amb, true);
             xhttp.send();
         }
 
+        function checkLength() {
+            var length = document.getElementById("Length").value;
+            var upp = document.getElementById("UpperCase").value;
+            var nr = document.getElementById("Numbers").value;
+            var symb = document.getElementById("Symbols").value;
+            if (length < upp + nr + symb)
+                alert("Please don't exceed the number of characters!! ( " + length + " )");
+        }
 
     </script>
 
