@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <title>Merge?</title>
+</head>
+<body>
+
+    <form>
+        Please input the password length:<br>
+        <input type="number" id="Length" value="0"><br>
+        How many Upper Case Letters?<br>
+        <input type="number" id="UpperCase" value="0"><br>
+        How many Numbers ?<br>
+        <input type="number" id="Numbers" value="0"><br>
+        How many symbols?<br>
+        <input type="number" id="Symbols" value="0"><br>
+        <input type="checkbox" id="Similar"> Does it contain similar Characters?  <br>
+        <input type="checkbox" id="Ambiguos"> Does it contain ambiguos Characters? <br>
+        <input type="submit" id="submit" value="Submit">
+
+    </form>
+    <br>
+
+    <br>
+    <p id="passw"> Your password is:</p>
+    <p id="demo"> </p>
+
+    <script>
+        $(document).ready(function () {
+            $("#submit").click(function (event) {
+                event.preventDefault();
+                const length = $("#Length").val();
+                const upperCase = $("#UpperCase").val();
+                const numbers = $("#Numbers").val();
+                const symbols = $("#Symbols").val();
+                const similar = $("#Similar").is(":checked");
+                const ambiguos = $("#Ambiguos").is(":checked");
+                
+                       
+                $.get(`api/values/${length}/${upperCase}/${numbers}/${symbols}/${similar}/${ambiguos}`,
+                function (data, status) {
+                    $("#demo").text(data);
+                });
+            });
+        });
+
+    </script>
+
+</body>
+</html>
