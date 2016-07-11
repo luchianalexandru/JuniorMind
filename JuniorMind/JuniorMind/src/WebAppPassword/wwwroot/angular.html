@@ -10,22 +10,22 @@
     <div ng-app="myApp" ng-controller="formCtrl">
         <form>
             Please input the password length:<br>
-            <input type="number" value="0" ng-model="Length"><br>
+            <input type="number" ng-model="Length"><br>
             How many Upper Case Letters?<br>
             <input type="number" ng-model="UpperCase"><br>
-            How many Numbers ?<br>
+            How many Numbers?<br>
             <input type="number" ng-model="Numbers"><br>
             How many symbols?<br>
             <input type="number" ng-model="Symbols"><br>
             <input type="checkbox" ng-model="Similar"> Does it contain similar Characters?  <br>
             <input type="checkbox" ng-model="Ambigous"> Does it contain ambiguous Characters? <br>
             <button ng-click="click()">Submit</button>
-
-
         </form>
+
         <br>
         <p id="passw"> The password is:</p>
-        <p id="demo" ng-model="demo">  </p>
+        <h1>{{demo}}</h1>
+
     </div>
 
         <script>
@@ -34,7 +34,6 @@
                 $scope.click = function () {
                     $http.get('api/values/${$Length}/${$UpperCase}/${$Numbers}/${$Symbols}/${$Similar}/${$Ambigous}').then(function (response) {
                         $scope.demo = response.data;
-                        alert(response.data);
                     })
                 }
             });
