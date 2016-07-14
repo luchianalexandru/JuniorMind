@@ -32,6 +32,7 @@
             var app = angular.module('myApp', []);
             app.controller('formCtrl', function ($scope, $http) {
                 $scope.click = function () {
+                    $http.get('api/values/${$scope.Length}/${$scope.UpperCase}/${$scope.Numbers}/${$scope.Symbols}/${$scope.Similar}/${$scope.Ambigous}').then(function (response) {
                         $scope.demo = response.data;
                     })
                 }
