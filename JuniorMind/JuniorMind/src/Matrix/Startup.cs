@@ -50,6 +50,8 @@ namespace Matrix
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            app.UseStaticFiles();
+
             app.UseMvc();
         }
     }
