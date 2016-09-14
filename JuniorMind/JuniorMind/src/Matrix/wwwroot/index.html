@@ -6,28 +6,41 @@
 </head>
 <body>
 
-    <canvas id="myCanvas" width="411" height="411"></canvas>
-    <!--411 = width or height (400) + padding (10) + 1;-->
+    <canvas id="myCanvas" width="410" height="410"></canvas>
+    <!--411 = width or height (400) + padding (10) ;-->
     <script>
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext('2d');
+        
         
         var w = myCanvas.width;
         var h = myCanvas.height;
         var p = 10; //padding
 
         for (var x = 0; x < w; x += 100) {
-            context.moveTo(0.5 + x + p, p);
-            context.lineTo(0.5 + x + p, h + p);
+            context.moveTo(x + p, p);
+            context.lineTo(x + p, h + p);
         }
 
         for (var x = 0; x < h; x += 100) {
-            context.moveTo(p, 0.5 + x + p);
-            context.lineTo(w + p, 0.5 + x + p);
+            context.moveTo(p,x + p);
+            context.lineTo(w + p,x + p);
         }
+
         context.lineWidth = 5;
-        context.strokeStyle = "cyan";
+        context.strokeStyle = "black";
         context.stroke();
+
+
+        var circle = canvas.getContext('2d');
+
+        circle.beginPath();
+        circle.arc(60, 60, 40, 0, 180);
+        circle.fillStyle = 'green';
+        circle.fill();
+        circle.stroke();
+
+
 
     </script>
 </body>
